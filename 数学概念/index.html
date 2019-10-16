@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="precision,recall,ROC,AUC,F-measure,Taylor公式,联合概率,条件概率,全概率,贝叶斯公式,概率公式总结,期望,方差,标准差,协方差,大数定律,中心极限定理,最大似然估计,向量运算,矩阵运算,QR分解,SVD分解,向量的导数," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数学基础常见函数  导数, 梯度 Taylor展开, Taylor公式 概率论, 联合概率, 条件概率, 全概率公式, 贝叶斯公式 期望, 方差, 协方差 大数定理, 中心极限定理 估计法, 最大似然估计(MLE) 向量, 矩阵运算, 矩阵求导 SVD, QR分解  梯度梯度是一个向量, 表示某一个函数在该点处的方向导数沿着该方向取的最大值, 即函数在该点处沿着该方向变化最快, 变化率最大(即该梯">
+<meta name="keywords" content="precision,recall,ROC,AUC,F-measure,Taylor公式,联合概率,条件概率,全概率,贝叶斯公式,概率公式总结,期望,方差,标准差,协方差,大数定律,中心极限定理,最大似然估计,向量运算,矩阵运算,QR分解,SVD分解,向量的导数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数学概念">
+<meta property="og:url" content="http://yoursite.com/数学概念/index.html">
+<meta property="og:site_name" content="Wenhua">
+<meta property="og:description" content="数学基础常见函数  导数, 梯度 Taylor展开, Taylor公式 概率论, 联合概率, 条件概率, 全概率公式, 贝叶斯公式 期望, 方差, 协方差 大数定理, 中心极限定理 估计法, 最大似然估计(MLE) 向量, 矩阵运算, 矩阵求导 SVD, QR分解  梯度梯度是一个向量, 表示某一个函数在该点处的方向导数沿着该方向取的最大值, 即函数在该点处沿着该方向变化最快, 变化率最大(即该梯">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/数学概念/WechatIMG8.png">
+<meta property="og:image" content="http://yoursite.com/数学概念/WechatIMG7.png">
+<meta property="og:image" content="http://yoursite.com/数学概念/QR分解示意图.png">
+<meta property="og:updated_time" content="2019-10-16T03:29:33.343Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数学概念">
+<meta name="twitter:description" content="数学基础常见函数  导数, 梯度 Taylor展开, Taylor公式 概率论, 联合概率, 条件概率, 全概率公式, 贝叶斯公式 期望, 方差, 协方差 大数定理, 中心极限定理 估计法, 最大似然估计(MLE) 向量, 矩阵运算, 矩阵求导 SVD, QR分解  梯度梯度是一个向量, 表示某一个函数在该点处的方向导数沿着该方向取的最大值, 即函数在该点处沿着该方向变化最快, 变化率最大(即该梯">
+<meta name="twitter:image" content="http://yoursite.com/数学概念/WechatIMG8.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/数学概念/"/>
+
+
+
+
+
+  <title>数学概念 | Wenhua</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wenhua</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/数学概念/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wenhua">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数学概念</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-16T11:22:13+08:00">
+                2019-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ai/" itemprop="url" rel="index">
+                    <span itemprop="name">ai</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="数学基础"><a href="#数学基础" class="headerlink" title="数学基础"></a>数学基础</h2><p>常见函数</p>
+<ul>
+<li>导数, <font color="red"><strong>梯度</strong></font></li>
+<li>Taylor展开, <font color="red"><strong>Taylor公式</strong></font></li>
+<li>概率论, <font color="red"><strong>联合概率</strong></font>, <font color="red"><strong>条件概率</strong></font>, <font color="red"><strong>全概率公式</strong></font>, <font color="red"><strong>贝叶斯公式</strong></font></li>
+<li>期望, <font color="red"><strong>方差</strong></font>, <font color="red"><strong>协方差</strong></font></li>
+<li>大数定理, <font color="red"><strong>中心极限定理</strong></font></li>
+<li>估计法, <font color="red"><strong>最大似然估计(MLE)</strong></font></li>
+<li><font color="red"><strong>向量</strong></font>, <font color="red"><strong>矩阵运算</strong></font>, 矩阵求导</li>
+<li><font color="red"><strong>SVD</strong></font>, QR分解</li>
+</ul>
+<h3 id="梯度"><a href="#梯度" class="headerlink" title="梯度"></a>梯度</h3><p>梯度是一个向量, 表示某一个函数在该点处的<strong>方向导数</strong>沿着该方向取的最大值, 即函数在该点处沿着该方向变化最快, 变化率最大(即该梯度向量的模); 当函数为一维函数时, 梯度其实就是导数</p>
+<script type="math/tex; mode=display">\nabla{f(x_1, x_2)} = (\frac{\partial{f(x_1, x_2)}}{x_1}, \frac{\partial{f(x_1, x_2)}}{x_2})</script><h3 id="Taylor公式"><a href="#Taylor公式" class="headerlink" title="Taylor公式"></a>Taylor公式</h3><ul>
+<li>Taylor公式是用一个函数在某点的信息描述其附近取值的公式. 如果函数足够平滑, 在已知函数在某一点的各阶导数值的情况下, Taylor公式可以利用这些导数值来做系数构建一个多项式近似函数在这一点的领域中的值.</li>
+<li>若函数$f(x)$在包含$x_0$的某个闭区间$[a, b]$上具有$n$阶函数, 且在开区间$(a, b)$上具有$n+1$阶函数, 则对闭区间$[a, b]$上任意一点$x$, 有Taylor公式如下:<script type="math/tex; mode=display">f(x) = \frac{f(x_0)}{0!} + \frac{f^{'}(x_0)}{1!}(x-x_0) + \frac{f^{''}(x_0)}{2!}(x-x_0)^2 + ... + \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n + R_n(x)</script></li>
+</ul>
+<p>$f^{(n)}(x)$表示$f(x)$的$n$阶导数, $R_n(x)$是Taylor公式的余项, 是$(x-x_0)^n$的高阶无穷小</p>
+<script type="math/tex; mode=display">sin(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} + ... + (-1)^{m-1}\frac{x^{2m-1}}{(2m-1)!} + R_{2m-1}(x)</script><p>计算近似值, 并估计误差值</p>
+<script type="math/tex; mode=display">e = \lim_{x \rightarrow \infty}(1 + {\frac{1}{n})}^n</script><script type="math/tex; mode=display">y = e^x \Rightarrow y^{'} = y = e^x</script><script type="math/tex; mode=display">\begin{align}
+e^x &\approx \sum_{k=0}^{n}{\frac{e^x_0}{k!}}(x-x_0)^k\\
+&\stackrel{令x_0=0}{\Rightarrow} e^x \approx 1 + x + \frac{x^2}{2!} + ... + \frac{x_n}{n!}\\
+&\stackrel{令x=1}{\Rightarrow} e \approx 1 + 1 + \frac{1}{2!} + \frac{1}{3!} + ... + \frac{1}{n!}\\
+&\stackrel{令x=10}{\Rightarrow} e \approx 2.7182815\\
+\end{align}</script><script type="math/tex; mode=display">\delta = \vert R_{10}\vert = \frac{1}{11!} + \frac{1}{12!} + ... = \frac{1}{11!}(1+\frac{1}{12}+\frac{1}{12*13}+...) \lt \frac{1}{11!}(1+\frac{1}{12}+\frac{1}{12^2}+...) = \frac{12}{11*11!} = 2.73 * 10^{-8}</script><h3 id="联合概率"><a href="#联合概率" class="headerlink" title="联合概率"></a>联合概率</h3><p>两个事件同时发生的概率, 计作: $P(AB)$, $P(A, B)$, 或者$P(A \cap B)$, 即为”事件A和事件B同时发生的概率”<br><img src="/数学概念/WechatIMG8.png" width="400px"></p>
+<h3 id="条件概率"><a href="#条件概率" class="headerlink" title="条件概率"></a>条件概率</h3><p>事件A在另外一件事情B已经发生的条件下发生的概率叫做条件概率, 表示为P(A|B), 即为”在B条件下A发生的概率”<br>一般情况下, P(A|B) &ne; P(A)<br>条件概率有如下三个特性</p>
+<ul>
+<li>非负性</li>
+<li>可列性</li>
+<li>可加性</li>
+</ul>
+<p><img src="/数学概念/WechatIMG7.png" width="400px"></p>
+<script type="math/tex; mode=display">P(A_1|B) = \frac{P(A_1, B)}{P(B)}</script><p>如果将条件概率由两个事件推广到任意有穷多个事件时, 可以得到如下公式, 假设$A_1, A_2, …, A_n$为任意n个任意事件(n &ge; 2)), 而且$P(A_1A_2…A_n) &gt; 0$, 则</p>
+<script type="math/tex; mode=display">P(A_1B) = P(A_1|B)P(B)</script><script type="math/tex; mode=display">P(A_1A_2) = P(A_1|A_2)P(A_2) = P(A_2)P(A_1|A_2)</script><p>即为, 事件$A_1$和事件$A_2$同时发生的概率等于事件$A_2$已经发生的条件下$A_1$发生的概率与事件$A_2$发生的概率的乘积</p>
+<script type="math/tex; mode=display">P(A_2A_1) = P(A_2|A_1)P(A_1) = P(A_1)P(A_2|A_1)</script><p>即为, 事件$A_2$和事件$A_1$同时发生的概率等于事件$A_1$已经发生的条件下$A_2$发生的概率与事件$A_1$发生的概率的乘积</p>
+<script type="math/tex; mode=display">P(A_1A_2) = P(A_2, A_1)</script><p>即为, 事件$A_1$和事件$A_2$同时发生的概率</p>
+<script type="math/tex; mode=display">P(A_1|A_2)P(A_2) =  P(A_2|A_1)P(A_1)</script><p>即为, 事件$A_2$已经发生的条件下$A_1$发生的概率与事件$A_2$发生的概率的乘积 <strong>等于</strong> 事件$A_1$已经发生的条件下$A_2$发生的概率与事件$A_1$发生的概率的乘积</p>
+<script type="math/tex; mode=display">P(A_1A_2A_3) = P(A_1A_2)P(A_3|(A_1A_2)) = P(A_1)P(A_2|A_1)P(A_3|(A_1A_2))</script><script type="math/tex; mode=display">P(A_1A_2...A_n) = P(A_1)P(A_2|A_1)...P(A_n|(A_1A_2...A_n))</script><h3 id="全概率"><a href="#全概率" class="headerlink" title="全概率"></a>全概率</h3><p>样本空间$\Omega$有一组事件$A_1, A_2, …, A_n$, 如果事件组满足以下两个条件, 那么事件组称为样本空间的一个划分:</p>
+<ul>
+<li>$\forall i &ne; j \in \{1, 2, …, n\}, A_iA_j = \phi$</li>
+<li>$A_1 \cup A_2… \cup A_n = \Omega$ </li>
+</ul>
+<p>如果事件$\{A_j\}$是样本空间$\Omega$的一个划分, 且$P(A_j) &gt; 0$, 那么对于任意事件B, 全概率公式为:</p>
+<script type="math/tex; mode=display">P(B) = \sum_{i=1}^{n}{P(A_i)P(B|A_i)}</script><h3 id="贝叶斯公式"><a href="#贝叶斯公式" class="headerlink" title="贝叶斯公式"></a>贝叶斯公式</h3><script type="math/tex; mode=display">P(A|B) = \frac{P(B|A)P(A)}{P(B)}</script><p>设$A_1, A_2, …, A_n$是样本空间$\Omega$的一个划分, 如果对于任意事件B, 有$P(B) &gt; 0$, 那么</p>
+<script type="math/tex; mode=display">P(A_i|B) = \frac{P(B|A_i)P(A_i)}{P(B)} = \frac{P(A_i)P(B|A_i)}{\displaystyle \sum_{i=1}^{n}{P(A_i)P(B|A_i)}}</script><h3 id="概率公式总结"><a href="#概率公式总结" class="headerlink" title="概率公式总结"></a>概率公式总结</h3><script type="math/tex; mode=display">P(A|B) = \frac{P(A, B)}{P(B)}</script><script type="math/tex; mode=display">P(B) = \sum_{i=1}^{n}{P(A_i)P(B|A_i)}</script><script type="math/tex; mode=display">P(A_i|B) = \frac{P(A_i, B)}{P(B)}</script><script type="math/tex; mode=display">P(A_i|B) = \frac {P(A_i)P(B|A_i)} {\displaystyle \sum_{i=1}^{n}{P(A_i)P(B|A_i)} }</script><h3 id="期望"><a href="#期望" class="headerlink" title="期望"></a>期望</h3><p>期望即均值, 是概率加权下的”平均值”, 是每次可能结果的概率乘以其结果的总和, 反映的是随机变量平均取值大小, 常用符号$\mu$表示:</p>
+<ul>
+<li>连续性数据, $E(X) = \int_{-\infty}^{+\infty}xf(x)dx$</li>
+<li>离散性数据, $E(X) = \sum_{i}{x_ip_i}$</li>
+</ul>
+<p>假设C为一个常数, X和Y是两个随机变量, 期望的性质如下:</p>
+<ul>
+<li>E(C) = C</li>
+<li>E(CX) = CE(X)</li>
+<li>E(X + Y) = E(X) + E(Y)</li>
+<li>如果X和Y相互独立, 那么E(XY) = E(X)E(Y)</li>
+<li>如果E(XY) = E(X)E(Y), 那么X和Y不相关</li>
+</ul>
+<h3 id="方差"><a href="#方差" class="headerlink" title="方差"></a>方差</h3><p>衡量随机变量或一组数据离散程度的度量, 是用来度量随机变量和其数学期望之间的偏离程度. 即方差是衡量原数据和期望/均值相差的度量值.</p>
+<script type="math/tex; mode=display">Var(X) = D(X) = \sigma^2 = \frac{\sum{(X-\mu)^2}}{N}</script><script type="math/tex; mode=display">D(X) = \sum_{n=1}^{n}{P_i}{(X_i-\mu)^2}</script><script type="math/tex; mode=display">D(X) = \int_a^b(x-u)^2f(x)dx</script><script type="math/tex; mode=display">D(X) = E((X-E(X))^2) = E(X^2) - (E(x))^2</script><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>X</th>
+<th>2</th>
+<th>4</th>
+<th>6</th>
+<th>8</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$P(x)$</td>
+<td>0.2</td>
+<td>0.2</td>
+<td>0.2</td>
+<td>0.2</td>
+<td>0.2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<script type="math/tex; mode=display">E(X) = 2*0.2 + 4*0.2 + 6*0.2 + 8*0.2 + 10*0.2 = 6</script><script type="math/tex; mode=display">\begin{align}
+E(X^2) &= 2^2*0.2 + 4^2*0.2 + 6^2*0.2 + 8^2*0.2 + 10^2*0.2\\
+&= 4*0.2 + 16*0.2 + 36*0.2 + 64*0.2 + 100*0.2\\
+&= 220*0.2\\
+&= 44
+\end{align}</script><script type="math/tex; mode=display">D(X) = E(X^2) - (E(X))^2 = 44 - 6^2 = 8</script><p>假设C是一个常数, X和Y是两个随机变量, 那么方差的性质如下:</p>
+<p>$D(C) = 0$<br>$D(CX) = C^2D(X)$<br>$D(C + X) = D(X)$<br>$D(X \pm Y) = D(X) + D(Y) \pm 2 Cov(X,Y)$</p>
+<h3 id="标准差"><a href="#标准差" class="headerlink" title="标准差"></a>标准差</h3><p>标准差(Standard Deviation)是方差的算术平方根, 用符号$\sigma$表示.<br>标准差和方差都是测量离散程度最重要最常见的指标. 不同之处在于标准差和变量的计算单位是相同的, 比方差清楚, 因此在很多分析的时候用标准差. </p>
+<script type="math/tex; mode=display">\sigma = \sqrt{D(X)} = \sqrt{\frac{\sum(X-\mu)^2}{N}}</script><h3 id="协方差"><a href="#协方差" class="headerlink" title="协方差"></a>协方差</h3><p>协方差常用于衡量两个变量的总体误差, 当两个变量相同的情况下, 协方差其实就是方差<br>如果X和Y是统计独立的, 那么二者之间的协方差为零; 如果协方差为零, 那么X和Y是不相关的.</p>
+<script type="math/tex; mode=display">\begin{align}
+Cov(X,Y) &= E[(X-E(X))(Y-E(Y))]\\
+&= E[XY - XE(Y) - YE(X) + E(X)E(Y)]\\
+&= E(XY) - E(X)E(Y) - E(Y)E(X) + E(X)E(Y)\\
+&= E(XY) - E(X)E(Y)\\
+\end{align}</script><p>假设C为一个常数, X和Y是两个随机变量, 那么协方差性质如下:</p>
+<script type="math/tex; mode=display">Cov(X, Y) = Cov(Y, X)</script><script type="math/tex; mode=display">Cov(aX, bY) = abCov(X, Y)</script><script type="math/tex; mode=display">Cov(X_1 + X_2, Y) = Cov(X_1, Y) + Cov(X_2, Y)</script><p>协方差是两个随机变量具有相同方向变化趋势的度量:</p>
+<ul>
+<li>若$Cov(X, Y) &gt; 0$, 则X和Y的变化趋势相同</li>
+<li>若$Cov(X, Y) &lt; 0$, 则X和Y的变化趋势相反</li>
+<li>若$Cov(X, Y) = 0$, 则X和Y则不相关, 即变化没有什么相关性</li>
+</ul>
+<p>对于n个随机向量($X_1, X_2, X_3…X_n$), 任意两个元素$X_i$和$X_j$都可以得到一个协方差, 从而形成一个n*n的矩阵即为协方差矩阵, 协方差矩阵为对称矩阵</p>
+<script type="math/tex; mode=display">C_{ij} = E\{[E_i - E(X_i)][E_j - E(X_j)]\} = Cov(X_i, X_j)</script><script type="math/tex; mode=display">\begin{bmatrix}
+{c_{11}}&{c_{12}}&{\cdots}&{c_{1n}}\\
+{c_{21}}&{c_{22}}&{\cdots}&{c_{2n}}\\
+{\vdots}&{\vdots}&{\ddots}&{\vdots}\\
+{c_{m1}}&{c_{m2}}&{\cdots}&{c_{mn}}\\
+\end{bmatrix}</script><h3 id="大数定律"><a href="#大数定律" class="headerlink" title="大数定律"></a>大数定律</h3><ul>
+<li>大数定律的意义在于, 随着样本容量n的增加, 样本平均数将接近于总体平均数(期望$\mu$), 所以在统计推断中, 一般都会使用样本平均数估计总体平均数的值.</li>
+<li>使用一部分样本的平均值来代替整体样本的期望/均值, 出现偏差的可能是存在的, 但是当n足够大的时候, 偏差的可能性是非常小的, 当n无限大的时候, 这种可能性的概率基本为0</li>
+<li>大数定律的作用就是为使用频率来估计概率提供来理论支持; 为使用部分数据来近似的模拟构建全部数据特征提供来理论支持</li>
+</ul>
+<h3 id="中心极限定理"><a href="#中心极限定理" class="headerlink" title="中心极限定理"></a>中心极限定理</h3><ul>
+<li>中心极限定理(Central Limit Theorem), 假设${X_n}$为独立同分布的随机变量序列, 并有相同的期望$\mu$和方差$\sigma^2$, 则$X_n$服从中心极限定理, 且${Z_n}$为随机序列${X_n}$的规范和:<script type="math/tex; mode=display">Y_n = X_1 + X_2 + ... + X_n = \sum_{n=1}^{n}{X_i} \rightarrow N(n\mu, n\sigma^2)</script><script type="math/tex; mode=display">Z_n = \frac{Y_n - E(Y_n)}{\sqrt{D(Y_n)}} = \frac{Y_n - n\mu}{\sqrt{n}\sigma} \rightarrow(0, 1)</script></li>
+<li>中心极限定理就是一般在同分布的情况下, 抽样样本值的规范和在总体数量趋于无穷时的极限分布近似于正态分布</li>
+</ul>
+<h3 id="最大似然估计"><a href="#最大似然估计" class="headerlink" title="最大似然估计"></a>最大似然估计</h3><ul>
+<li>最大似然估计(Maximum Likelihood Estimation, MLE)是一种具有理论性的参数估计方法. 基本思想: 当从模型总体随机抽取n组样本观测值后, 最合理的参数估计量应该使得从模型中抽取n组样本观测值的概率最大, 步骤如下:<ul>
+<li>写出似然函数</li>
+<li>对似然函数取对数, 并整理</li>
+<li>求导数</li>
+<li>解似然函数</li>
+</ul>
+</li>
+</ul>
+<p>设总体分布为$f(x, \theta)$, $X_n$为该总体采样得到的样本. 因为随机序列${X_n}$独立同分布, 则它们的联合密度函数为:</p>
+<script type="math/tex; mode=display">L(x_1, x_2, ..., x_n) = \prod_{i=1}^{n}{f(x_i; \theta_1, \theta_2, ..., \theta_n)}</script><ul>
+<li>$\theta$被看作固定但是未知的参数, 反过来, 因为样本的已经存在, 可以看作${X_n}$是固定的, $L(x, \theta)$是关于$\theta$的函数, 即似然函数</li>
+<li>求参数$\theta$, 使得似然函数取最大值, 此为最大似然估计法</li>
+</ul>
+<p><a href="http://fangs.in/post/thinkstats/likelihood/" target="_blank" rel="noopener">似然与极大似然估计</a></p>
+<h3 id="向量的运算"><a href="#向量的运算" class="headerlink" title="向量的运算"></a>向量的运算</h3><p>两个向量: $\overrightarrow{a} = (x_1, y_1)$, $\overrightarrow{b} = (x_2, y_2)$, 并且a和b之间的夹角为$\theta$</p>
+<ul>
+<li>数量积: 两个向量的数量积(内积, 点积)是一个数量/实数, 记作$\overrightarrow{a} \cdot \overrightarrow{b}$<script type="math/tex; mode=display">\overrightarrow{a} \cdot \overrightarrow{b} = \vert \overrightarrow{a} \vert * \vert \overrightarrow{b} \vert * cos\theta</script></li>
+<li>向量积: 两个向量的向量积(外积, 叉积)是一个向量, 记作$\overrightarrow{a} \times \overrightarrow{b}$; 向量积即两个不共线非零向量所在平面的一组法向量<script type="math/tex; mode=display">\vert \overrightarrow{a} \times \overrightarrow{b} \vert = \vert \overrightarrow{a} \vert * \vert \overrightarrow{b} \vert * sin\theta</script></li>
+</ul>
+<h3 id="矩阵的运算"><a href="#矩阵的运算" class="headerlink" title="矩阵的运算"></a>矩阵的运算</h3><ul>
+<li>假设A, B均为$m*n$阶矩阵, 那么<ul>
+<li>$C = A \pm B$</li>
+<li>$A + B = B +A$</li>
+<li>$(A + B) + C = A + (B + C)$</li>
+<li>$(\lambda\mu)A = \lambda(\mu A)$</li>
+<li>$\lambda(A + B) = \lambda A + \lambda B$</li>
+<li>$(AB)C = A(BC)$</li>
+<li>$(A + B)C = AC + BC$</li>
+<li>$C(A + B) = CA + CB$</li>
+<li>$(A^T)^T = A$</li>
+<li>$(\lambda A)^T = \lambda A^T$</li>
+<li>$(AB)^T = B^TA^T$</li>
+<li>$(A + B)^T = A^T + B^T$</li>
+</ul>
+</li>
+</ul>
+<h3 id="QR分解"><a href="#QR分解" class="headerlink" title="QR分解"></a>QR分解</h3><ul>
+<li>QR分解是将矩阵分解为一个正交矩阵和一个上三角矩阵的乘积</li>
+</ul>
+<p><img src="/数学概念/QR分解示意图.png" width="400px"></p>
+<ul>
+<li>其中, Q为正交矩阵, $Q^TQ = I, R为上三角矩阵$</li>
+<li>QR分解经常被用来解<a href="https://blog.csdn.net/qq_29721419/article/details/69676770" target="_blank" rel="noopener">线性最小二乘问题</a></li>
+</ul>
+<h3 id="SVD分解"><a href="#SVD分解" class="headerlink" title="SVD分解"></a>SVD分解</h3><ul>
+<li>奇异值分解(Singular Value Decomposition)是一种重要的矩阵分解方法, 可以看作是对称矩阵在任意矩阵上的推广</li>
+<li>假设A为一个$m*n$阶的实矩阵, 则存在一个分解使得:<script type="math/tex; mode=display">A_{m*n} = U_{m*n}\Sigma_{m*n}V_{m*n}^T</script><ul>
+<li>通常奇异值由大到小排列, 这样$\Sigma$便能由A唯一确定了</li>
+</ul>
+</li>
+</ul>
+<h3 id="向量的导数"><a href="#向量的导数" class="headerlink" title="向量的导数"></a>向量的导数</h3><p>A为一个$m*n$阶的矩阵, $x$为$n\ast1$的列向量, 则$Ax$为$m\ast1$的列向量, 计作$\overrightarrow{y} = A \cdot \overrightarrow{x}$</p>
+<script type="math/tex; mode=display">A = \begin{bmatrix}
+{a_{11}}&{a_{12}}&{\cdots}&{a_{1n}}\\
+{a_{21}}&{a_{22}}&{\cdots}&{a_{2n}}\\
+{\vdots}&{\vdots}&{\ddots}&{\vdots}\\
+{a_{m1}}&{a_{m2}}&{\cdots}&{a_{mn}}\\
+\end{bmatrix}</script><script type="math/tex; mode=display">\overrightarrow{x} = \begin{bmatrix}
+{x_{1}}\\
+{x_{2}}\\
+{\vdots}\\
+{a_{n}}\\
+\end{bmatrix}</script><script type="math/tex; mode=display">\overrightarrow{y} = \begin{bmatrix}
+{a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n}\\
+{a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n}\\
+{\vdots}\\
+{a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n}\\
+\end{bmatrix}</script><script type="math/tex; mode=display">\frac{ \partial \overrightarrow{y} }{ \partial \overrightarrow{x} } = \frac{ \partial A\overrightarrow{x} }{ \partial \overrightarrow{x} } = 
+
+\displaystyle \frac{\partial}{\partial \overrightarrow{x}} \begin{bmatrix}
+{a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n}\\
+{a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n}\\
+{\vdots}\\
+{a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n}\\
+\end{bmatrix}
+
+= \begin{bmatrix}
+{a_{11}}&{a_{21}}&{\cdots}&{a_{m1}}\\
+{a_{12}}&{a_{22}}&{\cdots}&{a_{m2}}\\
+{\vdots}&{\vdots}&{\ddots}&{\vdots}\\
+{a_{1n}}&{a_{2n}}&{\cdots}&{a_{mn}}\\
+\end{bmatrix}
+
+= A^T</script><h4 id="向量的导数-1"><a href="#向量的导数-1" class="headerlink" title="向量的导数"></a>向量的导数</h4><script type="math/tex; mode=display">\frac{\partial A \overrightarrow{x}}{\partial \overrightarrow{x}} = A^T</script><script type="math/tex; mode=display">\frac{\partial A \overrightarrow{x}}{\partial \overrightarrow{x}^T} = A</script><script type="math/tex; mode=display">\frac{\partial (\overrightarrow{x}^TA)}{\partial \overrightarrow{x}} = A</script><h4 id="标量对向量的导数"><a href="#标量对向量的导数" class="headerlink" title="标量对向量的导数"></a>标量对向量的导数</h4><ul>
+<li>$A$为$n*n$的矩阵, $x$为$n \ast 1$的列向量, 计作$\overrightarrow{y} = \overrightarrow{x}^T \cdot A \cdot \overrightarrow{x}$</li>
+<li>同理可得: <script type="math/tex; mode=display">\frac{\partial{y}}{\partial{\overrightarrow{x}}} = \frac{\partial(\overrightarrow{x}^T \cdot A \cdot \overrightarrow{x})}{\partial{\overrightarrow{x}}} = (A^T + A) \cdot \overrightarrow{x}</script></li>
+<li>若A为对称矩阵, 则有<script type="math/tex; mode=display">\frac{\partial(\overrightarrow{x}^T A \overrightarrow{x})}{\partial{\overrightarrow{x}}} = 2A\overrightarrow{x}</script>推导过程如下:</li>
+</ul>
+<script type="math/tex; mode=display">A = \begin{bmatrix}
+{a_{11}}&{a_{12}}&{\cdots}&{a_{1n}}\\
+{a_{21}}&{a_{22}}&{\cdots}&{a_{2n}}\\
+{\vdots}&{\vdots}&{\ddots}&{\vdots}\\
+{a_{m1}}&{a_{m2}}&{\cdots}&{a_{mn}}\\
+\end{bmatrix}</script><script type="math/tex; mode=display">\overrightarrow{x} = \begin{bmatrix}
+{x_{1}}\\
+{x_{2}}\\
+{\vdots}\\
+{a_{n}}\\
+\end{bmatrix}</script><script type="math/tex; mode=display">\begin{align}
+\overrightarrow{x}^T A \overrightarrow{x} 
+&= (x_1, x_2,\cdots, x_n)
+\begin{bmatrix}
+{a_{11}}&{a_{12}}&{\cdots}&{a_{1n}}\\
+{a_{21}}&{a_{22}}&{\cdots}&{a_{2n}}\\
+{\vdots}&{\vdots}&{\ddots}&{\vdots}\\
+{a_{n1}}&{a_{n2}}&{\cdots}&{a_{nn}}\\
+\end{bmatrix}
+\begin{bmatrix}
+{x_{1}}\\
+{x_{2}}\\
+{\vdots}\\
+{a_{n}}\\
+\end{bmatrix}\\
+&=(x_1, x_2,\cdots, x_n)(\Sigma_{j=1}^{n}{a_{1j}{x_j}}, \Sigma_{j=1}^{n}{a_{2j}{x_j}}, \cdots, \Sigma_{j=1}^{n}{a_{nj}{x_j}})^T\\
+&=x_1\Sigma_{j=1}^{n}{a_{1j}{x_j}} + x_2\Sigma_{j=1}^{n}{a_{2j}{x_j}} + \cdots + x_n\Sigma_{j=1}^{n}{a_{nj}{x_j}}\\
+&=\Sigma_{i=1}^{n} \Sigma_{j=1}^{n} a_{ij} x_i x_j\\
+\end{align}</script><script type="math/tex; mode=display">\begin{align}
+\frac{\partial(\overrightarrow{x}^T A \overrightarrow{x})}{\overrightarrow{x}} &= \frac{\partial(\Sigma_{i=1}^{n} \Sigma_{j=1}^{n} a_{ij} x_i x_j)}{\overrightarrow{x}}\\
+&=\frac{\partial}{\overrightarrow{x}}[\Sigma_{i=1}^{n}(a_{i1}x_ix_1 + a_{i2}x_ix_2 + \cdots + a_{in}x_ix_n)]\\
+&= \frac{\partial}{\overrightarrow{x}}[\\
+&a_{11}x_1x_1 + a_{12}x_1x_2 + \cdots + a_{1n}x_1x_n +\\
+&a_{21}x_2x_1 + a_{22}x_2x_2 + \cdots + a_{2n}x_2x_n +\\
+&\vdots\\
+&a_{n1}x_nx_1 + a_{n2}x_nx_2 + \cdots + a_{nn}x_nx_n ]\\
+&=\\
+&[a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n +\\
+&a_{21}x_2+\\
+&\vdots\\
+&a_{n1}x_n] +\\
+
+[&\qquad\quad a_{12}x_1 +\\
+&a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n +\\
+&\vdots\\
+&\qquad\quad a_{n2}x_n] +\\
+& \vdots\\
+&+ \\
+[&\qquad \qquad \qquad \qquad \qquad a_{1n}x_1 +\\
+ &\qquad \qquad \qquad \qquad \qquad a_{2n}x_2 +\\
+ &\vdots\\
+ &+ \\
+ &a_{n1}x_1 + a_{n2}x_2 + \cdots + a_{nn}x_n]\\
+
+\end{align}</script><p>由上式得到</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+{2a_{11}}&{a_{12}}&{a_{13}}&{\cdots}&{a_{1n}}\\
+{a_{21}}&{0}&{0}&{\cdots}&{0}\\
+{a_{31}}&{0}&{0}&{\cdots}&{0}\\
+{\vdots}&{\vdots}&{\ddots}&{\vdots}\\
+{a_{m1}}&{0}&{0}&{\cdots}&{0}\\
+\end{bmatrix}
+
++
+
+\begin{bmatrix}
+{0}&{a_{12}}&{0}&{\cdots}&{0}\\
+{a_{21}}&{2a_{22}}&{a_{23}}&{\cdots}&{a_{2n}}\\
+{0}&{a_{32}}&{0}&{\cdots}&{0}\\
+{\vdots}&{\vdots}&{\ddots}&{\vdots}\\
+{0}&{a_{n2}}&{0}&{\cdots}&{0}\\
+\end{bmatrix} 
+
++ \cdots +
+
+\begin{bmatrix}
+{0}&{0}&{0}&{\cdots}&{a_{1n}}\\
+{0}&{0}&{0}&{\cdots}&{a_{2n}}\\
+{0}&{0}&{0}&{\cdots}&{a_{3n}}\\
+{\vdots}&{\vdots}&{\ddots}&{\vdots}\\
+{a_{m1}}&{a_{m2}}&{a_{m3}}&{\cdots}&{2a_{mn}}\\
+\end{bmatrix} 
+= \Sigma_{j=1}^{n}(a_{ij} + a_{ji})x_j</script><h4 id="标量对方阵对导数"><a href="#标量对方阵对导数" class="headerlink" title="标量对方阵对导数"></a>标量对方阵对导数</h4><p>A为$n * n$的矩阵, $|A|$为A的行列式, 计算$\frac{\partial{|A|}}{\partial{A}}$</p>
+<script type="math/tex; mode=display">\forall 1 \le i \le n, |A| = \Sigma_{j=1}^{n}a_{ij}(-1)^{i+j}M_{ij}</script><script type="math/tex; mode=display">\frac{\partial |A|}{\partial a_{ij}} = \frac{\partial(\Sigma_{j=1}^{n}a_{ij}(-1)^{i+j}M_{ij})}{\partial a_{ij}} = (-1)^{i+j}M_{ij} = A_{ji}^*</script><script type="math/tex; mode=display">\frac{\partial \lvert A \rvert}{\partial A} = (A^*)^T = \lvert A \rvert \cdot (A^{-1})^T</script><h2 id="模型训练及测试"><a href="#模型训练及测试" class="headerlink" title="模型训练及测试"></a>模型训练及测试</h2><ul>
+<li>模型选择, 对特定任务最优建模方法的选择或者对特定模型最佳参数的选择</li>
+<li>在训练数据集上运行模型(算法)并在测试数据集中测试效果, 迭代进行数据模型对修改, 这种方式称为交叉验证(将原始数据分为训练集和测试集, 使用训练集构建模型, 并使用测试集评估模型提供修改意见)</li>
+<li>模型的选择会尽可能多的选择算法进行执行, 并比较执行结果 </li>
+<li>模型的测试一般从以下几个方面来进行比较, 分别是准确率, 召回率, 精准率, F值 <ul>
+<li>准确率(Accuracy) = 提取出的正确样本数/总样本数</li>
+<li>召回率(Recall) = 正确的正例样本数/样本中的正例样本数- 覆盖率</li>
+<li>精确度(Precision) = 正确的正例样本数/预测为正例的样本数</li>
+<li>F值 = Precision <em> Recall </em> 2 / (Precision + Recall), 即F值是精准度和召回率的调和平均值</li>
+</ul>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th>预测值</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td>正例</td>
+<td>负例</td>
+</tr>
+<tr>
+<td>真实值</td>
+<td>正例</td>
+<td>true positive真正例(A)</td>
+<td>false negative假负例(B)</td>
+</tr>
+<tr>
+<td></td>
+<td>负例</td>
+<td>false positive假正例(C)</td>
+<td>true negative真负例(D)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>true positive(hit)真正例, 确实是正例<br>true negative(Correct Rejection)真负例, 确实是负例<br>false positive(False Alarm)假正例, 本来真实值是负例, 被预测为正例了, 虚报, 干扰报警<br>false negative(Miss)假负例, 本来真实值是正例, 被预测为负例了, 即没有预测出来</p>
+<p>击中(Hit)(报准)和正确拒绝(Correct Rejection)是正确反应, 虚报(False Alarm)和漏报(Miss)是错误反应</p>
+<p>A和D预测正确, B和C预测错误, 那么计算结果为:</p>
+<script type="math/tex; mode=display">Accuracy = (A + D) / (A + B + C + D)</script><script type="math/tex; mode=display">Recall = A / (A + B)</script><script type="math/tex; mode=display">Precision = A / (A + C)</script><script type="math/tex; mode=display">\displaystyle F = \frac{Precision \ast Recall \ast 2}{Precision + Recall}</script><p>举个例子, 真实值中, 正例为80, 负例为20; 预测值中, 正例为90, 负例为10, 然而, 在模型的实际预测中, 原本有75个真正的正例, 有15个是假正例, 5个假负例和5个真负例, 如下图所示:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th>预测值</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td>正例90</td>
+<td>负例10</td>
+</tr>
+<tr>
+<td>真实值</td>
+<td>正例80</td>
+<td>真正例(A)75</td>
+<td>假负例(B)5</td>
+</tr>
+<tr>
+<td></td>
+<td>负例20</td>
+<td>假正例(C)15</td>
+<td>真负例(D)5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Accuracy和Recall是一对互斥的关系, Accuracy在增大的时候Recall是在减小的</p>
+<p><a href="/ai/AI/precision和accuracy的区别/">precision和accuracy的区别</a></p>
+<h2 id="ROC"><a href="#ROC" class="headerlink" title="ROC"></a>ROC</h2><p>ROC(Receiver Operating Characteristic), 描述的是分类混淆矩阵中FPR-TPR之间的相对变化情况.<br>纵轴是TPR(True Positive Rate), 横轴是FPR(False Positive Rate)</p>
+<p>如果二元分类器输出的是对正样本对一个分类概率值, 当取不同阈值时会得到不同当混淆矩阵， 对应于ROC曲线上当一个点, ROC曲线就反应了FPR和TPR之间权衡当情况, 通俗的说, 即在TPR随着FPR递增的情况下, 谁增长的更快, 快多少的问题. TPR增长的越快, 曲线越往上弯曲, AUC就越大, 反应了模型的分类性能就越好. 当正负样本不平衡时, 这种模型评价方式比起一般当精确度评价方式的好处尤其显著. </p>
+<h3 id="AUC-Area-Under-Curve"><a href="#AUC-Area-Under-Curve" class="headerlink" title="AUC(Area Under Curve)"></a>AUC(Area Under Curve)</h3><p>AUC被定义为ROC曲线下的面积, 显然这个面积的数值不会大于1. 由于ROC曲线一般都处于<code>y=x</code>这条直线的上方, 所以AUC的取之范围在0.5和1之间. AUC作为数值可以直观的评价分类器的好坏, 值越大越好.</p>
+<p>AUC的值一般要求在0.7以上.</p>
+<h3 id="模型评估"><a href="#模型评估" class="headerlink" title="模型评估"></a>模型评估</h3><p>回归结果度量</p>
+<ul>
+<li>explained_varicance_score, 可解释方差的回归评分函数</li>
+<li>mean_absolute_error, 平均绝对误差</li>
+<li>mean_squared_error, 平均平方误差</li>
+</ul>
+<h3 id="模型评估总结-分类算法评估方式"><a href="#模型评估总结-分类算法评估方式" class="headerlink" title="模型评估总结_分类算法评估方式"></a>模型评估总结_分类算法评估方式</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>描述</th>
+<th>scikit-learn函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Precision</td>
+<td>精确度</td>
+<td>from sklearn.metrics import precision_score</td>
+</tr>
+<tr>
+<td>Recall</td>
+<td>召回率</td>
+<td>from sklearn.metrics import recall_score</td>
+</tr>
+<tr>
+<td>F1</td>
+<td>F1指标</td>
+<td>from sklearn.metrics import f1_score</td>
+</tr>
+<tr>
+<td>Confusion Matrix</td>
+<td>混淆矩阵</td>
+<td>from sklearn.metrics import confusion_matrix</td>
+</tr>
+<tr>
+<td>ROC</td>
+<td>ROC曲线</td>
+<td>from sklearn.metrics import roc</td>
+</tr>
+<tr>
+<td>AUC</td>
+<td>ROC曲线下的面积</td>
+<td>from sklearn.metrics import auc</td>
+</tr>
+<tr>
+<td>Mean Square Error(MSE, RMSE)</td>
+<td>平均方差</td>
+<td>from sklearn.metrics import mean_squared_error</td>
+</tr>
+<tr>
+<td>Absolute Error(MAE, RAE)</td>
+<td>平均方差</td>
+<td>from sklearn.metrics import mean_absolute_error, median_absolute_error</td>
+</tr>
+<tr>
+<td>R-Squared</td>
+<td>平均方差</td>
+<td>from sklearn.metrics import r2_score</td>
+</tr>
+</tbody>
+</table>
+</div>
+<script type="math/tex; mode=display">\overrightarrow{x}^T A \overrightarrow{x} = (x_1, x_2,\cdots, x_n)
+\begin{bmatrix}
+{a_{11}}&{a_{12}}&{\cdots}&{a_{1n}}\\
+{a_{21}}&{a_{22}}&{\cdots}&{a_{2n}}\\
+{\vdots}&{\vdots}&{\ddots}&{\vdots}\\
+{a_{n1}}&{a_{n2}}&{\cdots}&{a_{nn}}\\
+\end{bmatrix}
+\begin{bmatrix}
+{x_{1}}\\
+{x_{2}}\\
+{\vdots}\\
+{a_{n}}\\
+\end{bmatrix}
+=(x_1, x_2,\cdots, x_n)(\Sigma_{j=1}^{n}{a_{1j}{x_j}}, \Sigma_{j=1}^{n}{a_{2j}{x_j}}, \cdots, \Sigma_{j=1}^{n}{a_{nj}{x_j}})^T
+=x_1\Sigma_{j=1}^{n}{a_{1j}{x_j}} + x_2\Sigma_{j=1}^{n}{a_{2j}{x_j}} + \cdots + x_n\Sigma_{j=1}^{n}{a_{nj}{x_j}}
+=\Sigma_{i=1}^{n} \Sigma_{j=1}^{n} a_{ij} x_i x_j</script>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/precision/" rel="tag"># precision</a>
+          
+            <a href="/tags/recall/" rel="tag"># recall</a>
+          
+            <a href="/tags/ROC/" rel="tag"># ROC</a>
+          
+            <a href="/tags/AUC/" rel="tag"># AUC</a>
+          
+            <a href="/tags/F-measure/" rel="tag"># F-measure</a>
+          
+            <a href="/tags/Taylor公式/" rel="tag"># Taylor公式</a>
+          
+            <a href="/tags/联合概率/" rel="tag"># 联合概率</a>
+          
+            <a href="/tags/条件概率/" rel="tag"># 条件概率</a>
+          
+            <a href="/tags/全概率/" rel="tag"># 全概率</a>
+          
+            <a href="/tags/贝叶斯公式/" rel="tag"># 贝叶斯公式</a>
+          
+            <a href="/tags/概率公式总结/" rel="tag"># 概率公式总结</a>
+          
+            <a href="/tags/期望/" rel="tag"># 期望</a>
+          
+            <a href="/tags/方差/" rel="tag"># 方差</a>
+          
+            <a href="/tags/标准差/" rel="tag"># 标准差</a>
+          
+            <a href="/tags/协方差/" rel="tag"># 协方差</a>
+          
+            <a href="/tags/大数定律/" rel="tag"># 大数定律</a>
+          
+            <a href="/tags/中心极限定理/" rel="tag"># 中心极限定理</a>
+          
+            <a href="/tags/最大似然估计/" rel="tag"># 最大似然估计</a>
+          
+            <a href="/tags/向量运算/" rel="tag"># 向量运算</a>
+          
+            <a href="/tags/矩阵运算/" rel="tag"># 矩阵运算</a>
+          
+            <a href="/tags/QR分解/" rel="tag"># QR分解</a>
+          
+            <a href="/tags/SVD分解/" rel="tag"># SVD分解</a>
+          
+            <a href="/tags/向量的导数/" rel="tag"># 向量的导数</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/鸢尾花数据分类/" rel="next" title="鸢尾花数据分类">
+                <i class="fa fa-chevron-left"></i> 鸢尾花数据分类
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数学基础"><span class="nav-number">1.</span> <span class="nav-text">数学基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度"><span class="nav-number">1.1.</span> <span class="nav-text">梯度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Taylor公式"><span class="nav-number">1.2.</span> <span class="nav-text">Taylor公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#联合概率"><span class="nav-number">1.3.</span> <span class="nav-text">联合概率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件概率"><span class="nav-number">1.4.</span> <span class="nav-text">条件概率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全概率"><span class="nav-number">1.5.</span> <span class="nav-text">全概率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贝叶斯公式"><span class="nav-number">1.6.</span> <span class="nav-text">贝叶斯公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概率公式总结"><span class="nav-number">1.7.</span> <span class="nav-text">概率公式总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#期望"><span class="nav-number">1.8.</span> <span class="nav-text">期望</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方差"><span class="nav-number">1.9.</span> <span class="nav-text">方差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标准差"><span class="nav-number">1.10.</span> <span class="nav-text">标准差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协方差"><span class="nav-number">1.11.</span> <span class="nav-text">协方差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大数定律"><span class="nav-number">1.12.</span> <span class="nav-text">大数定律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中心极限定理"><span class="nav-number">1.13.</span> <span class="nav-text">中心极限定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最大似然估计"><span class="nav-number">1.14.</span> <span class="nav-text">最大似然估计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向量的运算"><span class="nav-number">1.15.</span> <span class="nav-text">向量的运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵的运算"><span class="nav-number">1.16.</span> <span class="nav-text">矩阵的运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QR分解"><span class="nav-number">1.17.</span> <span class="nav-text">QR分解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SVD分解"><span class="nav-number">1.18.</span> <span class="nav-text">SVD分解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向量的导数"><span class="nav-number">1.19.</span> <span class="nav-text">向量的导数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#向量的导数-1"><span class="nav-number">1.19.1.</span> <span class="nav-text">向量的导数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#标量对向量的导数"><span class="nav-number">1.19.2.</span> <span class="nav-text">标量对向量的导数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#标量对方阵对导数"><span class="nav-number">1.19.3.</span> <span class="nav-text">标量对方阵对导数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型训练及测试"><span class="nav-number">2.</span> <span class="nav-text">模型训练及测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ROC"><span class="nav-number">3.</span> <span class="nav-text">ROC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AUC-Area-Under-Curve"><span class="nav-number">3.1.</span> <span class="nav-text">AUC(Area Under Curve)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型评估"><span class="nav-number">3.2.</span> <span class="nav-text">模型评估</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型评估总结-分类算法评估方式"><span class="nav-number">3.3.</span> <span class="nav-text">模型评估总结_分类算法评估方式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
