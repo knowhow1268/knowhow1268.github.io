@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="aura," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="如何用极大似然概率解释交叉熵lossLogistic回归Logistic/Sigmoid函数, $\displaystyle p = h_\theta(x) = g(\theta^Tx) = \frac{1}{1 + e^{-\theta^Tx}}$, p是个概率值 g(z) = \frac{1}{1 + e^{-z}}\begin{align} g^\prime(z) = &amp;(\frac{1}{">
+<meta name="keywords" content="aura">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20191207">
+<meta property="og:url" content="http://yoursite.com/20191207/index.html">
+<meta property="og:site_name" content="Wenhua">
+<meta property="og:description" content="如何用极大似然概率解释交叉熵lossLogistic回归Logistic/Sigmoid函数, $\displaystyle p = h_\theta(x) = g(\theta^Tx) = \frac{1}{1 + e^{-\theta^Tx}}$, p是个概率值 g(z) = \frac{1}{1 + e^{-z}}\begin{align} g^\prime(z) = &amp;(\frac{1}{">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/20191207/WechatIMG26.png">
+<meta property="og:updated_time" content="2019-12-12T13:35:51.313Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20191207">
+<meta name="twitter:description" content="如何用极大似然概率解释交叉熵lossLogistic回归Logistic/Sigmoid函数, $\displaystyle p = h_\theta(x) = g(\theta^Tx) = \frac{1}{1 + e^{-\theta^Tx}}$, p是个概率值 g(z) = \frac{1}{1 + e^{-z}}\begin{align} g^\prime(z) = &amp;(\frac{1}{">
+<meta name="twitter:image" content="http://yoursite.com/20191207/WechatIMG26.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/20191207/"/>
+
+
+
+
+
+  <title>20191207 | Wenhua</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wenhua</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/20191207/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wenhua">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">20191207</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-09T10:49:04+08:00">
+                2019-12-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/aura/" itemprop="url" rel="index">
+                    <span itemprop="name">aura</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="如何用极大似然概率解释交叉熵loss"><a href="#如何用极大似然概率解释交叉熵loss" class="headerlink" title="如何用极大似然概率解释交叉熵loss"></a>如何用极大似然概率解释交叉熵loss</h2><h3 id="Logistic回归"><a href="#Logistic回归" class="headerlink" title="Logistic回归"></a>Logistic回归</h3><p>Logistic/Sigmoid函数, $\displaystyle p = h_\theta(x) = g(\theta^Tx) = \frac{1}{1 + e^{-\theta^Tx}}$, p是个概率值</p>
+<script type="math/tex; mode=display">g(z) = \frac{1}{1 + e^{-z}}</script><script type="math/tex; mode=display">\begin{align}
+g^\prime(z) = &(\frac{1}{1 + e^{-z}})^\prime = \frac{e^{-z}}{(1 + e^{-z})^2}\\
+&=\frac{1}{1 + e^{-z}} \cdot \frac{e^{-z}}{(1 + e^{-z})} = \frac{1}{1 + e^{-z}} \cdot (1 - \frac{1}{1 + e^{-z}})\\
+&=g(z) \cdot (1 - g(z))\\
+\end{align}</script><script type="math/tex; mode=display">y = \begin{cases}0\\
+1\end{cases}</script><script type="math/tex; mode=display">\hat{y} = \begin{cases}1, P(\hat{y} = 1) > p\\
+0, P(\hat{y} = 0) > p\end{cases}</script><p><img src="/20191207/WechatIMG26.png" width="300px"></p>
+<h3 id="Logistic回归及似然函数"><a href="#Logistic回归及似然函数" class="headerlink" title="Logistic回归及似然函数"></a>Logistic回归及似然函数</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>y=1</th>
+<th>y=0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$p(y \mid x)$</td>
+<td>$\theta$</td>
+<td>$1 - \theta$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>假设:</p>
+<script type="math/tex; mode=display">P(y=1|x;\theta) = h_\theta(x)</script><script type="math/tex; mode=display">P(y=0|x;\theta) = 1 - h_\theta(x)</script><script type="math/tex; mode=display">P(y|x;\theta) = h_\theta(x) \ast (1 - h_\theta(x)) = (h_\theta(x))^y(1 - h_\theta(x))^{(1-y)}</script><p>似然函数:</p>
+<script type="math/tex; mode=display">\begin{align}L(\theta) &= p(\overrightarrow y \mid X;\theta) = \displaystyle \prod_{i=1}^{m}{p(y^{(i)}|x^{(i)}; \theta)}\\
+&=\displaystyle \prod_{i=1}^{m} (h_\theta(x^{(i)}))^y{^{(i)}}(1 - h_\theta(x^{(i)}))^{(1-y^{(i)})}\\
+\end{align}</script><p>最大似然/极大似然函数的随机梯度<br>对数似然函数为:</p>
+<script type="math/tex; mode=display">l(\theta) = logL(\theta) = \displaystyle \sum_{i=1}^{m}(y^{(i)}log h_\theta(x^{(i)}) + (1 - y^{(i)})log(1 - h_\theta(x^{(i)})))</script><h3 id="极大似然估计与Logistic回归损失函数"><a href="#极大似然估计与Logistic回归损失函数" class="headerlink" title="极大似然估计与Logistic回归损失函数"></a>极大似然估计与Logistic回归损失函数</h3><script type="math/tex; mode=display">L(\theta) = \displaystyle \prod_{i=1}^{m}{p(y^{(i)}|x^{(i)}; \theta)} = \displaystyle \prod_{i=1}^{m}{p_{i}^{y^{(i)}}(1-p_i)^{(1-y^{(i)})}}, \quad p_i = h_\theta(x^{(i)}) = \frac{1}{1 + e^{\displaystyle - \theta^{T} x^{(i)}}}</script><script type="math/tex; mode=display">l(\theta) = lnL(\theta) = \displaystyle \sum_{i=1}^{m} ln[p_{i}^{y^{(i)}}(1-p_i)^{(1-y^{(i)})}]</script><script type="math/tex; mode=display">\begin{align}loss &= - l(\theta)\\
+&= - \displaystyle \sum_{i=1}^{m}[y^{(i)}ln(p_i) + (1-y^{(i)})ln(1-p_i)] \\
+\end{align}</script><p>如果我们对m个样本取平均, 得到如下:</p>
+<script type="math/tex; mode=display">- \frac{1}{m} \displaystyle \sum_{i=1}^{m}[y^{(i)}ln(p_i) + (1-y^{(i)})ln(1-p_i)]</script><p>即cross entropy</p>
+<p><a href="https://en.wikipedia.org/wiki/Cross_entropy#Relation_to_log-likelihood" target="_blank" rel="noopener">详情参考</a></p>
+<h2 id="硬币问题为何不使用MLP而直接假设正反面概率p"><a href="#硬币问题为何不使用MLP而直接假设正反面概率p" class="headerlink" title="硬币问题为何不使用MLP而直接假设正反面概率p?"></a>硬币问题为何不使用MLP而直接假设正反面概率p?</h2><ol>
+<li>对于硬币游戏, 硬币只有正面和反面两种情况, 那么对于同一个硬币来说, 正面的概率是$p$的话, 那么反面的概率就是$1-p$, 根据一个已知的硬币观测序列, 可以直接将观测到的正反面情况带入相应的概率公式, 通过梯度下降得到极值;</li>
+<li>而MLP分为输入层, 隐藏层, 输出层, 层级之间使用全连接, 需要将特征值传入进去, 通过带有结果的数据来训练神经网络的weight和bias, 本质上是将线性不可分的数据通过增加隐藏层构造切分平面使之线性科锋, 解决的问题基本上是分类问题.</li>
+</ol>
+<h2 id="面对未知分类问题，存在A-B-C三个模型，如何确定使用哪一个模型？"><a href="#面对未知分类问题，存在A-B-C三个模型，如何确定使用哪一个模型？" class="headerlink" title="面对未知分类问题，存在A,B,C三个模型，如何确定使用哪一个模型？"></a>面对未知分类问题，存在A,B,C三个模型，如何确定使用哪一个模型？</h2><ul>
+<li>模型选择, 对特定任务最优建模方法的选择或者对特定模型最佳参数的选择</li>
+<li>在训练数据集上运行模型(算法)并在测试数据集中测试效果, 迭代进行数据模型对修改, 这种方式称为交叉验证(将原始数据分为训练集和测试集, 使用训练集构建模型, 并使用测试集评估模型提供修改意见)</li>
+<li>模型的选择会尽可能多的选择算法进行执行, 并比较执行结果</li>
+<li>模型的测试一般从以下几个方面来进行比较, 分别是准确率, 召回率, 精准率, F值<ul>
+<li>准确率(Accuracy) = 提取出的正确样本数/总样本数</li>
+<li>召回率(Recall) = 正确的正例样本数/样本中的正例样本数- 覆盖率</li>
+<li>精确度(Precision) = 正确的正例样本数/预测为正例的样本数</li>
+<li>F值 = Precision <em> Recall </em> 2 / (Precision + Recall), 即F值是精准度和召回率的调和平均值</li>
+</ul>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th>预测值</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td>正例</td>
+<td>负例</td>
+</tr>
+<tr>
+<td>真实值</td>
+<td>正例</td>
+<td>true positive真正例(A)</td>
+<td>false negative假负例(B)</td>
+</tr>
+<tr>
+<td></td>
+<td>负例</td>
+<td>false positive假正例(C)</td>
+<td>true negative真负例(D)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>true positive(hit)真正例, 确实是正例<br>true negative(Correct Rejection)真负例, 确实是负例<br>false positive(False Alarm)假正例, 本来真实值是负例, 被预测为正例了, 虚报, 干扰报警<br>false negative(Miss)假负例, 本来真实值是正例, 被预测为负例了, 即没有预测出来</p>
+<p>击中(Hit)(报准)和正确拒绝(Correct Rejection)是正确反应, 虚报(False Alarm)和漏报(Miss)是错误反应</p>
+<p>A和D预测正确, B和C预测错误, 那么计算结果为:</p>
+<script type="math/tex; mode=display">Accuracy = (A + D) / (A + B + C + D)</script><script type="math/tex; mode=display">Recall = A / (A + B)</script><script type="math/tex; mode=display">Precision = A / (A + C)</script><script type="math/tex; mode=display">\displaystyle F = \frac{Precision \ast Recall \ast 2}{Precision + Recall}</script><p>举个例子, 真实值中, 正例为80, 负例为20; 预测值中, 正例为90, 负例为10, 然而, 在模型的实际预测中, 原本有75个真正的正例, 有15个是假正例, 5个假负例和5个真负例, 如下图所示:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th>预测值</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td>正例90</td>
+<td>负例10</td>
+</tr>
+<tr>
+<td>真实值</td>
+<td>正例80</td>
+<td>真正例(A)75</td>
+<td>假负例(B)5</td>
+</tr>
+<tr>
+<td></td>
+<td>负例20</td>
+<td>假正例(C)15</td>
+<td>真负例(D)5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Accuracy和Recall是一对互斥的关系, Accuracy在增大的时候Recall是在减小的</p>
+<h3 id="ROC"><a href="#ROC" class="headerlink" title="ROC"></a>ROC</h3><p>ROC(Receiver Operating Characteristic), 描述的是分类混淆矩阵中FPR-TPR之间的相对变化情况.<br>纵轴是TPR(True Positive Rate), 横轴是FPR(False Positive Rate)</p>
+<p>如果二元分类器输出的是对正样本对一个分类概率值, 当取不同阈值时会得到不同当混淆矩阵， 对应于ROC曲线上当一个点, ROC曲线就反应了FPR和TPR之间权衡当情况, 通俗的说, 即在TPR随着FPR递增的情况下, 谁增长的更快, 快多少的问题. TPR增长的越快, 曲线越往上弯曲, AUC就越大, 反应了模型的分类性能就越好. 当正负样本不平衡时, 这种模型评价方式比起一般当精确度评价方式的好处尤其显著.</p>
+<h3 id="AUC-Area-Under-Curve"><a href="#AUC-Area-Under-Curve" class="headerlink" title="AUC(Area Under Curve)"></a>AUC(Area Under Curve)</h3><p>AUC被定义为ROC曲线下的面积, 显然这个面积的数值不会大于1. 由于ROC曲线一般都处于<code>y=x</code>这条直线的上方, 所以AUC的取之范围在0.5和1之间. AUC作为数值可以直观的评价分类器的好坏, 值越大越好.</p>
+<p>AUC的值一般要求在0.7以上.</p>
+<h3 id="模型评估"><a href="#模型评估" class="headerlink" title="模型评估"></a>模型评估</h3><p>回归结果度量</p>
+<ul>
+<li>explained_varicance_score, 可解释方差的回归评分函数</li>
+<li>mean_absolute_error, 平均绝对误差</li>
+<li>mean_squared_error, 平均平方误差</li>
+</ul>
+<h3 id="模型评估总结-分类算法评估方式"><a href="#模型评估总结-分类算法评估方式" class="headerlink" title="模型评估总结_分类算法评估方式"></a>模型评估总结_分类算法评估方式</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>描述</th>
+<th>scikit-learn函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Precision</td>
+<td>精确度</td>
+<td>from sklearn.metrics import precision_score</td>
+</tr>
+<tr>
+<td>Recall</td>
+<td>召回率</td>
+<td>from sklearn.metrics import recall_score</td>
+</tr>
+<tr>
+<td>F1</td>
+<td>F1指标</td>
+<td>from sklearn.metrics import f1_score</td>
+</tr>
+<tr>
+<td>Confusion Matrix</td>
+<td>混淆矩阵</td>
+<td>from sklearn.metrics import confusion_matrix</td>
+</tr>
+<tr>
+<td>ROC</td>
+<td>ROC曲线</td>
+<td>from sklearn.metrics import roc</td>
+</tr>
+<tr>
+<td>AUC</td>
+<td>ROC曲线下的面积</td>
+<td>from sklearn.metrics import auc</td>
+</tr>
+<tr>
+<td>Mean Square Error(MSE, RMSE)</td>
+<td>平均方差</td>
+<td>from sklearn.metrics import mean_squared_error</td>
+</tr>
+<tr>
+<td>Absolute Error(MAE, RAE)</td>
+<td>平均方差</td>
+<td>from sklearn.metrics import mean_absolute_error, median_absolute_error</td>
+</tr>
+<tr>
+<td>R-Squared</td>
+<td>平均方差</td>
+<td>from sklearn.metrics import r2_score</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/aura/" rel="tag"># aura</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/20191130/" rel="next" title="20191130">
+                <i class="fa fa-chevron-left"></i> 20191130
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Xception/" rel="prev" title="Xception">
+                Xception <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何用极大似然概率解释交叉熵loss"><span class="nav-number">1.</span> <span class="nav-text">如何用极大似然概率解释交叉熵loss</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Logistic回归"><span class="nav-number">1.1.</span> <span class="nav-text">Logistic回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Logistic回归及似然函数"><span class="nav-number">1.2.</span> <span class="nav-text">Logistic回归及似然函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#极大似然估计与Logistic回归损失函数"><span class="nav-number">1.3.</span> <span class="nav-text">极大似然估计与Logistic回归损失函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬币问题为何不使用MLP而直接假设正反面概率p"><span class="nav-number">2.</span> <span class="nav-text">硬币问题为何不使用MLP而直接假设正反面概率p?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面对未知分类问题，存在A-B-C三个模型，如何确定使用哪一个模型？"><span class="nav-number">3.</span> <span class="nav-text">面对未知分类问题，存在A,B,C三个模型，如何确定使用哪一个模型？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ROC"><span class="nav-number">3.1.</span> <span class="nav-text">ROC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AUC-Area-Under-Curve"><span class="nav-number">3.2.</span> <span class="nav-text">AUC(Area Under Curve)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型评估"><span class="nav-number">3.3.</span> <span class="nav-text">模型评估</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型评估总结-分类算法评估方式"><span class="nav-number">3.4.</span> <span class="nav-text">模型评估总结_分类算法评估方式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

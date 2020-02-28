@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Inception,Xception," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="InceptionInception结构 Inception架构的主要思想是找出如何让已有的稠密组件接近与覆盖卷积视觉网络中的最佳局部稀疏结构为了避免patch校准问题, 现在滤波器大小限制在$1\ast1$, $3\ast3$和$5\ast5$, 主要为了方便, 不是必要的另外在pooling层添加一个额外的并行pooling路径用于提高效率 Previous Layer, 输入层, 比如是$2">
+<meta name="keywords" content="Inception,Xception">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Xception">
+<meta property="og:url" content="http://yoursite.com/Xception/index.html">
+<meta property="og:site_name" content="Wenhua">
+<meta property="og:description" content="InceptionInception结构 Inception架构的主要思想是找出如何让已有的稠密组件接近与覆盖卷积视觉网络中的最佳局部稀疏结构为了避免patch校准问题, 现在滤波器大小限制在$1\ast1$, $3\ast3$和$5\ast5$, 主要为了方便, 不是必要的另外在pooling层添加一个额外的并行pooling路径用于提高效率 Previous Layer, 输入层, 比如是$2">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/Xception/WechatIMG98.png">
+<meta property="og:image" content="http://yoursite.com/Xception/WechatIMG99.png">
+<meta property="og:image" content="http://yoursite.com/Xception/wechat_20200220113141.png">
+<meta property="og:image" content="http://yoursite.com/Xception/wechat_20200220104838.png">
+<meta property="og:image" content="http://yoursite.com/Xception/wechat_20200220111937.png">
+<meta property="og:image" content="http://yoursite.com/Xception/wechat_20200220143307.png">
+<meta property="og:image" content="http://yoursite.com/Xception/wechat_20200220143746.png">
+<meta property="og:image" content="http://yoursite.com/Xception/wechat_20200220143755.png">
+<meta property="og:image" content="http://yoursite.com/Xception/wechat_20200220144303.png">
+<meta property="og:image" content="http://yoursite.com/Xception/wechat_20200220150054.png">
+<meta property="og:updated_time" content="2020-02-20T07:02:23.095Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Xception">
+<meta name="twitter:description" content="InceptionInception结构 Inception架构的主要思想是找出如何让已有的稠密组件接近与覆盖卷积视觉网络中的最佳局部稀疏结构为了避免patch校准问题, 现在滤波器大小限制在$1\ast1$, $3\ast3$和$5\ast5$, 主要为了方便, 不是必要的另外在pooling层添加一个额外的并行pooling路径用于提高效率 Previous Layer, 输入层, 比如是$2">
+<meta name="twitter:image" content="http://yoursite.com/Xception/WechatIMG98.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/Xception/"/>
+
+
+
+
+
+  <title>Xception | Wenhua</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wenhua</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Xception/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wenhua">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Xception</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-20T10:24:33+08:00">
+                2020-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ai/" itemprop="url" rel="index">
+                    <span itemprop="name">ai</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Inception"><a href="#Inception" class="headerlink" title="Inception"></a>Inception</h2><h3 id="Inception结构"><a href="#Inception结构" class="headerlink" title="Inception结构"></a>Inception结构</h3><p><img src="/Xception/WechatIMG98.png" width="400px"></p>
+<p>Inception架构的主要思想是找出如何让已有的稠密组件接近与覆盖卷积视觉网络中的最佳局部稀疏结构<br>为了避免patch校准问题, 现在滤波器大小限制在$1\ast1$, $3\ast3$和$5\ast5$, 主要为了方便, 不是必要的<br>另外在pooling层添加一个额外的并行pooling路径用于提高效率</p>
+<p>Previous Layer, 输入层, 比如是$27\ast27\ast128$</p>
+<p>先做一个$1\ast1$的卷积,  那么output为: $(27-1+1)/1=27, 27\ast27\ast?$<br>$3\ast3$的卷积, output为: $(27-3+1+2)/1=27, 27\ast27\ast?$<br>$5\ast5$的卷积, output为: $(27-5+1+4)/1=27, 27\ast27\ast?$<br>以上的三个卷积相当于从三个不同的方面并行的观察目标信息, 在这里比如$1\ast1$是10个, $3\ast3$是20个, $5\ast5$是5个,  那么输出到filter concatenation就是$27\ast27\ast35$, 就包含了小/中/大区域观测的结果</p>
+<p>然而, 输入结果中有可能也包含着一些个性化的或者噪音数据或者异常信息, 所有要并行的做一个池化操作<br>池化的output为: (27-3+1+2)/1, 池化不改变深度, 所以是$27\ast27\ast128$</p>
+<p>所以最后的层次为$27\ast27\ast(35+128)=27\ast27\ast163$</p>
+<p>参数量为$(1\ast1\ast128+1)\ast10 + (3\ast3\ast128+1)\ast20 + (5\ast5\ast128+1)\ast5  = 40355$</p>
+<p>这种结构参数比较多,  遂引出inception的改进结构</p>
+<h3 id="Inception结构改进-Pointwise-Conv"><a href="#Inception结构改进-Pointwise-Conv" class="headerlink" title="Inception结构改进/Pointwise Conv"></a>Inception结构改进/Pointwise Conv</h3><p>架构的第二个主要思想: 在计算要求增加很多的地方应用维度缩减和预测. 即在$3\ast3$和$5\ast5$卷积前用一个$1\ast1$的卷积用于减少计算, 还用于修正线性激活. 如下图所示, 左边是加入维度缩减之前的, 右边是加入维度缩减之后的, 这就是Inception V1的网络架构<br><img src="/Xception/WechatIMG99.png" width="400px"></p>
+<p>输入还是$27\ast27\ast128$, 假设核函数设置的都是10个</p>
+<p>那么未改进的结构的总层数为$27\ast27\ast(10+10+10+128)=27\ast27\ast158$<br>参数量为$(1\ast1\ast128+1)\ast10 + (3\ast3\ast128+1)\ast10 + (5\ast5\ast128+1)\ast10 = 44830$<br>改进后的总层数为$27\ast27\ast40$<br>参数量为$(1\ast1\ast128+1)\ast10\ast4 + (3\ast3\ast10+1)\ast10 + (5\ast5\ast10+1)\ast10 = 8580$</p>
+<p>改进后的结构就叫做Network-In-Network, 在上面的例子来说, 就是把128个方位的降为了40个方位</p>
+<p>在这里$1 \ast 1$的卷积核就是Pointwise Convolution, 简称PW, 其目的主要在于减少维度, 还可以引入更多的非线性</p>
+<h3 id="Kernel-Replace"><a href="#Kernel-Replace" class="headerlink" title="Kernel Replace"></a>Kernel Replace</h3><p><a href="https://arxiv.org/pdf/1502.03167.pdf" target="_blank" rel="noopener">Inception V2</a>和<a href="https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Szegedy_Rethinking_the_Inception_CVPR_2016_paper.pdf" target="_blank" rel="noopener">Inception V3</a>为了进一步降低卷积参数采用小卷积来代替大卷积</p>
+<p><img src="/Xception/wechat_20200220113141.png" width="300px"></p>
+<p>大尺寸的卷积核可以带来更大的感受野, 但也意味着会产生更多的参数, 比如$5 \ast 5$卷积核的参数有25个, $3 \ast 3$ 卷积核的参数有9个, 前者是后者的$\frac{25}{9}=2.78$倍. 因此, GoogLeNet团队提出可以用2个连续的$3 \ast 3$卷积层组成的小网络来代替单个的$5 \ast 5$卷积层, 即在保持感受野范围的同时又减少了参数量. 除了规整的的正方形, 还有分解版本的$3 \ast 3 = 3 \ast 1 + 1 \ast 3$，这个效果在深度较深的情况下比规整的卷积核更好(feature map大小建议在12到20之间)</p>
+<h2 id="Group-Conv-Depthwise-Separable-Conv"><a href="#Group-Conv-Depthwise-Separable-Conv" class="headerlink" title="Group Conv/Depthwise Separable Conv"></a>Group Conv/Depthwise Separable Conv</h2><h3 id="Group-COnv"><a href="#Group-COnv" class="headerlink" title="Group COnv"></a>Group COnv</h3><p>Group Conv分组卷积, 可以用来切分网络, 以便在多个GPU上运行</p>
+<p><img src="/Xception/wechat_20200220104838.png" width="400px"></p>
+<p>对于输入为$I \ast H \ast W$大小的input features, 经过O个$K \ast K \ast I$大小的卷积核之后, 输出的output features通道数为O, 卷积参数量为$O \ast K \ast K \ast I$</p>
+<p>Group Conv, 先对输入的input features进行分组, 然后对每组分别进行卷积. 仍然假设input feature map的尺寸为$I \ast H \ast W$, 输出output features的通道数为O, 假设分成G个组, 则每个input feature map的数量为$\frac{I}{G}$, 每组的输出的feature map的数量为$\frac{O}{G}$, 那么每个卷积核的尺寸为$K \ast K \ast \frac{I}{G}$, 每组卷积核的数量为$\frac{O}{G}$, 卷积核的总数仍然为O.</p>
+<p>卷积核只与自己同组的input feature map进行卷积, 最后的卷积的总参数量为$O \ast K \ast K \ast \frac{I}{G}$, 由此可以看到总参数量减少到了原来的$\frac{1}{G}$</p>
+<p>Group Conv的用途如下所示:</p>
+<ul>
+<li>减少参数量, 分成G组, 则参数量减少为原来的$\frac{1}{G}$</li>
+<li>Group Conv可以看成是一种structured sparse, 每个卷积核的尺寸由$K \ast K \ast I$变成了$K \ast K \ast \frac{I}{G}$, 那么减少的参数量为$(I - \frac{I}{G})$, 可以视其为0(<label style="color:red">考虑该效果是否与L1/L2正则类似</label>)</li>
+</ul>
+<p>Depthwise Convolution(DW)是Group Conv的一种特例. 当分组数量等于input feature map的数量, output feature map数量也等于input feature map数量, 即当$I = O = G$, 且O个卷积核中每个的尺寸为$K \ast K \ast 1$时, Group Conv 就成了Depthwise Conv. </p>
+<h3 id="Depthwise-Separable-Conv"><a href="#Depthwise-Separable-Conv" class="headerlink" title="Depthwise Separable Conv"></a>Depthwise Separable Conv</h3><p>Depthwise Separable Convolution则是DW + PW的组合, 参数量会进一步缩小, 如下图所示:</p>
+<p><img src="/Xception/wechat_20200220111937.png" width="400px"></p>
+<h2 id="Xception"><a href="#Xception" class="headerlink" title="Xception"></a>Xception</h2><p>Xception就是在Inception + Depthwise Separable Conv</p>
+<h3 id="Inception-Hypothesis"><a href="#Inception-Hypothesis" class="headerlink" title="Inception Hypothesis"></a>Inception Hypothesis</h3><p>从Inception的各种演进架构可以看出, Inception V1是从多尺寸卷积核角度来观察input feature map, Inception V3是从参数量和计算量角度来尝试改进结构的. </p>
+<p>然而Inception V3也可以理解为: 通过显式地将操作分解为一系列独立的通道维度和空间维度的学习, 从而使得学习的过程更加简单和高效.</p>
+<p>Inception V1里各个卷积核需要同时学习空间上的相关性和通道相关性, 结合了spatial dimentions和channels dimentions.</p>
+<p>Inception V3先通过一组$1 \ast 1$PW卷积来学习通道相关性, 将输入数据映射到多个单独的小空间(降维), 之后对所有这些小空间, 通过常规的$3 \ast 3$卷积和$5 \ast 5$卷积来学习空间相关性. </p>
+<p>Inception背后的基本假设是, 通道相关性和空间相关性是可以分离相互之间的耦合性的, 于是就得到了Xception: 将通道相关性和空间相关性分开学习的结构.</p>
+<h3 id="Extreme-Inception"><a href="#Extreme-Inception" class="headerlink" title="Extreme Inception"></a>Extreme Inception</h3><p>Inception中, 特征是通过$1 \ast 1$, $3 \ast 3$, $5 \ast 5$, max pooling等进行提取的, Inception结构将特征类型的选择留给网络自己训练, 即同一个输入交由几种特征提取方式, 之后做concat. Inception V3结果图如下:</p>
+<p><img src="/Xception/wechat_20200220143307.png" width="300px"></p>
+<p>对Inception-V3进行简化, 去除Inception-V3中的avg-pooling, 输入的下一步操作就都是$1 \ast 1$的PW卷积了:</p>
+<p><img src="/Xception/wechat_20200220143746.png" width="300px"></p>
+<p>继续演进, 3个PW卷积核统一起来变成共用一个PW卷积, 后面的三个$3 \ast 3$卷积核则分别负责Group Conv</p>
+<p><img src="/Xception/wechat_20200220143755.png" width="300px"></p>
+<p>对卷积后的每个channel分别进行$3 \ast 3$卷积操作(Depthwise Conv, DW), 最后concat, 就是Extreme Inception:</p>
+<p><img src="/Xception/wechat_20200220144303.png" width="300px"></p>
+<p>在Extreme Inception模块中, 用于学习空间相关性的$3 \ast 3$的DW卷积, 和用于学习通道相关性的$1 \ast 1$PW卷积之间, 不使用非线性激活函数, 收敛过程更快, 准确率更高.</p>
+<h3 id="Xception-1"><a href="#Xception-1" class="headerlink" title="Xception"></a>Xception</h3><p>Xception常用版本是将DW和PW互换位置.</p>
+<p>Extreme Inception先进行$1 \ast 1$的PW卷积, 再进行$3 \ast 3$的DW卷积.<br>Depthwise Seprable Conv先进行$3 \ast 3$的DW卷积, 再进行$1 \ast 1$的PW卷积.</p>
+<p>DW与标准卷积操作的计算量比较如下:</p>
+<script type="math/tex; mode=display">P_{DW} = I \ast K \ast K + I \ast O</script><script type="math/tex; mode=display">P_{Normal} = I \ast K \ast K \ast O</script><script type="math/tex; mode=display">\displaystyle \frac{P_{DW}}{P_{Normal}} = \frac{1}{O} + \frac{1}{K^2} \approx \frac{1}{K^2}</script><p>其中I为输入通道数, O为输出通道数, K为标准卷积和大小. 当使用$3 \ast 3$的卷积核时, 参数量约等于标准卷积核的$\frac{1}{9}$, 大大的减少了参数量, 从而加快了训练速度. 最终其网络结构图如下图所示:</p>
+<p><img src="/Xception/wechat_20200220150054.png" width="300px"></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.cnblogs.com/xuanyuyt/p/11329998.html#_label6" target="_blank" rel="noopener">深度学习笔记</a><br><a href="https://cloud.tencent.com/developer/news/60074" target="_blank" rel="noopener">深度学习背景下的神经网络架构演变</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Inception/" rel="tag"># Inception</a>
+          
+            <a href="/tags/Xception/" rel="tag"># Xception</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/20191207/" rel="next" title="20191207">
+                <i class="fa fa-chevron-left"></i> 20191207
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Inception"><span class="nav-number">1.</span> <span class="nav-text">Inception</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Inception结构"><span class="nav-number">1.1.</span> <span class="nav-text">Inception结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inception结构改进-Pointwise-Conv"><span class="nav-number">1.2.</span> <span class="nav-text">Inception结构改进/Pointwise Conv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kernel-Replace"><span class="nav-number">1.3.</span> <span class="nav-text">Kernel Replace</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Group-Conv-Depthwise-Separable-Conv"><span class="nav-number">2.</span> <span class="nav-text">Group Conv/Depthwise Separable Conv</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Group-COnv"><span class="nav-number">2.1.</span> <span class="nav-text">Group COnv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Depthwise-Separable-Conv"><span class="nav-number">2.2.</span> <span class="nav-text">Depthwise Separable Conv</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xception"><span class="nav-number">3.</span> <span class="nav-text">Xception</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Inception-Hypothesis"><span class="nav-number">3.1.</span> <span class="nav-text">Inception Hypothesis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Extreme-Inception"><span class="nav-number">3.2.</span> <span class="nav-text">Extreme Inception</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Xception-1"><span class="nav-number">3.3.</span> <span class="nav-text">Xception</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="有约束的最优化问题," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="有约束的最优化问题 最优化问题一般是指对于某一个函数而言, 求解在其指定作用域上的全局最小值问题, 一般分为三种情况, 这三种方法求出来的解都有可能有局部最小值, 只有当函数是凸函数的时候, 才可以得到全局最小值 无约束问题, 一般求解方式为梯度下降法, 牛顿法, 坐标轴下降法, $ \displaystyle \min \limits_{x}f(x)$ 等式约束条件, 求解方式为拉格朗日乘子法,">
+<meta name="keywords" content="有约束的最优化问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="有约束的最优化问题">
+<meta property="og:url" content="http://yoursite.com/有约束的最优化问题/index.html">
+<meta property="og:site_name" content="Wenhua">
+<meta property="og:description" content="有约束的最优化问题 最优化问题一般是指对于某一个函数而言, 求解在其指定作用域上的全局最小值问题, 一般分为三种情况, 这三种方法求出来的解都有可能有局部最小值, 只有当函数是凸函数的时候, 才可以得到全局最小值 无约束问题, 一般求解方式为梯度下降法, 牛顿法, 坐标轴下降法, $ \displaystyle \min \limits_{x}f(x)$ 等式约束条件, 求解方式为拉格朗日乘子法,">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-01T23:34:54.007Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="有约束的最优化问题">
+<meta name="twitter:description" content="有约束的最优化问题 最优化问题一般是指对于某一个函数而言, 求解在其指定作用域上的全局最小值问题, 一般分为三种情况, 这三种方法求出来的解都有可能有局部最小值, 只有当函数是凸函数的时候, 才可以得到全局最小值 无约束问题, 一般求解方式为梯度下降法, 牛顿法, 坐标轴下降法, $ \displaystyle \min \limits_{x}f(x)$ 等式约束条件, 求解方式为拉格朗日乘子法,">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/有约束的最优化问题/"/>
+
+
+
+
+
+  <title>有约束的最优化问题 | Wenhua</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wenhua</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/有约束的最优化问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wenhua">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">有约束的最优化问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-16T10:10:41+08:00">
+                2019-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ai/" itemprop="url" rel="index">
+                    <span itemprop="name">ai</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="有约束的最优化问题"><a href="#有约束的最优化问题" class="headerlink" title="有约束的最优化问题"></a>有约束的最优化问题</h2><ul>
+<li>最优化问题一般是指对于某一个函数而言, 求解在其指定作用域上的全局最小值问题, 一般分为三种情况, 这三种方法求出来的解都有可能有局部最小值, 只有当函数是凸函数的时候, 才可以得到全局最小值<ul>
+<li>无约束问题, 一般求解方式为梯度下降法, 牛顿法, 坐标轴下降法, $ \displaystyle \min \limits_{x}f(x)$</li>
+<li>等式约束条件, 求解方式为拉格朗日乘子法, $\displaystyle \min \limits_{x}f(x), s.t: h_k(x)=0, k=1,2,\cdots, p$</li>
+<li>不等式约束条件, 求解方式为KKT条件<script type="math/tex; mode=display">\displaystyle \min \limits_{x}f(x), s.t: h_k(x)=0, k=1,2,\cdots, p, g_j(x) \le 0, j=1, 2, \cdots, q</script></li>
+</ul>
+</li>
+</ul>
+<h4 id="拉格朗日乘子法"><a href="#拉格朗日乘子法" class="headerlink" title="拉格朗日乘子法"></a>拉格朗日乘子法</h4><script type="math/tex; mode=display">\displaystyle \min \limits_{x}f(x), s.t: h_i(x)=0, i=1,2,\cdots, p</script><script type="math/tex; mode=display">\displaystyle \min \limits_{x}f(x) + \displaystyle \sum_{i=1}^{p} \alpha_i h_i(x); \quad \alpha_i \ne 0</script><h4 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h4><p>在优化问题中, 目标函数f(x)存在多种形式, 如果目标函数和约束条件都为变量x的线性函数, 则称问题为线性规划; 如果目标函数为二次函数, 则称优化问题为二次规划; 如果目标函数或者约束条件为非线性函数, 则称最优化问题为非线性规划. 每个线性规划问题都有一个对偶问题</p>
+<ul>
+<li>对偶问题的对偶是原问题</li>
+<li>无论原始问题是否是凸的, 对偶问题都是凸优化问题</li>
+<li>对偶问题可以给出原始问题的一个下界</li>
+<li>当满足一定条件的时候, 原始问题和对偶问题的解是完美等价的</li>
+</ul>
+<h4 id="KKT条件"><a href="#KKT条件" class="headerlink" title="KKT条件"></a>KKT条件</h4><p>KKT条件是泛拉格朗日乘子法的一种形式, 主要应用在当我们的优化函数存在不等值约束的情况下的一种最优化解决方式; KKT条件即满足不等值约束的条件</p>
+<script type="math/tex; mode=display">\displaystyle \min \limits_{x}f(x); \quad s.t.: h_k(x)=0, k=1,2,\cdots,p; \quad g_j(x) \le 0, j=1, 2, \cdots, q</script><script type="math/tex; mode=display">L(x, \alpha, \beta) = f(x) + \sum_{i=1}^{p}\alpha_ih_i(x) + \sum_{i=1}^{q}\beta_ig_i(x);\quad\alpha_i \ne 0, \beta_i \lt 0</script><script type="math/tex; mode=display">\min \limits_{x}L(x, \alpha, \beta)</script><h4 id="KKT条件总结"><a href="#KKT条件总结" class="headerlink" title="KKT条件总结"></a>KKT条件总结</h4><ul>
+<li>拉格朗日取得可行解的充要条件, $\nabla_xL(x, \alpha, \beta) = 0$</li>
+<li>将不等式约束转换后的一个约束, 称为松弛互补条件, $\beta_ig_i(x) = 0, \quad i=1,2,\cdots,q$</li>
+<li>初始约束条件, $h_i(x)=0, \quad i=1,2,\cdots,p$</li>
+<li>初始约束条件, $g_i(x)\le0,\quad i=1,2,\cdots,q$</li>
+<li>不等式约束需要满足的条件, $\beta_i\ge0,\quad i=1,2,\cdots,q$</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/有约束的最优化问题/" rel="tag"># 有约束的最优化问题</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/precision和accuracy的区别/" rel="next" title="precision和accuracy的区别">
+                <i class="fa fa-chevron-left"></i> precision和accuracy的区别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/鸢尾花数据分类/" rel="prev" title="鸢尾花数据分类">
+                鸢尾花数据分类 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#有约束的最优化问题"><span class="nav-number">1.</span> <span class="nav-text">有约束的最优化问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#拉格朗日乘子法"><span class="nav-number">1.0.1.</span> <span class="nav-text">拉格朗日乘子法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对偶问题"><span class="nav-number">1.0.2.</span> <span class="nav-text">对偶问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#KKT条件"><span class="nav-number">1.0.3.</span> <span class="nav-text">KKT条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#KKT条件总结"><span class="nav-number">1.0.4.</span> <span class="nav-text">KKT条件总结</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

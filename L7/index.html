@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="K-means聚类,层次聚类,密度聚类,谱聚类,有约束的最优化问题,SVM,SMO,拉格朗日乘子法,KKT(karush–kuhn–tucker)," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="回顾决策树和集成学习  分类决策树和回归决策树 决策树的构建  目的: 让同一个类别/y的取值接近的样本在同一个叶子节点中, 让一个叶子节点中的样本足够的”纯” “纯”的度量方式(值越大表示数据越不”纯”) 信息熵(分类) gini系数(分类) 错误率(分类) MSE(回归) MAE(回归)   进行数据划分的特征属性的选择 基于划分前”纯”度的指标和划分后”纯”度值之间的差距, 作为特征属性的选">
+<meta name="keywords" content="K-means聚类,层次聚类,密度聚类,谱聚类,有约束的最优化问题,SVM,SMO,拉格朗日乘子法,KKT(karush–kuhn–tucker)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="L7">
+<meta property="og:url" content="http://yoursite.com/L7/index.html">
+<meta property="og:site_name" content="Wenhua">
+<meta property="og:description" content="回顾决策树和集成学习  分类决策树和回归决策树 决策树的构建  目的: 让同一个类别/y的取值接近的样本在同一个叶子节点中, 让一个叶子节点中的样本足够的”纯” “纯”的度量方式(值越大表示数据越不”纯”) 信息熵(分类) gini系数(分类) 错误率(分类) MSE(回归) MAE(回归)   进行数据划分的特征属性的选择 基于划分前”纯”度的指标和划分后”纯”度值之间的差距, 作为特征属性的选">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/L7/WechatIMG143.png">
+<meta property="og:image" content="http://yoursite.com/L7/WechatIMG144.png">
+<meta property="og:image" content="http://yoursite.com/L7/微信图片_20190622104414.png">
+<meta property="og:image" content="http://yoursite.com/L7/微信图片_20190624114549.png">
+<meta property="og:image" content="http://yoursite.com/L7/WechatIMG37.png">
+<meta property="og:image" content="http://yoursite.com/L7/WechatIMG38.png">
+<meta property="og:updated_time" content="2019-11-01T23:34:53.798Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="L7">
+<meta name="twitter:description" content="回顾决策树和集成学习  分类决策树和回归决策树 决策树的构建  目的: 让同一个类别/y的取值接近的样本在同一个叶子节点中, 让一个叶子节点中的样本足够的”纯” “纯”的度量方式(值越大表示数据越不”纯”) 信息熵(分类) gini系数(分类) 错误率(分类) MSE(回归) MAE(回归)   进行数据划分的特征属性的选择 基于划分前”纯”度的指标和划分后”纯”度值之间的差距, 作为特征属性的选">
+<meta name="twitter:image" content="http://yoursite.com/L7/WechatIMG143.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/L7/"/>
+
+
+
+
+
+  <title>L7 | Wenhua</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wenhua</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/L7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wenhua">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">L7</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-20T20:59:11+08:00">
+                2019-01-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ai/" itemprop="url" rel="index">
+                    <span itemprop="name">ai</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h2><p>决策树和集成学习</p>
+<ul>
+<li>分类决策树和回归决策树</li>
+<li><p>决策树的构建</p>
+<ul>
+<li>目的: 让同一个类别/y的取值接近的样本在同一个叶子节点中, 让一个叶子节点中的样本足够的”纯”</li>
+<li>“纯”的度量方式(值越大表示数据越不”纯”)<ul>
+<li>信息熵(分类)</li>
+<li>gini系数(分类)</li>
+<li>错误率(分类)</li>
+<li>MSE(回归)</li>
+<li>MAE(回归)</li>
+</ul>
+</li>
+<li>进行数据划分的特征属性的选择<ul>
+<li>基于划分前”纯”度的指标和划分后”纯”度值之间的差距, 作为特征属性的选择, 叫做信息增益, 选择增益越大的特征属性作为最终的划分数据<br>基于划分前”纯”度的指标和划分后”纯”度值之间的差距, 然后相对于划分属性的”纯”度值的比率, 作为特征属性选择的依据, 叫做信息增益率, 选择增益率最大的特征属性作为最终的划分属性</li>
+</ul>
+</li>
+<li>数据的划分方式<ul>
+<li>对于离散数据, 如果是构建多叉树, 那么此时一个特征的取值就是一个分支</li>
+<li>对于离散数据, 如果是构建二叉树, 那么将离散数据转换为”属于该值”和”不属于该值”两个类别, 然后再每个类别一个分支</li>
+<li>对于连续数据, 在连续数据中找出一个split_point点, 然后让大于等于split_point的数据属于一个分支, 让其他数据属于另外一个分支</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>决策树的预测</p>
+</li>
+<li><p>欠拟合和过拟合</p>
+<ul>
+<li>欠拟合解决方案: 可以通过增加树的层次来解决这个问题, 但是如果层次足够高的话又会导致过拟合</li>
+<li>过拟合解决方案: 剪枝(前剪枝和后剪枝), 或者多棵树的集成学习(随机森林), 在选择划分的特征属性的时候不进行全局最优选择, 而是进行局部最优选择</li>
+</ul>
+</li>
+<li><p>常见的算法</p>
+<ul>
+<li>ID3</li>
+<li>C4.5</li>
+<li>CART</li>
+</ul>
+</li>
+<li><p>集成学习</p>
+<ul>
+<li>思路, 将多个模型进行融合, 使用融合后的结果作为真实的预测值</li>
+<li>bagging, 对数据进行重采样, 然后使用重采样的数据进行模型训练, 然后将训练的多个模型预测结果进行融合; 如果是分类就多数投票或者加权的多数投票, 如果是回归就均值或者加权均值<ul>
+<li>代表算法是随机森林</li>
+</ul>
+</li>
+<li><p>boosting, 对训练数据进行更改(样本权重的更改, 或者样本数据值的更改), 然后使用更改后的数据来训练模型, 训练之后对模型进行加权的操作</p>
+<ul>
+<li>代表算法有两种, adaboost基于样本的权重进行模型构建, 权重越高的样本在模型训练的时候起到的决策性作用越大; 样本的更新规则, 如果一个样本被前面的模型预测错误, 那么当前这个样本的权重就增大; 模型的权重给定规则, 如果一个模型的预测越准确, 模型的权重越高 </li>
+<li>adaboost本质是每次迭代构建模型的时候, 对于之前分类错误的样本着重考虑 </li>
+<li>GBDT, 梯度提升树, 在每次迭代的时候使用上一次的训练数据和上一次训练之后模型的预测值之间的残差作为当前模型的输入</li>
+<li>GBDT本质, 每次迭代模型的时候, 都是在之前模型预测的结果的基础上进行预测, 每次产生的模型都让误差/偏度变得更小</li>
+<li>GBDT中所有模型权重相同</li>
+<li>衰减因子, 每次考量模型的时候, 不是完全的相信模型效果, 所以可以对模型进行一个缩放操作; 每次更新的时候不是基于全部的预测值(y_true - y_predict), 而是采用变化一小点的策略(y_true - alpha * y_predict)</li>
+</ul>
+</li>
+<li><p>stacking</p>
+<ul>
+<li>使用原始数据和算法模型(不要求一样)训练多个模型</li>
+<li>使用第一步训练的多个模型在训练集上的预测值组成一个特征举证X, 使用原始数据中的目标属性作为Y, 然后再训练一个模型, 就相当于模型的算法集成, 而不是通过数据上的算法集成</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="聚类算法"><a href="#聚类算法" class="headerlink" title="聚类算法"></a>聚类算法</h2><h3 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h3><ul>
+<li>Jaccard相似度, Pearson相似度</li>
+<li>K-means聚类</li>
+<li>聚类算法效果评估(准确率, 召回率等)</li>
+<li>层次聚类算法</li>
+<li>密度聚类算法</li>
+<li>谱聚类算法</li>
+</ul>
+<h3 id="什么是聚类"><a href="#什么是聚类" class="headerlink" title="什么是聚类"></a>什么是聚类</h3><p>聚类就是对大量未知标注对数据集, 按照数据内部存在的数据特征将数据划分为多个不同的类别, 使类别内的数据比较相似, 类别之间的数据相似度比较小; 属于无监督学习</p>
+<p>聚类算法的重点是计算样本项之间的相似度, 有时候也称为样本间的距离</p>
+<p>和分类算法的区别</p>
+<ul>
+<li>分类算法属于有监督学习, 基于有标注的历史数据进行算法模型构建</li>
+<li>聚类算法属于无监督学习, 数据集中的数据是没有标注的</li>
+</ul>
+<h3 id="相似度-距离公式"><a href="#相似度-距离公式" class="headerlink" title="相似度/距离公式"></a>相似度/距离公式</h3><h4 id="闵可夫斯基距离-Minkovski"><a href="#闵可夫斯基距离-Minkovski" class="headerlink" title="闵可夫斯基距离(Minkovski)"></a>闵可夫斯基距离(Minkovski)</h4><script type="math/tex; mode=display">dist(X, Y) = \displaystyle \sqrt[p]{ \sum_{i=1}^n \vert x_i - y_i \vert^p}</script><ul>
+<li>当p为1的时候就是曼哈顿距离(Manhattan)<script type="math/tex; mode=display">M_{dist} = \displaystyle \sum_{i=1}^n \vert x_i - y_i \vert</script></li>
+<li>当p为2的时候就是欧式距离(Euclidean)<script type="math/tex; mode=display">E_{dist} = \displaystyle \sqrt{ \displaystyle \sum_{i=1}^n (x_i - y_i)^2}</script></li>
+<li>当p为无穷大的时候就是切比雪夫距离(Chebyshev)<script type="math/tex; mode=display">C_{dist} = \max \limits_{i} ( \vert x_i - y_i \vert )</script></li>
+</ul>
+<h4 id="标准化欧式距离-Standardized-Euclidean-Distance"><a href="#标准化欧式距离-Standardized-Euclidean-Distance" class="headerlink" title="标准化欧式距离(Standardized Euclidean Distance)"></a>标准化欧式距离(Standardized Euclidean Distance)</h4><script type="math/tex; mode=display">X^{\ast} = \frac{ X - \bar X}{s}</script><script type="math/tex; mode=display">s = \sqrt{ \frac{ \displaystyle \sum_{i=1}^n (x_i - y_i)^2}{n} }</script><script type="math/tex; mode=display">S\_E\_D = \sqrt{ \displaystyle \sum_{i=1}^n (\frac{x_i - y_i}{s_i})^2 }</script><h4 id="夹角余弦相似度-Cosine"><a href="#夹角余弦相似度-Cosine" class="headerlink" title="夹角余弦相似度(Cosine)"></a>夹角余弦相似度(Cosine)</h4><script type="math/tex; mode=display">a = (x_{11}, x_{12}, \cdots, x_{1n})</script><script type="math/tex; mode=display">b = (x_{21}, x_{22}, \cdots, x_{2n})</script><script type="math/tex; mode=display">cos(\theta) = \displaystyle \frac{\displaystyle \sum_{k=1}^n x_{1k} x_{2k}}{\sqrt{\displaystyle \sum_{k=1}^n x_{1k}^2} \ast \sqrt{\displaystyle \sum_{k=1}^n x_{2k}^2}} = \frac{a^T \cdot b}{\vert a \vert \vert b \vert}</script><h4 id="KL距离-相对熵"><a href="#KL距离-相对熵" class="headerlink" title="KL距离(相对熵)"></a>KL距离(相对熵)</h4><script type="math/tex; mode=display">D(P \Vert\Vert Q) = \sum_x P(x) log(\frac{P(x)}{Q(x)})</script><h4 id="杰卡德相似系数-Jaccard"><a href="#杰卡德相似系数-Jaccard" class="headerlink" title="杰卡德相似系数(Jaccard)"></a>杰卡德相似系数(Jaccard)</h4><script type="math/tex; mode=display">J(A, B) = \frac{\vert A \bigcap B \vert}{\vert A \bigcup B \vert}, \quad dist(A, B) = 1 - J(A, B) = \frac{\vert A \bigcup B \vert - \vert A \bigcap B \vert}{\vert A \bigcup B \vert}</script><h4 id="Pearson相关系数"><a href="#Pearson相关系数" class="headerlink" title="Pearson相关系数"></a>Pearson相关系数</h4><script type="math/tex; mode=display">\rho_{XY} = \frac{Cov(X, Y)}{\sqrt{D(X)} \sqrt{D(Y)}} = \frac{ E[(X-E(X))(Y-E(Y)) ]} {\sqrt{D(X)} \sqrt{D(Y)}}=  \frac{ \displaystyle \sum_{i=1}^n (X_i - \mu_X)(Y_i - \mu_Y) }{\sqrt{\displaystyle \sum_{i=1}^n (X_i - \mu_X)^2} \ast \sqrt{\displaystyle \sum_{i=1}^n (Y_i - \mu_Y)^2}}</script><script type="math/tex; mode=display">dist(X, Y) = 1 - \rho_{XY}</script><h3 id="聚类的思想"><a href="#聚类的思想" class="headerlink" title="聚类的思想"></a>聚类的思想</h3><p>给定一个有M个对象的数据集, 构建一个具有k个簇的模型, 其中$k \le M$, 满足以下条件:</p>
+<ul>
+<li>每个簇至少包含一个对象</li>
+<li>每个对象属于且仅属于一个簇</li>
+<li>将满足上述条件的k个簇称为一个合理的聚类划分</li>
+</ul>
+<p>基本思想: 对于给定的类别数据k, 首先给定初始划分, 通过迭代改变样本和簇的隶属关系, 使得每次处理后的得到的划分比上一次的好(总的数据集之间的距离和变小了)</p>
+<h3 id="K-means算法"><a href="#K-means算法" class="headerlink" title="K-means算法"></a>K-means算法</h3><p>K-means算法, 也称为K平均或者K均值, 是使用广泛的最基础的聚类算法</p>
+<p>假设输入样本为$T=X_1, X_2, \cdots, X_m$, 则算法步骤(使用欧几里得距离公式)为:</p>
+<ul>
+<li>选择初始化的k个类别中心$a_1, a_2, \cdots, a_k$</li>
+<li>对于每个样本$X_i$, 将其标记为距离类别中心$a_j$最近的类别j</li>
+<li>更新每个类别的中心点$a_j$为隶属于该类别的所有样本的均值</li>
+<li>重复上述两步操作, 直到达到某个终止条件</li>
+</ul>
+<p>终止条件</p>
+<ul>
+<li>迭代次数, 最小平方误差MSE, 簇中心点变化率</li>
+</ul>
+<script type="math/tex; mode=display">label_i = arg \min \limits_{1 \le j \le k} { \sqrt{ \displaystyle \sum_{i=1}^n (x_i - a_j )^2 }  }</script><script type="math/tex; mode=display">a_j = \frac{1}{N(c_j)} \sum_{i \in c_j}x_i</script><h4 id="K-means算法过程"><a href="#K-means算法过程" class="headerlink" title="K-means算法过程"></a>K-means算法过程</h4><p><img src="/L7/WechatIMG143.png"></p>
+<p>记K个簇中心分别为$a_1, a_2, \cdots, a_K$, 每个簇的样本数量为$N_1, N_2, \cdots, N_K$<br>使用平方误差作为目标函数(使用欧几里得距离), 公式为:</p>
+<script type="math/tex; mode=display">J(a_1, a_2, \cdots, a_K) = \frac{1}{2} \displaystyle \sum_{j=1}^K \sum_{i=1}^{N_j} ( \overrightarrow {x_i} - \overrightarrow {a_j})^2</script><p>要获取最优解, 即使得目标函数尽可能的小, 对函数J求偏导, 可以得到簇中心点a更新对公式:</p>
+<script type="math/tex; mode=display">\frac{\partial J}{\partial a_j} = \displaystyle \sum_{i=1}^{N_j} (x_i - a_j) \underrightarrow{令} 0 \Rightarrow a_j = \frac{1}{N_j} \sum_{i=1}^{N_j} x_i</script><p>K-means算法在迭代过程中使用所有点的均值作为新的质心(中心点), 如果簇中存在异常点, 将导致均值偏差比较严重<br>比如一个簇中有2, 4, 6, 8, 100五个数据, 那么新的质心为24, 显然这个质心离绝大多数点都比较远, 在当前情况下, 使用中位数6可能比使用均值的想法更好, 使用中位数的聚类方法叫做K-Mediods聚类(K中值聚类)</p>
+<h4 id="K-means算法初值敏感"><a href="#K-means算法初值敏感" class="headerlink" title="K-means算法初值敏感"></a>K-means算法初值敏感</h4><p>K-means算法是初值敏感的, 选择不同的初始值可能导致不同的簇划分规则, 为了避免初值敏感最终导致的结果异常, 可以采用初始化多套初始节点构造不同的分类规则, 然后选择最优的构造规则</p>
+<p><img src="/L7/WechatIMG144.png" width="500px"></p>
+<h4 id="K-means算法初优缺点"><a href="#K-means算法初优缺点" class="headerlink" title="K-means算法初优缺点"></a>K-means算法初优缺点</h4><p>缺点:</p>
+<ul>
+<li>K值是用户给定的, 在进行数据处理前, K值是未知的, 不同的K值得到的结果也不一样</li>
+<li>对初始簇中心点是敏感的</li>
+<li>不适合发现非凸形状的簇或者大小差别较大的簇</li>
+<li>特殊值(离群值)对模型的影响比较大</li>
+</ul>
+<p>优点:</p>
+<ul>
+<li>理解容易, 聚类效果不错</li>
+<li>处理大数据集的时候, 该算法可以保证较好的伸缩性和高效率</li>
+<li>当簇近似高斯分布的时候, 效果非常不错</li>
+</ul>
+<h4 id="K-means算法案例"><a href="#K-means算法案例" class="headerlink" title="K-means算法案例"></a>K-means算法案例</h4><h3 id="二分K-means算法"><a href="#二分K-means算法" class="headerlink" title="二分K-means算法"></a>二分K-means算法</h3><p>解决K-means算法对初始簇中心比较敏感的问题, 二分K-means算法是一种弱化初始质心的一种算法, 具体思路步骤如下:</p>
+<ul>
+<li>将所有样本数据作为一个簇放到一个队列中</li>
+<li>从队列中选择一个簇进行K-means算法划分, 划分为两个簇, 并将子簇添加到队列中 </li>
+<li>循环迭代第二步操作, 知道终止条件达到(聚簇数量, 最小平方误差, 迭代次数)</li>
+<li>队列中的簇就是最终的分类簇集合</li>
+</ul>
+<p>从队列中选择划分聚簇的规则一般有两种方式:</p>
+<ul>
+<li>对所有簇计算误差和SSE(SSE也可以认为是距离函数的一种变种), 选择SSE最大的聚簇进行划分操作(优先这种策略)</li>
+<li>选择样本数据量最多的簇进行划分操作</li>
+</ul>
+<script type="math/tex; mode=display">SSE = \displaystyle \sum_{i=1}^n w_i ( \overrightarrow{x_i} - )^2</script><h3 id="K-means-算法"><a href="#K-means-算法" class="headerlink" title="K-means++算法"></a>K-means++算法</h3><h3 id="K-means-Vert-算法"><a href="#K-means-Vert-算法" class="headerlink" title="K-means$\Vert$算法"></a>K-means$\Vert$算法</h3><h3 id="Canopy算法"><a href="#Canopy算法" class="headerlink" title="Canopy算法"></a>Canopy算法</h3><h3 id="Mini-Batch-K-means算法"><a href="#Mini-Batch-K-means算法" class="headerlink" title="Mini Batch K-means算法"></a>Mini Batch K-means算法</h3><h3 id="K-means和Mini-Batch-K-means算法比较案例"><a href="#K-means和Mini-Batch-K-means算法比较案例" class="headerlink" title="K-means和Mini Batch K-means算法比较案例"></a>K-means和Mini Batch K-means算法比较案例</h3><h3 id="聚类算法的衡量指标"><a href="#聚类算法的衡量指标" class="headerlink" title="聚类算法的衡量指标"></a>聚类算法的衡量指标</h3><ul>
+<li>混淆矩阵</li>
+<li>均一性</li>
+<li>完整性</li>
+<li>V-measure</li>
+<li>调整兰德系数(ARI)</li>
+<li>调整互信息(AMI)</li>
+<li>轮廓系数(Silhouette)</li>
+</ul>
+<h4 id="均一性"><a href="#均一性" class="headerlink" title="均一性"></a>均一性</h4><ul>
+<li>均一性: 一个簇中只包含一个类别的样本, 则满足均一性; 其实也可以认为是正确率(每个聚簇中正确分类的样本数占该聚簇总样本书的比例和)<script type="math/tex; mode=display">p = \frac{1}{k} \displaystyle \sum_{i=1}^{k} \frac{N(C_i == K_i)}{N(K_i)}</script>N表示数量, $C_i$表示实际的类别, $K_i$表示在簇中间的类别, 总共k个簇</li>
+</ul>
+<h4 id="完整性"><a href="#完整性" class="headerlink" title="完整性"></a>完整性</h4><ul>
+<li>完整性: 同类别样本被归类到相同簇中, 则满足完整性; 每个聚簇中正确分类的样本数占该类型的总样本比例的和, 和之前讲的”召回率”有点类似<br><script type="math/tex">r = \frac{1}{k} \displaystyle \sum_{i=1}^{k} \frac{N(C_i == K_i)}{N(C_i)}</script> - V-measure: 均一性和完整性的加权平均</li>
+</ul>
+<h4 id="V-measure"><a href="#V-measure" class="headerlink" title="V-measure"></a>V-measure</h4><script type="math/tex; mode=display">v_\beta = \frac{(1 + \beta^2) \cdot pr}{\beta^2 \cdot p + r}</script><h4 id="轮廓系数"><a href="#轮廓系数" class="headerlink" title="轮廓系数"></a>轮廓系数</h4><ul>
+<li>簇内不相似度</li>
+<li>簇间不相似度</li>
+<li>轮廓系数</li>
+</ul>
+<h2 id="层次聚类方法"><a href="#层次聚类方法" class="headerlink" title="层次聚类方法"></a>层次聚类方法</h2><h3 id="凝聚的层次聚类AGNES算法"><a href="#凝聚的层次聚类AGNES算法" class="headerlink" title="凝聚的层次聚类AGNES算法"></a>凝聚的层次聚类AGNES算法</h3><h3 id="分裂的层次聚类DIANA算法"><a href="#分裂的层次聚类DIANA算法" class="headerlink" title="分裂的层次聚类DIANA算法"></a>分裂的层次聚类DIANA算法</h3><h3 id="AGNES和DIANA算法优缺点"><a href="#AGNES和DIANA算法优缺点" class="headerlink" title="AGNES和DIANA算法优缺点"></a>AGNES和DIANA算法优缺点</h3><h3 id="AGNES算法中簇间距离"><a href="#AGNES算法中簇间距离" class="headerlink" title="AGNES算法中簇间距离"></a>AGNES算法中簇间距离</h3><h3 id="层次聚类优化算法"><a href="#层次聚类优化算法" class="headerlink" title="层次聚类优化算法"></a>层次聚类优化算法</h3><h4 id="BIRCH算法"><a href="#BIRCH算法" class="headerlink" title="BIRCH算法"></a>BIRCH算法</h4><h4 id="CURE算法"><a href="#CURE算法" class="headerlink" title="CURE算法"></a>CURE算法</h4><h3 id="BRICH算法案例"><a href="#BRICH算法案例" class="headerlink" title="BRICH算法案例"></a>BRICH算法案例</h3><h2 id="密度聚类算法"><a href="#密度聚类算法" class="headerlink" title="密度聚类算法"></a>密度聚类算法</h2><p>密度聚类方法的指导思想是: 只要样本点的密度大于某个阈值, 则将样本添加到最近的簇中</p>
+<p>这类算法可以客服基于距离的算法只能发现凸聚类的缺点, 可以发现任意形状的聚类, 而且对噪声数据不敏感</p>
+<p>计算复杂度高, 计算量大<br>常用的算法有:</p>
+<ul>
+<li>DBSCAN</li>
+<li>密度最大值算法</li>
+</ul>
+<h3 id="DBSCAN算法"><a href="#DBSCAN算法" class="headerlink" title="DBSCAN算法"></a>DBSCAN算法</h3><h3 id="密度最大值聚类算法-MDCA"><a href="#密度最大值聚类算法-MDCA" class="headerlink" title="密度最大值聚类算法(MDCA)"></a>密度最大值聚类算法(MDCA)</h3><h3 id="密度聚类算法案例"><a href="#密度聚类算法案例" class="headerlink" title="密度聚类算法案例"></a>密度聚类算法案例</h3><h2 id="谱聚类"><a href="#谱聚类" class="headerlink" title="谱聚类"></a>谱聚类</h2><h3 id="拉普拉斯矩阵变换"><a href="#拉普拉斯矩阵变换" class="headerlink" title="拉普拉斯矩阵变换"></a>拉普拉斯矩阵变换</h3><h3 id="谱聚类应用场景及面临的问题"><a href="#谱聚类应用场景及面临的问题" class="headerlink" title="谱聚类应用场景及面临的问题"></a>谱聚类应用场景及面临的问题</h3><h3 id="谱聚类应用案例"><a href="#谱聚类应用案例" class="headerlink" title="谱聚类应用案例"></a>谱聚类应用案例</h3><h2 id="聚类综合案例"><a href="#聚类综合案例" class="headerlink" title="聚类综合案例"></a>聚类综合案例</h2><h3 id="不同聚类算法在不同数据分布情况下的聚类效果"><a href="#不同聚类算法在不同数据分布情况下的聚类效果" class="headerlink" title="不同聚类算法在不同数据分布情况下的聚类效果"></a>不同聚类算法在不同数据分布情况下的聚类效果</h3><h3 id="图片压缩"><a href="#图片压缩" class="headerlink" title="图片压缩"></a>图片压缩</h3><h2 id="有约束的最优化问题"><a href="#有约束的最优化问题" class="headerlink" title="有约束的最优化问题"></a>有约束的最优化问题</h2><ul>
+<li>最优化问题一般是指对于某一个函数而言, 求解在其指定作用域上的全局最小值问题, 一般分为三种情况, 这三种方法求出来的解都有可能有局部最小值, 只有当函数是凸函数的时候, 才可以得到全局最小值<ul>
+<li>无约束问题, 一般求解方式为梯度下降法, 牛顿法, 坐标轴下降法, $ \displaystyle \min \limits_{x}f(x)$</li>
+<li>等式约束条件, 求解方式为拉格朗日乘子法, $\displaystyle \min \limits_{x}f(x); s.t: h_k(x)=0, k=1,2,\cdots, p$</li>
+<li>不等式约束条件, 求解方式为KKT条件<script type="math/tex; mode=display">\displaystyle \min \limits_{x}f(x), s.t: h_k(x)=0, k=1,2,\cdots, p, g_j(x) \le 0, j=1, 2, \cdots, q</script></li>
+</ul>
+</li>
+</ul>
+<h3 id="拉格朗日乘子法"><a href="#拉格朗日乘子法" class="headerlink" title="拉格朗日乘子法"></a>拉格朗日乘子法</h3><script type="math/tex; mode=display">\displaystyle \min \limits_{x}f(x), s.t: h_i(x)=0, i=1,2,\cdots, p</script><script type="math/tex; mode=display">\displaystyle \min \limits_{x}f(x) + \displaystyle \sum_{i=1}^{p} \alpha_i h_i(x); \quad \alpha_i \ne 0</script><h3 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h3><p>在优化问题中, 目标函数f(x)存在多种形式, 如果目标函数和约束条件都为变量x的线性函数, 则称问题为线性规划; 如果目标函数为二次函数, 则称优化问题为二次规划; 如果目标函数或者约束条件为非线性函数, 则称最优化问题为非线性规划. 每个线性规划问题都有一个对偶问题</p>
+<ul>
+<li>对偶问题的对偶是愿问题</li>
+<li>无论原始问题是否是凸的, 对偶问题都是凸优化问题</li>
+<li>对偶问题可以给出原始问题的一个下界</li>
+<li>当满足一定条件的时候, 原始问题和对偶问题的解是完美等价的</li>
+</ul>
+<h3 id="KKT条件"><a href="#KKT条件" class="headerlink" title="KKT条件"></a>KKT条件</h3><p>KKT条件是泛拉格朗日乘子法的一种形式, 主要应用在当我们的优化函数存在不等值约束的情况下的一种最优化解决方式; KKT条件即满足不等值约束的条件</p>
+<script type="math/tex; mode=display">\displaystyle \min \limits_{x}f(x); \quad s.t.: h_k(x)=0, k=1,2,\cdots,p; \quad g_j(x) \le 0, j=1, 2, \cdots, q</script><script type="math/tex; mode=display">L(x, \alpha, \beta) = f(x) + \sum_{i=1}^{p}\alpha_ih_i(x) + \sum_{i=1}^{q}\beta_ig_i(x);\quad\alpha_i \ne 0, \beta_i \ge 0</script><script type="math/tex; mode=display">\min \limits_{x}L(x, \alpha, \beta)</script><p>考虑简化的形式</p>
+<script type="math/tex; mode=display">\displaystyle \min \limits_{x}f(x); \quad s.t.: g_j(x) \le 0, j=1, 2, \cdots, q</script><script type="math/tex; mode=display">L(x, \beta) = f(x) + \sum_{i=1}^{q}\beta_ig_i(x);\quad \beta_i \ge 0</script><p><img src="/L7/微信图片_20190622104414.png" width="300px"></p>
+<p>从上式可以看到, $\beta_i g_i(x) \le 0$, 那么它的最大值顶多是0, 那么$f(x) = L(x, \beta) - \displaystyle \sum_{i=1}^q{\beta_ig_i(x)}$, 由此可以得到$L(x, \beta)$的最大值顶多就是$f(x)$, 所以最后如果要求解$f(x)$的最小值, 即可以求解$\displaystyle \max \limits_{\beta}L(x, \beta)$的最小值</p>
+<h3 id="KKT条件总结"><a href="#KKT条件总结" class="headerlink" title="KKT条件总结"></a>KKT条件总结</h3><ul>
+<li>拉格朗日取得可行解的充要条件, $\nabla_xL(x, \alpha, \beta) = 0$</li>
+<li>将不等式约束转换后的一个约束, 称为松弛互补条件, $\beta_ig_i(x) = 0, \quad i=1,2,\cdots,q$</li>
+<li>初始约束条件, $h_i(x)=0, \quad i=1,2,\cdots,p$</li>
+<li>初始约束条件, $g_i(x)\le0,\quad i=1,2,\cdots,q$</li>
+<li>不等式约束需要满足的条件, $\beta_i\ge0,\quad i=1,2,\cdots,q$</li>
+</ul>
+<p>参考<a href="https://www.cnblogs.com/liaohuiqiang/p/7805954.html" target="_blank" rel="noopener">拉格朗日乘子法和KKT条件</a></p>
+<p><br><br>
+
+	<div class="row">
+    <embed src="./KKT.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+
+<br></p>
+<h2 id="感知器模型"><a href="#感知器模型" class="headerlink" title="感知器模型"></a>感知器模型</h2><p>感知器模型的前提是数据线性可分</p>
+<p>对于m个样本, 每个样本n维特征以及一个二元类别输出y, 如下:</p>
+<script type="math/tex; mode=display">\lbrace (x_1^{(1)}, x_2^{(1)}, \cdots, x_n^{(1)}), (x_1^{(2)}, x_2^{(2)}, \cdots, x_n^{(2)}), \cdots, (x_1^{(m)}, x_2^{(m)}, \cdots, x_n^{(m)}) \rbrace</script><p>目标是找到一个超平面, 即</p>
+<script type="math/tex; mode=display">\theta_0 + \theta_1x_1 + \cdots + \theta_nx_n = 0 \Rightarrow \theta x = 0</script><p>让一个类别的数据满足$\theta x &gt; 0$, 另外一个类别满足$\theta x &lt; 0$<br>感知器模型, $y=sign(\theta x )\begin{cases}<br>+1, \theta x &gt; 0\\<br>-1, \theta x &lt; 0\\<br>\end{cases}$</p>
+<p>定义正确分类为: $y\theta x&gt;0$, 定义错误分类为: $y\theta x&lt;0$, 所以定义的损失函数为: 期望使分类错误的所有样本(m条样本)到超平面的距离之和最小</p>
+<script type="math/tex; mode=display">L = \displaystyle \sum_{i=1}^{m} \frac{-y^{(i)}\theta x^{(i)}}{\Vert \theta \Vert_2}</script><p>分子分母简化后</p>
+<script type="math/tex; mode=display">L = \displaystyle - \sum_{i=1}^{m} y^{(i)}\theta x^{(i)}</script><p>直接使用梯度下降法对损失函数进行求解, 由于m是分类错误对样本集合, 不是固定的, 所以我们不能使用批量梯度下降法(BGD)求解, 只能使用随机梯度下降(SGD)和小批量梯度下降法(MBGD), 一般使用SGD求解</p>
+<script type="math/tex; mode=display">\frac{\partial L(\theta)}{\partial \theta} = - \sum_{i=1}^{m} y^{(i)}\theta x^{(i)}</script><script type="math/tex; mode=display">\theta^{k+1} = \theta^k + \alpha y^{(i)}x^{(i)}</script><h2 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h2><ul>
+<li>梯度下降法, 拉格朗日乘子法, KKT条件回顾</li>
+<li>感知器模型</li>
+<li>SVM线性可分</li>
+<li>SVM线性不可分</li>
+<li>核函数</li>
+<li>SMO</li>
+</ul>
+<h3 id="线性可分SVM"><a href="#线性可分SVM" class="headerlink" title="线性可分SVM"></a>线性可分SVM</h3><p>在感知器模型中, 是可以找到多个可以分类的超平面将数据分开. 并且希望所有的点都离超平面尽可能的远, 但是实际上离超平面足够远的点基本上都是被正确分类的, 所以这个是没有意义的. 反而是离超平面很近的点, 这些点比较容易分错. 所以只要让离超平面比较近的点尽可能的远离这个超平面, 这样模型分类效果就会不错, 此即为SVM的思想.</p>
+<p><img src="/L7/微信图片_20190624114549.png" width="300px"></p>
+<ul>
+<li>支持向量到超平面的距离为:<script type="math/tex; mode=display">\because w^T x + b = \pm 1</script><script type="math/tex; mode=display">\because y \in \{+1, -1\}</script><script type="math/tex; mode=display">\therefore \displaystyle \frac{y(w^Tx+b)}{\Vert w \Vert_2} = \frac{1}{\Vert w \Vert_2}</script></li>
+</ul>
+<p><strong>在SVM中支持向量到超平面的函数距离一般设置为1</strong></p>
+<p>SVM模型是让所有的分类点在各自类别的支持向量的两边(见公式(2)), 同时要求支持向量尽可能的远离这个超平面(见公式(1)), 用数学公式表示如下:</p>
+<script type="math/tex; mode=display">\max \limits_{w, b} \displaystyle \frac{1}{\Vert w \Vert_2} \tag{1}</script><script type="math/tex; mode=display">s.t: y^{(i)}(w^Tx^{(i)}+b) \ge 1, \quad i=1, 2, \cdots, m \tag{2}</script><script type="math/tex; mode=display">\because w^T = (w_1, w_2, \cdots, w_n)</script><script type="math/tex; mode=display">\therefore \Vert w \Vert_2 = \sqrt{w_1^2 + w_2^2 + \cdots + w_n^2}</script><p>优化问题等价于$ \min \limits_{w, b} \Vert w \Vert_2; \quad s.t: y^{(i)}(w^Tx^{(i)}+b) \ge 1, \quad i=1, 2, \cdots, m$<br>那么SVM的目标函数/损失函数为:</p>
+<script type="math/tex; mode=display">J(w) = \displaystyle \frac{1}{2} \Vert w \Vert_2^2; \quad s.t: y^{(i)}(w^Tx^{(i)}+b) \ge 1, \quad i=1, 2, \cdots, m</script><p>优化目标为$w^{\ast}, b^{\ast} = \min \limits_{w, b} J(w)$<br>这时可以将此此时的目标函数和约束条件使用KKT条件转换为拉格朗日函数, 从而转化为无约束优化函数:</p>
+<script type="math/tex; mode=display">J(w) = \displaystyle \frac{1}{2} \Vert w \Vert_2^2; \quad s.t: 1 - y^{(i)}(w^Tx^{(i)}+b) \le 0, \quad i=1, 2, \cdots, m</script><script type="math/tex; mode=display">L(w, b, \beta) = \displaystyle \frac{1}{2} \Vert w \Vert_2^2 + \sum_{i=1}^m \beta_i[1 - y^{(i)}(w^Tx^{(i)} + b)], \quad \beta_i \ge 0</script><p>引入拉格朗日乘子之后, 优化目标变成了:</p>
+<script type="math/tex; mode=display">\min \limits_{w, b} \max \limits_{\beta \ge 0} L(w, b, \beta)</script><p>根据拉格朗日对欧化特性, 将优化目标转换为等价的对偶问题</p>
+<script type="math/tex; mode=display">\max \limits_{\beta \ge 0} \min \limits_{w, b} L(w, b, \beta)</script><p>对于该优化函数, 要先求优化函数对于w和b的极小值, 然后再求解对于拉格朗日乘子$\beta$的极大值</p>
+<p>优化函数L对于w和b的极小值, 可以通过对函数L分别对w和b求偏导数得到</p>
+<script type="math/tex; mode=display">\displaystyle \frac{\partial L}{\partial w} = 0 \Rightarrow w = \sum_{i=1}^{m} \beta_i y^{(i)} x^{(i)}</script><script type="math/tex; mode=display">\displaystyle \frac{\partial L}{\partial b} = 0 \Rightarrow \sum_{i=1}^{m} \beta_i y^{(i)} = 0</script><p>将求解出的w和b带入优化函数L中, 那么优化后的函数如下:</p>
+<script type="math/tex; mode=display">\begin{align} \mathcal{l}(\beta) &= \displaystyle \frac{1}{2} \Vert w \Vert_2^2 + \sum_{i=1}^{m} \beta_i [1 - y^{(i)}(w^Tx^{(i)} + b)]\\
+&= \frac{1}{2} w^T w - \sum_{i=1}^{m} \beta_i y^{(i)} w^T x^{(i)} - \sum_{i=1}^{m} \beta_i y^{(i)} b + \sum_{i=1}^{m} \beta_i\\
+&= \frac{1}{2} w^T \sum_{i=1}^{m} \beta_i y^{(i)} x^{(i)} - \sum_{i=1}^{m} \beta_i y^{(i)} w^T x^{(i)} - \sum_{i=1}^{m} \beta_i y^{(i)} b + \sum_{i=1}^{m} \beta_i\\
+&= - \frac{1}{2} w^T \sum_{i=1}^{m} \beta_i y^{(i)} x^{(i)} - b \sum_{i=1}^{m} \beta_i y^{(i)} + \sum_{i=1}^{m} \beta_i \\
+&= - \frac{1}{2} w^T \sum_{i=1}^{m} \beta_i y^{(i)} x^{(i)} + \sum_{i=1}^{m} \beta_i \\
+&= - \frac{1}{2} (\sum_{i=1}^{m} \beta_i y^{(i)} x^{(i)})^T (\sum_{i=1}^{m} \beta_i y^{(i)} x^{(i)}) + \sum_{i=1}^{m} \beta_i \\
+&= - \frac{1}{2} (\sum_{i=1}^{m} \beta_i y^{(i)} {(x^{(i)})}^T) (\sum_{i=1}^{m} \beta_i y^{(i)} x^{(i)}) + \sum_{i=1}^{m} \beta_i \\
+&= - \frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \beta_i \beta_j y^{(i)} y^{(j)} {x^{(i)}}^T x^{(j)} + \sum_{i=1}^{m} \beta_i \\
+\end{align}</script><script type="math/tex; mode=display">\therefore l(\beta) = - \frac{1}{2} \sum_{i=1, j=1}^{m} \beta_i \beta_j y^{(i)} y^{(j)} {x^{(i)}}^T x^{(j)} + \sum_{i=1}^{m} \beta_i; \quad s.t: \sum_{i=1}^{m} \beta_i y^{(i)} = 0, \quad \beta_i \ge 0, \quad i=1, 2, \cdots, m</script><p>此时得到的优化函数只和$\beta$有关, 这时直接最大化优化函数得到$\beta$值, 从而最终得到w和b的值</p>
+<script type="math/tex; mode=display">\max \limits_{\beta \ge 0} l(\beta); \quad s.t: \sum_{i=1}^{m} \beta_i y^{(i)} = 0</script><p>该优化问题等价于:</p>
+<script type="math/tex; mode=display">\min \limits_{\beta \ge 0} - l(\beta); \quad s.t: \sum_{i=1}^{m} \beta_i y^{(i)} = 0</script><p>即:</p>
+<script type="math/tex; mode=display">\min \limits_{\beta_i \ge 0} l(\beta) = \min \limits_{\beta_i \ge 0} \frac{1}{2} ( \sum_{i=1, j=1}^{m} \beta_i \beta_j y^{(i)} y^{(j)} {x^{(i)}}^T x^{(j)} - \sum_{i=1}^{m} \beta_i); \quad s.t: \sum_{i=1}^{m} \beta_i y^{(i)} = 0</script><p><strong>$\beta$值的求解采用SMO算法</strong></p>
+<p>假设求解得到的$\beta$值为$\beta^{\ast}$, 则根据w, b, $\beta$的关系, 分别计算如下:</p>
+<script type="math/tex; mode=display">w^{\ast} = \displaystyle \sum_{i=1}^{m} \beta_i^{\ast} y^{(i)} x^{(i)}</script><p>b的计算采用所有支持向量的计算均值</p>
+<script type="math/tex; mode=display">\because y^s (w^T x^s +b) = y^s (\displaystyle \sum_{i=1}^{m} \beta_i^{\ast} y^{(i)} {x^{(i)}}^T x^s + b ) = 1</script><script type="math/tex; mode=display">\therefore b^{\ast} = \frac{1}{y^s} - \sum_{i=1}^{m} \beta_i^{\ast} y^{(i)} {x^{(i)}}^T x^s</script><script type="math/tex; mode=display">又\because y^s \in \{1, -1\}</script><script type="math/tex; mode=display">\therefore b^{\ast} = {y^s} - \sum_{i=1}^{m} \beta_i^{\ast} y^{(i)} {x^{(i)}}^T x^s</script><p>在这里$(x^s, y^s)$是支持向量, 根据KKT条件中的对欧互补条件(松弛约束条件), 支持向量必须满足以下公式:</p>
+<script type="math/tex; mode=display">\beta_i (y^{(i)}(w^T x^{(i)} + b) - 1 ) = 0</script><script type="math/tex; mode=display">\{ (x^{(i), y^{(i)}}) \quad | \quad \beta_i > 0, \quad i=1,2,\cdots,m \}</script><h3 id="线性可分SVM算法流程"><a href="#线性可分SVM算法流程" class="headerlink" title="线性可分SVM算法流程"></a>线性可分SVM算法流程</h3><p>输入线性可分的m个样本数据$\{ (x^1, y^1), (x^2, y^2), \cdots, (x^m, y^m)\}$, 其中x为n维的特征向量, y为二元输出, 取值为$+1$或者$-1$, SVM输出为参数$w$, $b$以及分类决策函数.</p>
+<ul>
+<li>构造约束优化维问题, $\displaystyle \min \limits_{\beta_i \ge 0} \frac{1}{2} ( \sum_{i=1, j=1}^{m} \beta_i \beta_j y^{(i)} y^{(j)} {x^{(i)}}^T x^{(j)} - \sum_{i=1}^{m} \beta_i); \quad s.t: \sum_{i=1}^{m} \beta_i y^{(i)} = 0 $</li>
+<li>使用SMO算法求出上述优化中对应的最优解$\beta^{\ast}$</li>
+<li>找出所有的支持向量集合$S = \{ (x^{(i)}, y^{(i)}) \quad | \quad \beta_i &gt; 0, \quad i=1,2,\cdots,m \}$</li>
+<li>更新参数$w^{\ast}$和$b^{\ast}$的值, $w^{\ast} = \displaystyle \sum_{i=1}^{m} \beta_i^{\ast} y^{(i)} x^{(i)}, \quad b^{\ast} = \frac{1}{s} \sum_{s=1}^{S} ({y^s} - \sum_{i=1}^{m} \beta_i^{\ast} y^{(i)} {x^{(i)}}^T x^s) $</li>
+<li>构建最终的分类决策函数, $f(x)=sign(w^{\ast} \cdot x + b^{\ast})$</li>
+</ul>
+<script type="math/tex; mode=display">\beta_1 \beta_1 3*3*3*3 + \beta_1 \beta_2 3*3*3*4 - \beta_1 \beta_33*1*3*1 + \beta_2 \beta_1 3*3*4*3 + \beta_2 \beta_2 3*3*4*4 - \beta_2 \beta_3 3*1*4*1 - \beta_3 \beta_1 1*3*1*3 - \beta_3 \beta_2 1*3*4*1 - \beta_3 \beta_3 1*1*1*1</script><script type="math/tex; mode=display">81\beta_1 \beta_1 + 216\beta_1 \beta_2 - 18\beta_1 \beta_3 + 144 \beta_2 \beta_2 - 24 \beta_2 \beta_3 + \beta_3 \beta_3</script><p>这里的例子没有理解</p>
+<p><a href="https://www.jb51.net/article/131591.htm" target="_blank" rel="noopener">svm参考例子1</a></p>
+<h3 id="线性可分SVM总结"><a href="#线性可分SVM总结" class="headerlink" title="线性可分SVM总结"></a>线性可分SVM总结</h3><ul>
+<li>要求数据必须是线性可分的</li>
+<li>纯线性可分的SVM模型对于异常数据的预测可能会不太准</li>
+<li>对于线性可分的数据, SVM分类器的效果非常不错</li>
+</ul>
+<h3 id="SVM的软间隔模型"><a href="#SVM的软间隔模型" class="headerlink" title="SVM的软间隔模型"></a>SVM的软间隔模型</h3><p>线性可分SVM中要求数据必须是线性可分的, 才可以找到分类的超平面, 但是有的时候线性数据集中存在少量的异常点, 由于这些异常点导致了数据集不能够线性可分; 正常数据是线性可分的, 但是由于存在异常点数据, 导致数据集不能够线性可分<br><img src="/L7/WechatIMG37.png" width="250px"></p>
+<p>如果线性数据中存在异常点导致没法直接使用SVM线性分割模型的时候, 那我们可以通过引入软间隔的概念来解决这个问题</p>
+<ul>
+<li>硬间隔: 认为线性可分SVM中的距离度量就是硬间隔, 在线性划分SVM中, 要求函数距离一定是大于1的, 最大化硬间隔条件为:<script type="math/tex; mode=display">\min \limits_{w,b} \frac{1}{2} \Vert w \Vert_{2}^{2}; \quad s.t: \quad y^{(i)}(w^Tx^{(i)} + b) \le 1, i=1,2,\cdots,m</script></li>
+<li>软间隔: SVM对于训练集中的每个样本都引入一个松弛因子($\xi$), 使得函数距离加上松弛因子后的值是大于或者等于1; 这表示相对于硬间隔, 对样本到超平面距离的要求放松了<script type="math/tex; mode=display">y^{(i)}(w^Tx^{(i)} + b) \ge 1 - \xi_i, i=1,2,\cdots,m, \quad \xi_i \ge 0</script></li>
+<li><p>松弛因子($\xi$)越大, 表示样本点离超平面越近, 如果松弛因子大于1, 那么允许该样本点分错, 所以加入松弛因子是有成本的, 过大的松弛因子可能会导致模型分类错误, 所以最终的目标函数就转换成为:</p>
+<script type="math/tex; mode=display">\min \limits_{w,b} \frac{1}{2} \Vert w \Vert_{2}^{2} + C \displaystyle \sum_{i=1}^{m} \xi_i</script><script type="math/tex; mode=display">y^{(i)}(w^Tx^{(i)} + b) \ge 1 - \xi_i, \quad \xi_i \ge 0, \quad i=1,2,\cdots,m</script><p>其中, 函数中的$C &gt; 0$是惩罚系数, 是一个超参, 类似于L1/L2 norm中的参数; C越大表示对误分类的惩罚越大, C越小表示对误分类的惩罚越小; C值的给定需要调参</p>
+</li>
+<li><p>同线性可分SVM, 构造软间隔最大化的约束问题对应的拉格朗日函数如下:</p>
+<script type="math/tex; mode=display">L(w,b,\xi,\beta,\mu) = \frac{1}{2} \Vert w \Vert_{2}^{2} + C \displaystyle \sum_{i=1}^{m}\xi_i + \displaystyle \sum_{i=1}^{m} \beta_i [1-\xi_i-y^{(i)}(w^Tx^{(i)}+b)]-\displaystyle \sum_{i=1}^{m}\mu_i \xi_i, \quad \beta_i \ge 0, \mu_i \ge 0</script><p>从而可以将优化目标函数转换为:</p>
+<script type="math/tex; mode=display">\min \limits_{w,b,\xi} \max \limits_{\beta, \mu} L(w, b, \xi, \beta, \mu)</script></li>
+<li>优化条件同样满足KTT条件, 所有使用拉格朗日对偶将优化问题转换为等价的对偶问题<script type="math/tex; mode=display">\max \limits_{\beta, \mu} \min \limits_{w,b,\xi} L(w, b, \xi, \beta, \mu)</script></li>
+</ul>
+<p>先求优化函数对于$w,b,\xi$的极小值, 这个可以通过分别优化函数L求$w,b,\xi$的偏导数, 从而可以得到$w,b,\xi$关于$\beta$和$\mu$之间的关系</p>
+<script type="math/tex; mode=display">\frac{\partial L}{\partial w} = 0 \Rightarrow w - \sum_{i=1}^{m}\beta_iy^{(i)}x^{(i)} = 0 \Rightarrow w = \sum_{i=0}^{m}\beta_iy^{(i)}x^{(i)}</script><script type="math/tex; mode=display">\frac{\partial L}{\partial b} = 0 \Rightarrow - \sum_{i=1}^{m}\beta_iy^{(i)} = 0 \Rightarrow \sum_{i=1}^{m}\beta_iy^{(i)} =0</script><script type="math/tex; mode=display">\frac{\partial L}{\partial \xi_i} = 0 \Rightarrow C - \beta_i - \mu_i = 0</script><p>将$w,b,\xi$的值带入L函数中, 就可以消去优化函数中的$w,b,\xi$, 定义优化中后的函数如下:</p>
+<script type="math/tex; mode=display">l(\beta) = \sum_{i=1}^{m}\beta_i - \frac{1}{2}\sum_{i=1,j=1}^{m}\beta_i\beta_jy^{(i)}y^{(j)}x^{(i)^{T}}x^{(j)}; \quad s.t: \sum_{i=1}^{m}\beta_iy^{(i)}=0, C-\beta_i - \mu_i = 0, \beta_i \ge 0, i=1,2,\cdots,m, \mu_i \ge 0, i=1,2,\cdots,m</script><p>最终优化后的目标函数/损失函数和线性可分SVM模型基本一样, 除了约束条件不同而已, 也就是说也可以使用SMO算法来求解</p>
+<script type="math/tex; mode=display">\min\frac{1}{2}\sum_{i=1,j=1}^{m}\beta_i\beta_jy^{(i)}y^{(j)}x^{(i)^{T}}x^{(j)} - \sum_{i=1}^{m}\beta_i</script><script type="math/tex; mode=display">s.t: \sum_{i=1}^{m}\beta_iy^{(i)}=0, 0 \le \beta_i \le C, i=1,2,\cdots,m</script><ul>
+<li>在硬间隔最大化的时候, 支持向量比较简单, 就是离超平面的函数距离为1的样本点就是支持向量</li>
+<li>在软间隔中, 根据KKT条件中的对偶互补条件: $\beta(y(wx+b)-1+\xi)=0$, 从而有:<ul>
+<li>当$0&lt;\beta_i \le C$的时候, 并且$\xi_i=0$的样本点均是支持向量(即所有的$0&lt;\beta_i &lt; C$). 即满足$|wx+b|=1$的所有样本均是支持向量</li>
+<li>软间隔和硬间隔中的支持向量的规则是一样的<br><img src="/L7/WechatIMG38.png" width="300px"></li>
+</ul>
+</li>
+</ul>
+<h3 id="SVM软间隔模型算法流程"><a href="#SVM软间隔模型算法流程" class="headerlink" title="SVM软间隔模型算法流程"></a>SVM软间隔模型算法流程</h3><p>输入线性可分的m个样本数据${(x^1, y^1), (x^2, y^2), \cdots, (x^m, y^m)}$, 其中x为n维的特征向量, y为二元输出, 取值为+1或者-1； SVM模型输出为参数$w,b$以及分类决策函数</p>
+<ul>
+<li>选择一个惩罚系数C&gt;0, 构造约束优化问题, $\displaystyle \min \limits_{\beta_i \ge 0} \frac{1}{2} ( \sum_{i=1, j=1}^{m} \beta_i \beta_j y^{(i)} y^{(j)} {x^{(i)}}^T x^{(j)} - \sum_{i=1}^{m} \beta_i); \quad s.t: \sum_{i=1}^{m} \beta_i y^{(i)} = 0, 0 \le \beta_i \le C, i=1,2,\cdots,m$</li>
+<li>使用SMO算法求出上述优化中对应的最优解$\beta^*$</li>
+<li>找出所有的支持向量集合$S = \{ (x^{(i)}, y^{(i)}) \quad | \quad 0 &lt; \beta_i \le C,  \xi_i = 0, i = 1, 2, \cdots, m $</li>
+<li>更新参数$w^{\ast}$和$b^{\ast}$的值, $w^{\ast} = \displaystyle \sum_{i=1}^{m} \beta_i^{\ast} y^{(i)} x^{(i)}, \quad b^{\ast} = \frac{1}{s} \sum_{s=1}^{S} ({y^s} - \sum_{i=1}^{m} \beta_i^{\ast} y^{(i)} {x^{(i)}}^T x^s) $</li>
+<li>构建最终的分类器$f(x)=sign(w^{\ast} x + b^{\ast})$</li>
+</ul>
+<h3 id="SVM软间隔模型总结"><a href="#SVM软间隔模型总结" class="headerlink" title="SVM软间隔模型总结"></a>SVM软间隔模型总结</h3><ul>
+<li>可以解决线性数据中携带异常点的分类模型构建的问题</li>
+<li>通过引入惩罚系数(松弛因子), 可以增加模型的泛化能力, 即鲁棒性</li>
+<li>如果给定的惩罚系数越小, 表示在模型构建的时候, 就允许存在越多的分类错误的样本, 表示此时模型的准确率会比较低; 如果惩罚系数越大, 表示模型在构建的时候, 就越不允许存在分类错误的样本, 表示此时模型的准确率会比较高</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/K-means聚类/" rel="tag"># K-means聚类</a>
+          
+            <a href="/tags/层次聚类/" rel="tag"># 层次聚类</a>
+          
+            <a href="/tags/密度聚类/" rel="tag"># 密度聚类</a>
+          
+            <a href="/tags/谱聚类/" rel="tag"># 谱聚类</a>
+          
+            <a href="/tags/有约束的最优化问题/" rel="tag"># 有约束的最优化问题</a>
+          
+            <a href="/tags/SVM/" rel="tag"># SVM</a>
+          
+            <a href="/tags/SMO/" rel="tag"># SMO</a>
+          
+            <a href="/tags/拉格朗日乘子法/" rel="tag"># 拉格朗日乘子法</a>
+          
+            <a href="/tags/KKT-karush–kuhn–tucker/" rel="tag"># KKT(karush–kuhn–tucker)</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/信息熵和决策树/" rel="next" title="信息熵和决策树">
+                <i class="fa fa-chevron-left"></i> 信息熵和决策树
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/L8/" rel="prev" title="L8">
+                L8 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚类算法"><span class="nav-number">2.</span> <span class="nav-text">聚类算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#课程内容"><span class="nav-number">2.1.</span> <span class="nav-text">课程内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是聚类"><span class="nav-number">2.2.</span> <span class="nav-text">什么是聚类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相似度-距离公式"><span class="nav-number">2.3.</span> <span class="nav-text">相似度/距离公式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#闵可夫斯基距离-Minkovski"><span class="nav-number">2.3.1.</span> <span class="nav-text">闵可夫斯基距离(Minkovski)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#标准化欧式距离-Standardized-Euclidean-Distance"><span class="nav-number">2.3.2.</span> <span class="nav-text">标准化欧式距离(Standardized Euclidean Distance)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#夹角余弦相似度-Cosine"><span class="nav-number">2.3.3.</span> <span class="nav-text">夹角余弦相似度(Cosine)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#KL距离-相对熵"><span class="nav-number">2.3.4.</span> <span class="nav-text">KL距离(相对熵)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#杰卡德相似系数-Jaccard"><span class="nav-number">2.3.5.</span> <span class="nav-text">杰卡德相似系数(Jaccard)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pearson相关系数"><span class="nav-number">2.3.6.</span> <span class="nav-text">Pearson相关系数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚类的思想"><span class="nav-number">2.4.</span> <span class="nav-text">聚类的思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#K-means算法"><span class="nav-number">2.5.</span> <span class="nav-text">K-means算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#K-means算法过程"><span class="nav-number">2.5.1.</span> <span class="nav-text">K-means算法过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#K-means算法初值敏感"><span class="nav-number">2.5.2.</span> <span class="nav-text">K-means算法初值敏感</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#K-means算法初优缺点"><span class="nav-number">2.5.3.</span> <span class="nav-text">K-means算法初优缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#K-means算法案例"><span class="nav-number">2.5.4.</span> <span class="nav-text">K-means算法案例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二分K-means算法"><span class="nav-number">2.6.</span> <span class="nav-text">二分K-means算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#K-means-算法"><span class="nav-number">2.7.</span> <span class="nav-text">K-means++算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#K-means-Vert-算法"><span class="nav-number">2.8.</span> <span class="nav-text">K-means$\Vert$算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Canopy算法"><span class="nav-number">2.9.</span> <span class="nav-text">Canopy算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mini-Batch-K-means算法"><span class="nav-number">2.10.</span> <span class="nav-text">Mini Batch K-means算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#K-means和Mini-Batch-K-means算法比较案例"><span class="nav-number">2.11.</span> <span class="nav-text">K-means和Mini Batch K-means算法比较案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚类算法的衡量指标"><span class="nav-number">2.12.</span> <span class="nav-text">聚类算法的衡量指标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#均一性"><span class="nav-number">2.12.1.</span> <span class="nav-text">均一性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#完整性"><span class="nav-number">2.12.2.</span> <span class="nav-text">完整性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#V-measure"><span class="nav-number">2.12.3.</span> <span class="nav-text">V-measure</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#轮廓系数"><span class="nav-number">2.12.4.</span> <span class="nav-text">轮廓系数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#层次聚类方法"><span class="nav-number">3.</span> <span class="nav-text">层次聚类方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#凝聚的层次聚类AGNES算法"><span class="nav-number">3.1.</span> <span class="nav-text">凝聚的层次聚类AGNES算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分裂的层次聚类DIANA算法"><span class="nav-number">3.2.</span> <span class="nav-text">分裂的层次聚类DIANA算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AGNES和DIANA算法优缺点"><span class="nav-number">3.3.</span> <span class="nav-text">AGNES和DIANA算法优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AGNES算法中簇间距离"><span class="nav-number">3.4.</span> <span class="nav-text">AGNES算法中簇间距离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#层次聚类优化算法"><span class="nav-number">3.5.</span> <span class="nav-text">层次聚类优化算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BIRCH算法"><span class="nav-number">3.5.1.</span> <span class="nav-text">BIRCH算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CURE算法"><span class="nav-number">3.5.2.</span> <span class="nav-text">CURE算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BRICH算法案例"><span class="nav-number">3.6.</span> <span class="nav-text">BRICH算法案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密度聚类算法"><span class="nav-number">4.</span> <span class="nav-text">密度聚类算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DBSCAN算法"><span class="nav-number">4.1.</span> <span class="nav-text">DBSCAN算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#密度最大值聚类算法-MDCA"><span class="nav-number">4.2.</span> <span class="nav-text">密度最大值聚类算法(MDCA)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#密度聚类算法案例"><span class="nav-number">4.3.</span> <span class="nav-text">密度聚类算法案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#谱聚类"><span class="nav-number">5.</span> <span class="nav-text">谱聚类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拉普拉斯矩阵变换"><span class="nav-number">5.1.</span> <span class="nav-text">拉普拉斯矩阵变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#谱聚类应用场景及面临的问题"><span class="nav-number">5.2.</span> <span class="nav-text">谱聚类应用场景及面临的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#谱聚类应用案例"><span class="nav-number">5.3.</span> <span class="nav-text">谱聚类应用案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚类综合案例"><span class="nav-number">6.</span> <span class="nav-text">聚类综合案例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#不同聚类算法在不同数据分布情况下的聚类效果"><span class="nav-number">6.1.</span> <span class="nav-text">不同聚类算法在不同数据分布情况下的聚类效果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片压缩"><span class="nav-number">6.2.</span> <span class="nav-text">图片压缩</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有约束的最优化问题"><span class="nav-number">7.</span> <span class="nav-text">有约束的最优化问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拉格朗日乘子法"><span class="nav-number">7.1.</span> <span class="nav-text">拉格朗日乘子法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对偶问题"><span class="nav-number">7.2.</span> <span class="nav-text">对偶问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KKT条件"><span class="nav-number">7.3.</span> <span class="nav-text">KKT条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KKT条件总结"><span class="nav-number">7.4.</span> <span class="nav-text">KKT条件总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感知器模型"><span class="nav-number">8.</span> <span class="nav-text">感知器模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SVM"><span class="nav-number">9.</span> <span class="nav-text">SVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线性可分SVM"><span class="nav-number">9.1.</span> <span class="nav-text">线性可分SVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性可分SVM算法流程"><span class="nav-number">9.2.</span> <span class="nav-text">线性可分SVM算法流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性可分SVM总结"><span class="nav-number">9.3.</span> <span class="nav-text">线性可分SVM总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SVM的软间隔模型"><span class="nav-number">9.4.</span> <span class="nav-text">SVM的软间隔模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SVM软间隔模型算法流程"><span class="nav-number">9.5.</span> <span class="nav-text">SVM软间隔模型算法流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SVM软间隔模型总结"><span class="nav-number">9.6.</span> <span class="nav-text">SVM软间隔模型总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

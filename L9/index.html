@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="马尔可夫性质,马尔科夫,隐马尔科夫,HMM,HMM前向算法,HMM后向算法," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="马尔可夫性质设$\{X(t), t \in T\}$是一个随机过程, E是其状态空间, 若对于任意的$t_1 &amp;lt; t_2 &amp;lt; \cdots &amp;lt; t_n &amp;lt; t$, 任意的$x_1 &amp;lt; t_2 &amp;lt; \cdots &amp;lt; t_n &amp;lt; t$, 任意的$x_1, x_2, \cdots, x_n, x \in E$, 随机变量$X(t)$在已知变量$X(t_1)">
+<meta name="keywords" content="马尔可夫性质,马尔科夫,隐马尔科夫,HMM,HMM前向算法,HMM后向算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="L9">
+<meta property="og:url" content="http://yoursite.com/L9/index.html">
+<meta property="og:site_name" content="Wenhua">
+<meta property="og:description" content="马尔可夫性质设$\{X(t), t \in T\}$是一个随机过程, E是其状态空间, 若对于任意的$t_1 &amp;lt; t_2 &amp;lt; \cdots &amp;lt; t_n &amp;lt; t$, 任意的$x_1 &amp;lt; t_2 &amp;lt; \cdots &amp;lt; t_n &amp;lt; t$, 任意的$x_1, x_2, \cdots, x_n, x \in E$, 随机变量$X(t)$在已知变量$X(t_1)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/L9/WechatIMG2.png">
+<meta property="og:image" content="http://yoursite.com/L9/微信图片_20190815140634.png">
+<meta property="og:image" content="http://yoursite.com/L9/微信图片_20190817095916.png">
+<meta property="og:image" content="http://yoursite.com/L9/微信图片_20190817100705.png">
+<meta property="og:updated_time" content="2019-11-01T23:34:53.934Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="L9">
+<meta name="twitter:description" content="马尔可夫性质设$\{X(t), t \in T\}$是一个随机过程, E是其状态空间, 若对于任意的$t_1 &amp;lt; t_2 &amp;lt; \cdots &amp;lt; t_n &amp;lt; t$, 任意的$x_1 &amp;lt; t_2 &amp;lt; \cdots &amp;lt; t_n &amp;lt; t$, 任意的$x_1, x_2, \cdots, x_n, x \in E$, 随机变量$X(t)$在已知变量$X(t_1)">
+<meta name="twitter:image" content="http://yoursite.com/L9/WechatIMG2.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/L9/"/>
+
+
+
+
+
+  <title>L9 | Wenhua</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wenhua</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/L9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wenhua">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">L9</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-14T16:00:57+08:00">
+                2019-02-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ai/" itemprop="url" rel="index">
+                    <span itemprop="name">ai</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="马尔可夫性质"><a href="#马尔可夫性质" class="headerlink" title="马尔可夫性质"></a>马尔可夫性质</h2><p>设$\{X(t), t \in T\}$是一个随机过程, E是其状态空间, 若对于任意的$t_1 &lt; t_2 &lt; \cdots &lt; t_n &lt; t$, 任意的$x_1 &lt; t_2 &lt; \cdots &lt; t_n &lt; t$, 任意的$x_1, x_2, \cdots, x_n, x \in E$, 随机变量$X(t)$在已知变量$X(t_1) = x_1, \cdots, X(t_n) = x_n$下的条件分布函数只与$X(t_n)=x_n$有关, 而与$X(t_1)=x_1, \cdots, X(t_{n-1})=x_{n-1}$无关, 即条件分布函数满足下列等式, 此性质称为马尔可夫性质; 如果随机过程满足马尔可夫性质, 则该过程称为马尔可夫过程.</p>
+<script type="math/tex; mode=display">p(X(t) \le x | X(t_1)=x_1, \cdots, X(t_n)=x_n) = p(X(t) \le x | X(t_n) = x_n)</script><script type="math/tex; mode=display">p(X_{n+1}=x| X_1=x_1, \cdots, X_n=x_n) = p(X_{n+1} | X_n = x_n)</script><h2 id="马尔可夫链"><a href="#马尔可夫链" class="headerlink" title="马尔可夫链"></a>马尔可夫链</h2><p>马尔可夫链是指具有马尔可夫性质的随机过程. 在过程中, 在给定当前信息的情况下, 过去的信息状态对于预测未来状态是无关的.</p>
+<p>在马尔可夫链的每一步, 系统根据概率分布, 可以从一个状态变成另外一个状态, 也可以保持当前状态不变. 状态的改变叫做转移, 状态改变的相关概率叫做转移概率</p>
+<p>马尔可夫链中的三元素是: 状态空间S, 转移概率矩阵P, 初始概率分布$\pi$</p>
+<h2 id="HMM"><a href="#HMM" class="headerlink" title="HMM"></a>HMM</h2><p>隐马尔可夫模型(Hidden Markov Model, HMM)是一种统计模型, 在语音识别, 行为识别, NLP, 故障诊断等领域具有高效的性能.</p>
+<p>HMM是关于时序的概率模型, 描述一个含有未知参数的马尔可夫链所生成的不可观测的状态随机序列, 再由各个状态生成观测随机序列的过程. HMM是一个双重随机过程, 具有一定状态的隐马尔可夫链和随机的观测序列.</p>
+<p>HMM随机生成的状态随机序列被称为状态序列; 每个状态生成一个观测, 由此产生的观测随机序列被称为观测序列.</p>
+<p><img src="/L9/WechatIMG2.png" width="700px"></p>
+<p>$z_1, z_2, \cdots, z_n$是不可观测的状态, $x_1, x_2, \cdots, x_n$是可观测到的序列; 不可观测的状态决定可观测序列的值(z的取值决定x的取值)</p>
+<p>HMM由隐含状态S, 可观测状态O, 初始状态概率矩阵$\pi$, 隐含状态转移概率矩阵A, 可观测值转移概率矩阵B(也称为混淆矩阵, Confusion Matrix)</p>
+<p>$\pi$和A决定了状态序列, B决定观测序列, 因此HMM可以使用三元符号表示, 称为HMM三元素</p>
+<script type="math/tex; mode=display">\lambda = (A, B, \pi)</script><h3 id="HMM参数说明"><a href="#HMM参数说明" class="headerlink" title="HMM参数说明"></a>HMM参数说明</h3><p>HMM模型 <script type="math/tex">\lambda = (A, B, \pi)</script></p>
+<p>S是所有可能的状态集合</p>
+<script type="math/tex; mode=display">S = \{ S_1, S_2, \cdots, S_n\}</script><p>O是所有可能的观测集合</p>
+<script type="math/tex; mode=display">O = \{ O_1, O_2, \cdots, O_n \}</script><p>I是长度为T的状态序列, Q对应的观测序列</p>
+<script type="math/tex; mode=display">I = \{ i_1, i_2, \cdots, i_T \} \qquad Q = \{ q_1, q_2, \cdots, q_T \}</script><p>A是隐含状态转移概率矩阵</p>
+<script type="math/tex; mode=display">A = [a_{ij}]_{n \ast n} = \begin{bmatrix}
+{a_{11}}&{a_{12}}&{\cdots}&{a_{1n}}\\
+{a_{21}}&{a_{22}}&{\cdots}&{a_{2n}}\\
+{\vdots}&{\vdots}&{\ddots}&{\vdots}\\
+{a_{n1}}&{a_{n2}}&{\cdots}&{a_{nn}}\\
+\end{bmatrix}</script><p>其中$a_{ij} = a_{i_t i_{t+1}}= p(i_{t+1}=s_j | i_t = s_i)$, 表示在时刻$t$处于状态序列中$s_i$状态的条件下时刻$t+1$转移到状态$s_j$的概率</p>
+<p>B是可观测值转移概率矩阵</p>
+<script type="math/tex; mode=display">B = [b_{ij}]_{n \ast m} = \begin{bmatrix}
+{b_{11}}&{b_{12}}&{\cdots}&{b_{1m}}\\
+{b_{21}}&{b_{22}}&{\cdots}&{b_{2m}}\\
+{\vdots}&{\vdots}&{\ddots}&{\vdots}\\
+{b_{n1}}&{b_{n2}}&{\cdots}&{b_{nm}}\\
+\end{bmatrix}</script><p>其中$b_{ij} = b_{i_t q_t} = p( q_t = o_j | i_t=s_i)$, 表示在时刻$t$处于状态序列中$s_i$状态的条件下, 生成可观测状态$o_j$的概率</p>
+<p>$\pi$是初始状态概率向量</p>
+<script type="math/tex; mode=display">\pi = (\pi_i)_{1 \ast n} = (\pi_1, \pi_2, \cdots, \pi_n)</script><p>其中$\pi_{i_1} = p(i_1 = s_i)$, 表示在时刻$t=1$处于状态序列中$s_i$的概率</p>
+<h3 id="HMM的两个性质"><a href="#HMM的两个性质" class="headerlink" title="HMM的两个性质"></a>HMM的两个性质</h3><script type="math/tex; mode=display">p(i_{t} | i_{t-1}, q_{t-1}, i_{t-2}, q_{t-2}, \cdots, i_1, q_1) =  p(i_{t} | i_{t-1})</script><script type="math/tex; mode=display">p(q_{t} | i_t, i_{t-1}, q_{t-1}, i_{t-2}, q_{t-2}, \cdots, i_1, q_1) = p(q_{t} | i_t)</script><p>看这个意思就是当前状态的概率只和上一个状态的概率有关, 与其他都没有关系</p>
+<h2 id="HMM案例"><a href="#HMM案例" class="headerlink" title="HMM案例"></a>HMM案例</h2><p>假设有三个盒子, 编号分别为1, 2, 3; 每个盒子都装有黑白两种颜色的小球, 小球的比例如下:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>白球</th>
+<th>黑球</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>4</td>
+<td>6</td>
+</tr>
+<tr>
+<td>2</td>
+<td>8</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>5</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>按照$\pi$的概率选择一个盒子, 从盒子中随机抽取一个小球, 记录颜色后, 放回盒子中</li>
+<li>按照某种条件概率选择新的盒子, 重复该操作</li>
+<li>最终得到的观测序列为: “白黑白白黑”</li>
+</ul>
+<p>对该题目的理解如下:</p>
+<p>有放回的按照概率$\pi$来抽取, 假如第一次抽取的是1号盒子, 第二次抽取的是3号盒子, 接下来是2号, 2号, 3号, 举个例子, 所以</p>
+<p>3号 -&gt; 2号 -&gt; 1号 -&gt; 1号 -&gt; 2号, 状态序列<br>白球 -&gt; 黑球 -&gt; 白球 -&gt; 白球 -&gt; 黑球, 观测序列</p>
+<h2 id="HMM的的三个问题"><a href="#HMM的的三个问题" class="headerlink" title="HMM的的三个问题"></a>HMM的的三个问题</h2><ul>
+<li>概率计算问题<br>给定模型$\lambda=(A, B, \pi)$和观测序列$Q = \{q_1, q_2, \cdots, q_T\}$, 利用前向-后向算法计算模型$\lambda$之下观测到序列Q出现的概率</li>
+<li>学习问题<br>已知观测序列$Q = \{q_1, q_2, \cdots, q_T\}$, 使用Baum-Welch算法估计模型$\lambda=(A, B, \pi)$的参数, 使得在该模型下观测序列$p(Q|\lambda)$最大</li>
+<li>预测问题<br>给定模型$\lambda=(A, B, \pi)$和观测序列$Q = \{q_1, q_2, \cdots, q_T\}$, 利用Viterbi算法求解给定观测序列条件概率$p(I|Q, \lambda)$的最大状态序列$I$</li>
+</ul>
+<h3 id="概率计算问题"><a href="#概率计算问题" class="headerlink" title="概率计算问题"></a>概率计算问题</h3><h4 id="直接计算法-暴力算法"><a href="#直接计算法-暴力算法" class="headerlink" title="直接计算法/暴力算法"></a>直接计算法/暴力算法</h4><p>给定模型$\lambda=(A, B, \pi)$和观测序列$Q = \{q_1, q_2, \cdots, q_T\}$, 计算在模型$\lambda$的情况下, 得到观测序列Q出现的概率$p(Q; \lambda)$</p>
+<p>要想得到观测序列”白球 -&gt; 黑球 -&gt; 白球 -&gt; 白球 -&gt; 黑球”这样的结果, 又因为每个盒子都是有白球和黑球的, 然而我们并不知道状态序列及抽取的盒子的序列是什么样的, 所以如下:</p>
+<p>按照概率公式, 列举所有可能的长度为T的状态序列$I = \{ i_1, i_2, \cdots, i_T\}$, 先求出各个状态序列与观测序列$Q=\{q_1, q_2, \cdots, q_T\}$的联合概率$P(Q,I; \lambda)$, 然后对所有可能的状态序列求和, 从而得到最后的概率$p(Q;\lambda)$</p>
+<script type="math/tex; mode=display">I = \{ i_1, i_2, \cdots, i_T\} \qquad p(I;\lambda) = \pi_{i_1} a_{i_1 i_2} a_{i_2 i_3} \cdots a_{i_{T-1} i_T}</script><script type="math/tex; mode=display">Q = \{ q_1, q_2, \cdots, q_T\} \qquad p(Q | I;\lambda) = b_{i_1 q_1} b_{i_2 q_2} \cdots b_{i_T q_T}</script><script type="math/tex; mode=display">p(Q, I; \lambda) = p(Q | I;\lambda) p(I;\lambda) = \pi_{i_1} a_{i_1 i_2 } a_{i_2 i_3} \cdots a_{i_{T-1} i_T} \ast b_{i_1 q_1} b_{i_2 q_2} \cdots b_{i_T q_T}</script><script type="math/tex; mode=display">p(Q; \lambda) = \sum_I p(Q, I; \lambda) = \sum_I \pi_{i_1} a_{i_1 i_2 } a_{i_2 i_3} \cdots a_{i_{T-1} i_T} \ast b_{i_1 q_1} b_{i_2 q_2} \cdots b_{i_T q_T}</script><p>假设抽取盒子的状态序列 $I = 3号, 2号, 1号, 1号, 2号$, 那么该状态序列的长度$T = 5$</p>
+<script type="math/tex; mode=display">\therefore p(I; \lambda) = \pi_3 a_{32} a_{21} a_{11} a_{12}</script><script type="math/tex; mode=display">\therefore p(Q | I; \lambda) = b_{3白} b_{2黑} b_{1白} b_{1白} b_{2黑}</script><script type="math/tex; mode=display">\therefore p(Q, I; \lambda) = p(Q | I;\lambda) p(I;\lambda) = \lambda) = \pi_3 a_{32} a_{21} a_{11} a_{12} \ast b_{3白} b_{2黑} b_{1白} b_{1白} b_{2黑}</script><p>上述只是求出了一种盒子的状态序列, 因为每个盒子里边既有白球又有黑球, 所以盒子的状态序列总共有$3^5$种可能.</p>
+<p>然后对所有可能的状态序列求和</p>
+<h4 id="前向概率-后向概率"><a href="#前向概率-后向概率" class="headerlink" title="前向概率/后向概率"></a>前向概率/后向概率</h4><p><img src="/L9/微信图片_20190815140634.png" width="500px"></p>
+<p>$\alpha_t$是给定$q_t$, 时刻1到时刻t所有观测值$y_1, y_2, \cdots, y_t, q_t$出现的联合概率<br>$\beta_t$是给定$q_t$, 时刻t+1到时刻T, 所有观测值$y_{t+1}, y_{t+2}, \cdots, y_T$出现的联合概率</p>
+<script type="math/tex; mode=display">\alpha_t(i) = p(y_1, y_2, \cdots, y_t, q_t = i | \lambda)</script><script type="math/tex; mode=display">\beta_t(i) = p(y_{t+1}, y_{t+2}, \cdots, y_T | q_t = i, \lambda)</script><p>前向概率-后向概率指的是在一个观测序列中, 时刻t对应状态$s_i$的概率值转换过来的信息</p>
+<script type="math/tex; mode=display">\begin{align} p(q_1, q_2, \cdots, q_T, i_t=s_i) &= p(q_1, q_2, \cdots, q_{t}, q_{t+1}, q_{t+2}, \cdots, q_T, i_t=s_i) \\
+&= p(q_1, q_2, \cdots, q_t, i_t=s_i) \ast p(q_{t+1}, q_{t+2}, \cdots, q_T | q_1, q_2, \cdots, q_t, i_t=s_i)\\
+&= p(q_1, q_2, \cdots, q_t, i_t=s_i) \ast p(q_{t+1}, q_{t+2}, \cdots, q_T | i_t=s_i ) \\
+&= p(q_1, q_2, \cdots, q_t, i_t=s_i; \lambda) \ast p(q_{t+1}, q_{t+2}, \cdots, q_T | i_t=s_i; \lambda) \\
+\end{align}</script><h4 id="前向算法"><a href="#前向算法" class="headerlink" title="前向算法"></a>前向算法</h4><p>给定$\lambda$, 定义前向概率为, 在时刻t观测序列为$q_1, q_2, \cdots, q_t$, 状态序列的当前状态为$s_i$的概率, 记为:</p>
+<script type="math/tex; mode=display">\alpha_t(i) = p(q_1, q_2, \cdots, q_t, i_t=s_i; \lambda)</script><p>初值$\alpha_1(i) = p(q_1, i_1=s_i; \lambda) = \pi_i b_{i q_1}$, 表示在时刻$t=1$, 观测序列为$q_1$和状态序列的当前状态为$s_i$的联合概率</p>
+<script type="math/tex; mode=display">\begin{align} \alpha_1(i) &= p(q_1, i_1=s_i; \lambda)\\
+&= p(i_1=s_1 | q_1; \lambda) \ast p(q_1; \lambda) \\
+&= p(i_1=s_1; \lambda) \ast p(q_1 = o_j| i_1 = s_i; \lambda) \\
+&= \pi_{i_1} b_{i_1 q_1}
+\end{align}</script><p>递推: 对于$t=1, 2, \cdots, T-1$</p>
+<script type="math/tex; mode=display">\alpha_{t+1}(i) = (\displaystyle \sum_{j=1}^n \alpha_t(j) a_{ji}) b_{i q_{t+1}}</script><p>最终</p>
+<script type="math/tex; mode=display">p(Q; \lambda) = \displaystyle \sum_{i=1}^n \alpha_T(i)</script><script type="math/tex; mode=display">\begin{align} \alpha_t(i) &= p(q_1, q_2, \cdots, q_{t-1}, q_t, i_t=s_i) \\
+&= p(q_1, q_2, \cdots, q_{t-1}, i_t = s_i) \ast p(q_t | q_1, q_2, \cdots, q_{t-1}, i_t = s_i) \\
+&= p(q_1, q_2, \cdots, q_{t-1}, i_t = s_i) \ast p(q_t | i_t = s_i) \\
+&= [\displaystyle \sum_{j=1}^n p(q_1, q_2, \cdots, q_{t-1}, i_{t-1} = s_j, i_t = s_i)] \ast p(q_t | i_t = s_i) \\
+&= [\displaystyle \sum_{j=1}^n p(q_1, q_2, \cdots, q_{t-1}, i_{t-1} = s_j) \ast p( i_t = s_i | i_{t-1} = s_j)] \ast p(q_t | i_t = s_i) \\
+&= (\displaystyle \sum_{j=1}^n \alpha_{t-1}(j) a_{ji}) \ast b_{i_t q_t}  \\
+\end{align}</script><h4 id="后向算法"><a href="#后向算法" class="headerlink" title="后向算法"></a>后向算法</h4><p>给定$\lambda$, 定义后向概率为, 在时刻t状态序列的当前状态为$s_i$的前提下, 从时刻$t+1$到时刻T部分的观测序列为$q_{t+1}, q_{t+2}, \cdots, q_T$的概率, 记为:</p>
+<script type="math/tex; mode=display">\beta_t(i) = p(q_{t+1}, q_{t+2}, \cdots, q_T | i_t=s_i; \lambda)</script><p>初值: $\beta_T(i) = 1$, 根据$\beta_t(i)$的公式, 令$t=T$, 那么整个状态序列和观测序列总共只有T个时刻, 是不可能有$T+1$时刻的, 所以$T+1$时刻之后发生的是必然事件, 所以$\beta_T(i) = 1$<br>递推: 对于$t = T-1, T-2, \cdots, 1$, 倒着推导</p>
+<script type="math/tex; mode=display">\beta_t(i) = \displaystyle \sum_{j=1}^n (a_{ij} b_{j q_{t+1}} \beta_{t+1}(j))</script><p>最终</p>
+<script type="math/tex; mode=display">p(Q; \lambda) = \displaystyle \sum_{i=1}^n \pi_i b_{i q_1} \beta_1(i)</script><p>根据上述$\beta_t$的定义, $\beta_t(i)$是给定$q_t$, 时刻$t+1$到时刻$T$, 所有观测值$y_{t+1}, y_{t+2}, \cdots, y_T$的联合概率, 如下图所示:<br><img src="/L9/微信图片_20190817095916.png" width="300px"></p>
+<p>那么$\beta_{t+1}(i)$就是给定$q_t$(这里为什么不是$q_{t+1}$), 时刻$t+2$到时刻$T$, 所有观测值$y_{t+2}, \cdots, y_T$的联合概率, 如下图所示:<br><img src="/L9/微信图片_20190817100705.png" width="300px"></p>
+<script type="math/tex; mode=display">\begin{align} \beta_t(i) &= p(q_{t+1}, q_{t+2}, \cdots, q_T | i_t=s_i) \\
+&= \displaystyle \sum_{j=1}^n p(i_{t+1} = s_j, q_{t+1}, q_{t+2}, \cdots, q_T | i_t = s_i)  \\ 
+&= \displaystyle \sum_{j=1}^n p(q_{t+1}, q_{t+2}, \cdots, q_T | i_{t+1} = s_j) \ast p(i_{t+1}=s_j | i_t=s_i) \\ 
+&= \displaystyle \sum_{j=1}^n p(q_{t+2}, \cdots, q_T | i_{t+1} = s_j) \ast p(q_{t+1} | i_{t+1}=s_j) \ast p(i_{t+1}=s_j | i_t=s_i) \\ 
+&= \displaystyle \sum_{j=1}^n (a_{ij} b_{j q_{t+1}} \beta_{t+1}(j))  \\
+\end{align}</script><h4 id="单个状态的概率"><a href="#单个状态的概率" class="headerlink" title="单个状态的概率"></a>单个状态的概率</h4><p>求给定模型$\lambda$和观测序列Q的情况下, 在时刻t处于状态序列中$s_i$的概率, 计作:</p>
+<script type="math/tex; mode=display">\gamma_t(i) = p(i_t=s_i|Q;\lambda)</script><p>单个状态概率的意义主要是用于判断在每个时刻最可能存在的状态序列中的状态, 从而可以得到整个状态序列作为最终的预测结果</p>
+<script type="math/tex; mode=display">p(i_t=s_i, Q;\lambda) = \alpha_t(i)\beta_t(i)</script><script type="math/tex; mode=display">\begin{align} \gamma_t(i) = p(i_t=s_i|Q;\lambda) &= \frac{p(i_t=s_i, Q; \lambda)}{p(Q;\lambda)} \\
+&= \frac{\alpha_t(i)\beta_t(i)}{p(Q;\lambda)}=\frac{\alpha_t(i)\beta_t(i)}{\displaystyle \sum_{j=1}^n\alpha_t(j)\beta_t(j)} \\
+\end{align}</script><h4 id="两个状态的联合概率"><a href="#两个状态的联合概率" class="headerlink" title="两个状态的联合概率"></a>两个状态的联合概率</h4><p>求给定模型$\lambda$和观测序列Q的情况下, 在时刻t处于状态$s_i$并且在时刻$t+1$处于状态$s_j$概率, 计作:</p>
+<script type="math/tex; mode=display">\begin{align} \xi_t(i, j) &= p(i_t=s_i, i_{t+1}=s_j|Q;\lambda) \\
+&= \frac{p(i_t=s_i, i_{t+1}=s_j, Q; \lambda)}{p(Q; \lambda)} \\
+&= \frac{ p(i_t=s_i, i_{t+1}=s_j, Q; \lambda)  }{ \displaystyle \sum_{i=1}^n \sum_{j=1}^n p(i_t=s_i, i_{t+1}=s_j, Q;\lambda ) }  \\
+\end{align}</script><script type="math/tex; mode=display">p(i_t=s_i, i_{t+1}=s_j, Q; \lambda) = \alpha_t(i) a_{ij} b_{j q_{t+1}} \beta_{t+1}(j)</script><h3 id="学习问题"><a href="#学习问题" class="headerlink" title="学习问题"></a>学习问题</h3><p>若训练数据包含观测序列和状态序列, 则HMM的学习问题非常简单, 是监督学习算法<br>若训练数据值包含观测序列, 则HMM的学习问题需要使用EM算法求解, 是非监督学习算法</p>
+<h4 id="学习问题-监督学习"><a href="#学习问题-监督学习" class="headerlink" title="学习问题-监督学习"></a>学习问题-监督学习</h4><p>直接利用大数定理的结论”频率的极限是概率”, 直接给出HMM的参数估计</p>
+<script type="math/tex; mode=display">\hat \pi_i = \frac{ \vert s_i \vert}{ \displaystyle \sum_{i=1}^n \vert s_i \vert }</script><script type="math/tex; mode=display">a_{ij} = \frac{\vert s_{ij} \vert}{ \displaystyle \sum_{j=1}^n \vert s_{ij} \vert }</script><script type="math/tex; mode=display">\hat b_{ij} = \frac{\vert q_{ij} \vert}{ \displaystyle \sum_{j=1}^n \vert q_{ij} \vert   }</script><h4 id="学习问题-非监督学习"><a href="#学习问题-非监督学习" class="headerlink" title="学习问题-非监督学习"></a>学习问题-非监督学习</h4><h3 id="预测问题"><a href="#预测问题" class="headerlink" title="预测问题"></a>预测问题</h3><h4 id="近似算法"><a href="#近似算法" class="headerlink" title="近似算法"></a>近似算法</h4><p>直接在每个时刻t时候最有可能的状态作为最终的预测状态, 使用下列公式计算概率值</p>
+<script type="math/tex; mode=display">\gamma_t(i) = \frac{\alpha_t(i) \beta_t(i)}{p(Q; \lambda)} = \frac{ \alpha_t(i)\beta_t(i) }{ \displaystyle \sum_{j=1}^n \alpha_t(j)\beta_t(j) }</script><h4 id="viterbi算法"><a href="#viterbi算法" class="headerlink" title="viterbi算法"></a>viterbi算法</h4><p>viterbi算法实际是用动态规划的思路求解HMM预测问题, 求概率最大的”路径”, 每条”路径”对应一个状态序列</p>
+<script type="math/tex; mode=display">\delta_t(i) = \max \limits_{i_1, i_2, \cdots, i_{t-1}} p(i_t=i, i_1, i_2, \cdots, i_{t-1}, q_t, q_{t-1}, \cdots, q_1; \lambda)</script><script type="math/tex; mode=display">\delta_1(i) = \pi_i b_{i q_1}</script><script type="math/tex; mode=display">\delta_{t+1}(i) = \max \limits_{ 1 \le j \le n} (\delta_t(j)a_{ji}) b_{i q_{t+1}}</script><script type="math/tex; mode=display">p^{\ast} = \max \limits_{ 1 \le j \le n} \delta_T(i)</script><h4 id="viterbi算法案例"><a href="#viterbi算法案例" class="headerlink" title="viterbi算法案例"></a>viterbi算法案例</h4><p>给定参数$\pi, A, B$, 得到观测序列为”白黑白白黑”, 求出最优的隐藏状态序列</p>
+<script type="math/tex; mode=display">\pi = \begin{bmatrix}
+{0.2}\\
+{0.5}\\
+{0.3}\\
+\end{bmatrix}</script><script type="math/tex; mode=display">A = \begin{bmatrix}
+{0.5}&{0.4}&{0.1}\\
+{0.2}&{0.2}&{0.6}\\
+{0.2}&{0.5}&{0.3}\\
+\end{bmatrix}</script><script type="math/tex; mode=display">B = \begin{bmatrix}
+{0.4}&{0.6}\\
+{0.8}&{0.2}\\
+{0.5}&{0.5}\\
+\end{bmatrix}</script><script type="math/tex; mode=display">\delta_1(i) = \pi_i b_{i q_1} = \pi_i b_{i白 }</script><script type="math/tex; mode=display">\delta_1(1) = 0.2 * 0.4 = 0.08 \qquad \delta_1(2) = 0.5 * 0.8 = 0.4 \qquad \delta_1(3) = 0.3 * 0.5 = 0.15</script><script type="math/tex; mode=display">\delta_2(i) = \max \limits_{1 \le j \le n} ( \delta_1(j) a_{ji}) b_{i黑}</script><script type="math/tex; mode=display">\delta_2(1) = max(\delta_1(1)*a_{11}, \delta_1(2)*a_{21}, \delta_1(3)*a_{31}) * b_{1黑} = max(0.08*0.5, 0.4*0.2, 0.15*0.2) * 0.6 = max(0.04, 0.08, 0.03) * 0.6 = 0.08*0.6 = 0.048</script><script type="math/tex; mode=display">\delta_2(2) = max(\delta_1(1)*a_{12}, \delta_1(2)*a_{22}, \delta_1(3)*a_{32}) * b_{2黑} = max(0.08*0.4, 0.4*0.2, 0.15*0.5) * 0.2 = max(0.032, 0.08, 0.075) * 0.2 = 0.08*0.2 = 0.016</script><script type="math/tex; mode=display">\delta_2(3) = max(\delta_1(1)*a_{13}, \delta_1(2)*a_{23}, \delta_1(3)*a_{33}) * b_{3黑} = max(0.08*0.1, 0.4*0.6, 0.15*0.3) * 0.5 = max(0.008, 0.24, 0.045) * 0.5 = 0.24*0.5 = 0.12</script><script type="math/tex; mode=display">\delta_3(i) = \max \limits_{1 \le j \le n} ( \delta_2(j) a_{ji}) b_{i白}</script><script type="math/tex; mode=display">\delta_3(1) = max(\delta_2(1)*a_{11}, \delta_2(2)*a_{21}, \delta_2(3)*a_{31}) * b_{1白} = max(0.048*0.5, 0.016*0.2, 0.12*0.2) * 0.4 = max(0.024, 0.0032, 0.024)*0.4 = 0.024*0.4 = 0.0096</script><script type="math/tex; mode=display">\delta_3(2) = max(\delta_2(1)*a_{12}, \delta_2(2)*a_{22}, \delta_2(3)*a_{32}) * b_{2白} = max(0.048*0.4, 0.016*0.2, 0.12*0.5) * 0.8 = max(0.0192, 0.0032, 0.06)*0.8 = 0.06*0.8 = 0.048</script><script type="math/tex; mode=display">\delta_3(3) = max(\delta_2(1)*a_{13}, \delta_2(2)*a_{23}, \delta_2(3)*a_{33}) * b_{3白} = max(0.048*0.1, 0.016*0.6, 0.12*0.3) * 0.5 = max(0.0048, 0.0096, 0.036)*0.5 = 0.036*0.5 = 0.018</script><script type="math/tex; mode=display">\delta_4(i) = \max \limits_{1 \le j \le n} ( \delta_3(j) a_{ji}) b_{i白}</script><script type="math/tex; mode=display">\delta_4(1) = max(\delta_3(1)*a_{11}, \delta_3(2)*a_{21}, \delta_3(3)*a_{31}) * b_{1白} = max(0.0096*0.5, 0.048*0.2, 0.018*0.2)*0.4 = max(0.0048, 0.0096, 0.0036)*0.4 = 0.0096*0.4 = 0.00384</script><script type="math/tex; mode=display">\delta_4(2) = max(\delta_3(1)*a_{12}, \delta_3(2)*a_{22}, \delta_3(3)*a_{32}) * b_{2白} = max(0.0096*0.4, 0.048*0.2, 0.018*0.5)*0.8 = max(0.00384, 0.0096, 0.009)*0.8 = 0.0096*0.8 = 0.00768</script><script type="math/tex; mode=display">\delta_4(3) = max(\delta_3(1)*a_{13}, \delta_3(2)*a_{23}, \delta_3(3)*a_{33}) * b_{3白} = max(0.0096*0.1, 0.048*0.6, 0.018*0.3)*0.5 = max(0.00096, 0.0288, 0.0054)*0.5 = 0.0288*0.5 = 0.0144</script><script type="math/tex; mode=display">\delta_5(i) = \max \limits_{1 \le j \le n} ( \delta_4(j) a_{ji}) b_{i黑}</script><script type="math/tex; mode=display">\delta_5(1) = max(\delta_4(1)*a_{11}, \delta_4(2)*a_{21}, \delta_4(3)*a_{31}) * b_{1黑} = max(0.00384*0.5, 0.00768*0.2, 0.0144*0.2 )*0.6 = max(0.00192, 0.001536, 0.00288)*0.6 = 0.00288*0.6 = 0.001728</script><script type="math/tex; mode=display">\delta_5(2) = max(\delta_4(1)*a_{12}, \delta_4(2)*a_{22}, \delta_4(3)*a_{32}) * b_{2黑} = max(0.00384*0.4, 0.00768*0.2, 0.0144*0.5 )*0.2 = max(0.001536, 0.001536, 0.0072)*0.2 = 0.0072*0.2 = 0.00144</script><script type="math/tex; mode=display">\delta_5(3) = max(\delta_4(1)*a_{13}, \delta_4(2)*a_{23}, \delta_4(3)*a_{33}) * b_{3黑} = max(0.00384*0.1, 0.00768*0.6, 0.0144*0.3 )*0.5 = max(0.000384, 0.004608, 0.00432)*0.5 = 0.004608*0.5 = 0.002304</script><p>同样的方法继续计算$\delta_3(i), \delta_4(i), \delta_5(i)$, 得到如下:</p>
+<script type="math/tex; mode=display">\delta_3(1)=0.0096, \delta_3(2)=0.048, \delta_3(3)=0.018</script><script type="math/tex; mode=display">\delta_4(1)=0.00384, \delta_4(2)=0.00768, \delta_4(3)=0.0144</script><script type="math/tex; mode=display">\delta_5(1)=0.001728, \delta_5(2)=0.00144, \delta_5(3)=0.002304</script><p>从$\delta_5$得知, $\delta_5(3)$最大, 往前推导, 第5个状态是由$\delta_4$的哪个产生的?<br>由$max(0.00384 \ast 0.1, 0.00768 \ast 0.6, 0.0144 \ast 0.3)$<br>得到是由$\delta_4(2)$来的, 依次往回倒推</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5 -&gt; 4 -&gt; 3 -&gt; 2 -&gt; 1</span><br><span class="line">3 -&gt; 2 -&gt; 2 -&gt; 3 -&gt; 2</span><br></pre></td></tr></table></figure>
+<p>可以看出盒子的序列为(2, 3, 2, 2, 3)</p>
+<p><a href="https://www.jianshu.com/p/c80ca0aa4213" target="_blank" rel="noopener">参考</a><br><a href="https://www.cnblogs.com/pinking/p/8531405.html" target="_blank" rel="noopener">盒子顺序的正确解释</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/马尔可夫性质/" rel="tag"># 马尔可夫性质</a>
+          
+            <a href="/tags/马尔科夫/" rel="tag"># 马尔科夫</a>
+          
+            <a href="/tags/隐马尔科夫/" rel="tag"># 隐马尔科夫</a>
+          
+            <a href="/tags/HMM/" rel="tag"># HMM</a>
+          
+            <a href="/tags/HMM前向算法/" rel="tag"># HMM前向算法</a>
+          
+            <a href="/tags/HMM后向算法/" rel="tag"># HMM后向算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/L8/" rel="next" title="L8">
+                <i class="fa fa-chevron-left"></i> L8
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/梯度下降/" rel="prev" title="梯度下降">
+                梯度下降 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#马尔可夫性质"><span class="nav-number">1.</span> <span class="nav-text">马尔可夫性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#马尔可夫链"><span class="nav-number">2.</span> <span class="nav-text">马尔可夫链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HMM"><span class="nav-number">3.</span> <span class="nav-text">HMM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HMM参数说明"><span class="nav-number">3.1.</span> <span class="nav-text">HMM参数说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HMM的两个性质"><span class="nav-number">3.2.</span> <span class="nav-text">HMM的两个性质</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HMM案例"><span class="nav-number">4.</span> <span class="nav-text">HMM案例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HMM的的三个问题"><span class="nav-number">5.</span> <span class="nav-text">HMM的的三个问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概率计算问题"><span class="nav-number">5.1.</span> <span class="nav-text">概率计算问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#直接计算法-暴力算法"><span class="nav-number">5.1.1.</span> <span class="nav-text">直接计算法/暴力算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前向概率-后向概率"><span class="nav-number">5.1.2.</span> <span class="nav-text">前向概率/后向概率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前向算法"><span class="nav-number">5.1.3.</span> <span class="nav-text">前向算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后向算法"><span class="nav-number">5.1.4.</span> <span class="nav-text">后向算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单个状态的概率"><span class="nav-number">5.1.5.</span> <span class="nav-text">单个状态的概率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两个状态的联合概率"><span class="nav-number">5.1.6.</span> <span class="nav-text">两个状态的联合概率</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习问题"><span class="nav-number">5.2.</span> <span class="nav-text">学习问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#学习问题-监督学习"><span class="nav-number">5.2.1.</span> <span class="nav-text">学习问题-监督学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#学习问题-非监督学习"><span class="nav-number">5.2.2.</span> <span class="nav-text">学习问题-非监督学习</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预测问题"><span class="nav-number">5.3.</span> <span class="nav-text">预测问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#近似算法"><span class="nav-number">5.3.1.</span> <span class="nav-text">近似算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#viterbi算法"><span class="nav-number">5.3.2.</span> <span class="nav-text">viterbi算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#viterbi算法案例"><span class="nav-number">5.3.3.</span> <span class="nav-text">viterbi算法案例</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="aura," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="思考: 硬币硬币a和硬币b, 抛硬币a朝上的概率为0.7, 抛硬币b朝上的概率为0.4 问题1: 从一个黑盒中随机取出一个, 向上抛10次, 结果有6次朝上, 那么拿的是哪个硬币, 为什么?问题2: 分别来自a和b的概率是多少?问题3: 向上抛20次, 有12次正面朝上的概率是多少? 分析    硬币编号 硬币朝上 硬币朝下     a 0.7 0.3   b 0.4 0.6     设向上抛硬币">
+<meta name="keywords" content="aura">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20191116">
+<meta property="og:url" content="http://yoursite.com/20191116/index.html">
+<meta property="og:site_name" content="Wenhua">
+<meta property="og:description" content="思考: 硬币硬币a和硬币b, 抛硬币a朝上的概率为0.7, 抛硬币b朝上的概率为0.4 问题1: 从一个黑盒中随机取出一个, 向上抛10次, 结果有6次朝上, 那么拿的是哪个硬币, 为什么?问题2: 分别来自a和b的概率是多少?问题3: 向上抛20次, 有12次正面朝上的概率是多少? 分析    硬币编号 硬币朝上 硬币朝下     a 0.7 0.3   b 0.4 0.6     设向上抛硬币">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/20191116/WechatIMG168.png">
+<meta property="og:image" content="http://yoursite.com/20191116/tf-idf-svd.png">
+<meta property="og:updated_time" content="2019-11-29T12:18:13.322Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20191116">
+<meta name="twitter:description" content="思考: 硬币硬币a和硬币b, 抛硬币a朝上的概率为0.7, 抛硬币b朝上的概率为0.4 问题1: 从一个黑盒中随机取出一个, 向上抛10次, 结果有6次朝上, 那么拿的是哪个硬币, 为什么?问题2: 分别来自a和b的概率是多少?问题3: 向上抛20次, 有12次正面朝上的概率是多少? 分析    硬币编号 硬币朝上 硬币朝下     a 0.7 0.3   b 0.4 0.6     设向上抛硬币">
+<meta name="twitter:image" content="http://yoursite.com/20191116/WechatIMG168.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/20191116/"/>
+
+
+
+
+
+  <title>20191116 | Wenhua</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wenhua</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/20191116/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wenhua">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">20191116</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-17T08:49:31+08:00">
+                2019-11-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/aura/" itemprop="url" rel="index">
+                    <span itemprop="name">aura</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="思考-硬币"><a href="#思考-硬币" class="headerlink" title="思考: 硬币"></a>思考: 硬币</h2><p>硬币a和硬币b, 抛硬币a朝上的概率为0.7, 抛硬币b朝上的概率为0.4</p>
+<p>问题1: 从一个黑盒中随机取出一个, 向上抛10次, 结果有6次朝上, 那么拿的是哪个硬币, 为什么?<br>问题2: 分别来自a和b的概率是多少?<br>问题3: 向上抛20次, 有12次正面朝上的概率是多少?</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>硬币编号</th>
+<th>硬币朝上</th>
+<th>硬币朝下</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td>0.7</td>
+<td>0.3</td>
+</tr>
+<tr>
+<td>b</td>
+<td>0.4</td>
+<td>0.6</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>设向上抛硬币a和b是事件A,  那么,<br>抛硬币a朝上的概率为0.7, 记为$P(A_1) = 0.7$, 抛硬币b朝上的概率为0.4, 记为$P(A_2) = 0.4$<br>向上抛10次结果有6次朝上为事件B, 记为$P(B)$</p>
+<script type="math/tex; mode=display">\because P(A_1) * 10 = 7 > 6, P(A_2) * 10 = 4 < 6</script><script type="math/tex; mode=display">\therefore 拿的是硬币a</script><p>或者</p>
+<script type="math/tex; mode=display">P(B|A_1) = 0.7^6 \ast 0.3^4 = 0.125749</script><script type="math/tex; mode=display">P(B|A_2) = 0.4^6 \ast 0.6^4 = 0.0005308416</script><script type="math/tex; mode=display">\therefore 拿的是硬币a</script><script type="math/tex; mode=display">P(B) = P(B|A_1) + P(B|A_2) = 0.125749 + 0.0005308416 = 0.1262798416</script><script type="math/tex; mode=display">P(A_1|B) = \frac{P(B|A_1) \ast P(A_1)}{P(B)} = \frac{0.7^6*0.3^4*0.7}{P(B)} = 0.00528</script><script type="math/tex; mode=display">P(A_2|B) = \frac{P(B|A_2) \ast P(A_2)}{P(B)} = \frac{0.4^6*0.6^4*0.4}{P(B)} = 0.00168</script><script type="math/tex; mode=display">\therefore 来自a的概率为0.00528, 来自b的概率为0.00168</script><p>向上抛20次, 12次正面朝上的概率为:</p>
+<script type="math/tex; mode=display">P = C_{20}^{12} \ast 0.7^{12} \ast 0.3^8 + 0.4^{12} \ast 0.6^8 = 0.599576</script><h2 id="思考-为什么SVD之后cos距离最近"><a href="#思考-为什么SVD之后cos距离最近" class="headerlink" title="思考: 为什么SVD之后cos距离最近"></a>思考: 为什么SVD之后cos距离最近</h2><p>几何中夹角余弦可用来衡量两个向量方向的差异, 所以可以用余弦相似度来衡量样本向量之间的差异<br>所以在文本做完SVD之后, 用余弦相似度来衡量输入文本中每个文档(即每句话)之间的相似度</p>
+<h2 id="编程-病情预测"><a href="#编程-病情预测" class="headerlink" title="编程: 病情预测"></a>编程: 病情预测</h2><p>6位建筑工人历史病例数据如下:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>症状</th>
+<th>职业</th>
+<th>疾病</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>打喷嚏</td>
+<td>护士</td>
+<td>感冒</td>
+</tr>
+<tr>
+<td>打喷嚏</td>
+<td>农夫</td>
+<td>过敏</td>
+</tr>
+<tr>
+<td>头痛</td>
+<td>建筑工人</td>
+<td>脑震荡</td>
+</tr>
+<tr>
+<td>头痛</td>
+<td>建筑工人</td>
+<td>感冒</td>
+</tr>
+<tr>
+<td>打喷嚏</td>
+<td>教师</td>
+<td>感冒</td>
+</tr>
+<tr>
+<td>头痛</td>
+<td>教师</td>
+<td>脑震荡</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>根据以上历史数据, 预测新来的一位打喷嚏的建筑工人患感冒的概率</p>
+<h3 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h3><p>从上述数据, 可以直观的得到, 症状列表为$[“打喷嚏”, “头痛”]$, 职业列表为$[“护士”, “建筑工人”, “教师”, “农夫”]$, 疾病列表为$[“感冒”, “过敏”, “脑震荡”]$</p>
+<h3 id="统计"><a href="#统计" class="headerlink" title="统计"></a>统计</h3><p>如果从2种症状判断为3种疾病的关系表如下:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>症状</th>
+<th>疾病</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>打喷嚏</td>
+<td>感冒</td>
+</tr>
+<tr>
+<td>打喷嚏</td>
+<td>过敏</td>
+</tr>
+<tr>
+<td>头痛</td>
+<td>脑震荡</td>
+</tr>
+<tr>
+<td>头痛</td>
+<td>感冒</td>
+</tr>
+<tr>
+<td>打喷嚏</td>
+<td>感冒</td>
+</tr>
+<tr>
+<td>头痛</td>
+<td>脑震荡</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>统计如下:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>症状</th>
+<th>疾病</th>
+<th>次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>打喷嚏</td>
+<td>感冒</td>
+<td>2</td>
+</tr>
+<tr>
+<td>打喷嚏</td>
+<td>过敏</td>
+<td>1</td>
+</tr>
+<tr>
+<td>头痛</td>
+<td>脑震荡</td>
+<td>2</td>
+</tr>
+<tr>
+<td>头痛</td>
+<td>感冒</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>或者如下(将行列转置一下):</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>T1(症状-疾病表)</th>
+<th>感冒</th>
+<th>过敏</th>
+<th>脑震荡</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>打喷嚏</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>头痛</td>
+<td>1</td>
+<td>0</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>如果从4种职业判断为3种疾病的关系表如下:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>职业</th>
+<th>疾病</th>
+<th>次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>护士</td>
+<td>感冒</td>
+<td>1</td>
+</tr>
+<tr>
+<td>农夫</td>
+<td>过敏</td>
+<td>1</td>
+</tr>
+<tr>
+<td>建筑工人</td>
+<td>脑震荡</td>
+<td>1</td>
+</tr>
+<tr>
+<td>建筑工人</td>
+<td>感冒</td>
+<td>1</td>
+</tr>
+<tr>
+<td>教师</td>
+<td>感冒</td>
+<td>1</td>
+</tr>
+<tr>
+<td>教师</td>
+<td>脑震荡</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>或者如下(将行列转置一下):</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>T2(职业-疾病表)</th>
+<th>感冒</th>
+<th>过敏</th>
+<th>脑震荡</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>护士</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>农夫</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>建筑工人</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>教师</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>从T1(症状-疾病表), 得到:</p>
+<p>P(感冒|打喷嚏) = 2/3, P(打喷嚏|感冒) = 2/3<br>P(感冒|头痛) = 1/3, P(头痛|感冒) = 1/3</p>
+<p>P(过敏|打喷嚏) = 1, P(打喷嚏|过敏) = 1/1<br>P(过敏|头痛) = 0, P(头痛|过敏) = 0/1</p>
+<p>P(脑震荡|打喷嚏) = 0, P(打喷嚏|脑震荡) = 0/2<br>P(脑震荡|头痛) = 1, P(头痛|脑震荡) = 2/2</p>
+<p>P(打喷嚏) = 3/6<br>P(头痛) = 3/6</p>
+<p>P(感冒) = 3/6<br>P(过敏) = 1/6<br>P(脑震荡) = 2/6</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>P(疾病&#124;症状)概率表</th>
+<th>感冒</th>
+<th>过敏</th>
+<th>脑震荡</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>打喷嚏</td>
+<td>2/3</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>头痛</td>
+<td>1/3</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>从T2(职业-疾病表), 得到:</p>
+<p>P(感冒|护士) = 1/1, P(护士|感冒) = 1/3<br>P(过敏|护士) = 0/1, P(护士|过敏) = 0/1<br>P(脑震荡|护士) = 0/1, P(护士|脑震荡) = 0/2 </p>
+<p>P(感冒|农夫) = 0/1, P(农夫|感冒) = 0/3<br>P(过敏|农夫) = 1/1, P(农夫|过敏) = 1/1<br>P(脑震荡|农夫) = 0/1, P(农夫|脑震荡) = 0/2 </p>
+<p>P(感冒|建筑工人) = 1/2, P(建筑工人|感冒) = 1/3<br>P(过敏|建筑工人) = 0/2, P(建筑工人|过敏) = 0/1<br>P(脑震荡|建筑工人) = 1/2, P(建筑工人|脑震荡) = 1/2</p>
+<p>P(感冒|教师) = 1/2, P(教师|感冒) = 1/3<br>P(过敏|教师) = 0/2, P(教师|过敏) = 0/1<br>P(脑震荡|教师) = 1/2, P(教师|脑震荡) = 1/2</p>
+<p>P(护士) = 1/6<br>P(农夫) = 1/6<br>P(建筑工人) = 2/6<br>P(教师) = 2/6</p>
+<p>P(感冒) = 3/6<br>P(过敏) = 1/6<br>P(脑震荡) = 2/6</p>
+<h3 id="计算结果"><a href="#计算结果" class="headerlink" title="计算结果"></a>计算结果</h3><script type="math/tex; mode=display">\begin{align} P(感冒|建筑工人, 打喷嚏) &= \frac{P(建筑工人, 打喷嚏|感冒) \ast P(感冒)}{P(建筑工人, 打喷嚏)} \\
+&假设建筑工人和打喷嚏两件事相互独立\\
+&= \frac{P(建筑工人|感冒) \ast P(打喷嚏|感冒) \ast P(感冒)}{P(建筑工人) \ast P(打喷嚏)} \\
+&= \frac{ 1/3 \ast 2/3 \ast 3/6 }{ 2/6 \ast 3/6 } \\
+&= \frac{2}{3}
+\end{align}</script><h3 id="编程实现"><a href="#编程实现" class="headerlink" title="编程实现"></a>编程实现</h3><p>history.csv<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">症状,职业,疾病</span><br><span class="line">打喷嚏,护士,感冒</span><br><span class="line">打喷嚏,农夫,过敏</span><br><span class="line">头痛,建筑工人,脑震荡</span><br><span class="line">头痛,建筑工人,感冒</span><br><span class="line">打喷嚏,教师,感冒</span><br><span class="line">头痛,教师,脑震荡</span><br></pre></td></tr></table></figure></p>
+<p>predict_sick.py<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">症状列表:</span><br><span class="line">[“打喷嚏”,“头痛”]</span><br><span class="line">职业列表:</span><br><span class="line">[“护士”,“建筑工人”,“教师”,“农夫”]</span><br><span class="line">疾病列表:</span><br><span class="line">[“感冒”,“过敏”,“脑震荡”]</span><br><span class="line">历史数据:</span><br><span class="line">症状, 职业, 疾病</span><br><span class="line">打喷嚏, 护士, 感冒</span><br><span class="line">打喷嚏, 农夫, 过敏</span><br><span class="line">头痛, 建筑工人, 脑震荡</span><br><span class="line">头痛, 建筑工人, 感冒</span><br><span class="line">打喷嚏, 教师, 感冒</span><br><span class="line">头痛, 教师, 脑震荡</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">data = pd.read_csv(&apos;history.csv&apos;)</span><br><span class="line">print(data)</span><br><span class="line"></span><br><span class="line">sickness = data[&quot;疾病&quot;].value_counts()</span><br><span class="line">occupation = data[&quot;职业&quot;].value_counts()</span><br><span class="line">symptom = data[&quot;症状&quot;].value_counts()</span><br><span class="line">print(sickness)</span><br><span class="line">print(occupation)</span><br><span class="line">print(symptom)</span><br><span class="line"></span><br><span class="line"># P(打喷嚏)</span><br><span class="line">p_pengti = symptom[&quot;打喷嚏&quot;] / sum(symptom)</span><br><span class="line">print(f&quot;p_pengti:\n &#123;p_pengti&#125;&quot;)</span><br><span class="line"></span><br><span class="line"># P(建筑工人)</span><br><span class="line">p_worker = occupation[&quot;建筑工人&quot;] / sum(occupation)</span><br><span class="line">print(f&quot;p_worker:\n &#123;p_worker&#125;&quot;)</span><br><span class="line"></span><br><span class="line"># P(感冒)</span><br><span class="line">p_cold = sickness[&quot;感冒&quot;] / sum(sickness)</span><br><span class="line">print(f&quot;p_cold:\n &#123;p_cold&#125;&quot;)</span><br><span class="line"></span><br><span class="line"># P(建筑工人|感冒)</span><br><span class="line">df_worker_cold = data[[&quot;职业&quot;, &quot;疾病&quot;]]</span><br><span class="line">print(f&quot;df_worker_cold:\n &#123;df_worker_cold&#125;&quot;)</span><br><span class="line">for index, row in df_worker_cold.iterrows():</span><br><span class="line">    if row[&quot;疾病&quot;] == &quot;感冒&quot;:</span><br><span class="line">        df_worker_cold[&quot;疾病&quot;][index] = 1</span><br><span class="line">        if row[&quot;职业&quot;] == &quot;建筑工人&quot;:</span><br><span class="line">            df_worker_cold[&quot;职业&quot;][index] = 1</span><br><span class="line">        else:</span><br><span class="line">            df_worker_cold[&quot;职业&quot;][index] = 0</span><br><span class="line">    else:</span><br><span class="line">        df_worker_cold[&quot;疾病&quot;][index] = 0</span><br><span class="line">        if row[&quot;职业&quot;] == &quot;建筑工人&quot;:</span><br><span class="line">            df_worker_cold[&quot;职业&quot;][index] = 1</span><br><span class="line">        else:</span><br><span class="line">            df_worker_cold[&quot;职业&quot;][index] = 0</span><br><span class="line"></span><br><span class="line">print(f&quot;df_worker_cold:\n &#123;df_worker_cold&#125;&quot;)</span><br><span class="line">p_worker_cold = (df_worker_cold[&quot;职业&quot;] &amp; df_worker_cold[&quot;疾病&quot;]).sum() / df_worker_cold[&quot;疾病&quot;].sum()</span><br><span class="line">print(f&quot;p_worker_cold:\n &#123;p_worker_cold&#125;&quot;)</span><br><span class="line"></span><br><span class="line"># P(打喷嚏|感冒)</span><br><span class="line">df_pengti_cold = data[[&quot;症状&quot;, &quot;疾病&quot;]]</span><br><span class="line">print(f&quot;df_pengti_cold:\n &#123;df_pengti_cold&#125;&quot;)</span><br><span class="line">for i, j in df_pengti_cold.iterrows():</span><br><span class="line">    # print(i, j)</span><br><span class="line">    if j[&quot;疾病&quot;].strip() == &quot;感冒&quot;:</span><br><span class="line">        df_pengti_cold[&quot;疾病&quot;][i] = 1</span><br><span class="line">        if j[&quot;症状&quot;] == &quot;打喷嚏&quot;:</span><br><span class="line">            df_pengti_cold[&quot;症状&quot;][i] = 1</span><br><span class="line">        else:</span><br><span class="line">            df_pengti_cold[&quot;症状&quot;][i] = 0</span><br><span class="line">    else:</span><br><span class="line">        df_pengti_cold[&quot;疾病&quot;][i] = 0</span><br><span class="line">        if j[&quot;症状&quot;] == &quot;打喷嚏&quot;:</span><br><span class="line">            df_pengti_cold[&quot;症状&quot;][i] = 1</span><br><span class="line">        else:</span><br><span class="line">            df_pengti_cold[&quot;症状&quot;][i] = 0</span><br><span class="line"></span><br><span class="line">print(f&quot;df_pengti_cold:\n &#123;df_pengti_cold&#125;&quot;)</span><br><span class="line">p_pengti_cold = (df_pengti_cold[&quot;症状&quot;] &amp; df_pengti_cold[&quot;疾病&quot;]).sum() / df_pengti_cold[&quot;疾病&quot;].sum()</span><br><span class="line">print(f&quot;p_pengti_cold:\n &#123;p_pengti_cold&#125;&quot;)</span><br><span class="line"></span><br><span class="line"># P(感冒|建筑工人,打喷嚏)</span><br><span class="line">p_cold_worker_and_pengti = (p_worker_cold * p_pengti_cold * p_cold) / (p_worker * p_pengti)</span><br><span class="line">print(f&quot;p_cold_worker_and_pengti:\n &#123;p_cold_worker_and_pengti&#125;&quot;)</span><br></pre></td></tr></table></figure></p>
+<p><img src="/20191116/WechatIMG168.png" width="300px"></p>
+<h2 id="编程-在SVD基础上进行TF-IDF"><a href="#编程-在SVD基础上进行TF-IDF" class="headerlink" title="编程: 在SVD基础上进行TF-IDF"></a>编程: 在SVD基础上进行TF-IDF</h2><ul>
+<li>将一个文本当作一个无序的数据集合, 文本特征可以采用文本中的词条T进行体现, 那么文本中出现的所有词条及其出现的次数就可以体现文档的特征</li>
+<li>TF-IDF, 词条的重要性随着它在文件中出现的次数成正比增加, 但同时会随着它在语料库中出现的频率成反比下降;<ul>
+<li>词条在文本中出现的次数越多, 表示该词条对该文本的重要性越高</li>
+<li>词条在所有文本中出现的次数越少, 说明这个词条对文本的重要性越高</li>
+<li>TF(词频)指某个词条在文本中出现的次数, 一般会将其进行归一化处理(该词条数量/该文档中所有词条数量)</li>
+<li>IDF(逆向文件频率)指一条词条重要性的度量, 一般计算方式为总文件数目除以包含该词语之文件的数目, 再将得到的商取对数得到. TF-IDF即TF*IDF</li>
+</ul>
+</li>
+</ul>
+<script type="math/tex; mode=display">词频(TF) = \frac{某个词在文章中出现的次数}{文章的总词数}</script><script type="math/tex; mode=display">逆文档频率(IDF) = log(\frac{语料库的文档总数}{包含该词的文档数 + 1})</script><p><strong>注意</strong>: IDF取对数时，分母$+1$是为了方式分母为0</p>
+<p>tf-idf-svd.py<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import pylab</span><br><span class="line">import re</span><br><span class="line">from scipy import linalg</span><br><span class="line">from matplotlib import pyplot</span><br><span class="line"></span><br><span class="line"># 文档</span><br><span class="line">documents = [</span><br><span class="line">    &quot;Roronoa Zoro, nicknamed \&quot;Pirate Hunter\&quot; Zoro, is a fictional character in the One Piece franchise created by Eiichiro Oda.&quot;,</span><br><span class="line">    &quot;In the story, Zoro is the first to join Monkey D. Luffy after he is saved from being executed at the Marine Base. &quot;,</span><br><span class="line">    &quot;Zoro is an expert swordsman who uses three swords for his Three Sword Style, but is also capable of the one and two-sword styles. &quot;,</span><br><span class="line">    &quot;Zoro seems to be more comfortable and powerful using three swords, but he also uses one sword or two swords against weaker enemies.&quot;,</span><br><span class="line">    &quot;In One Piece, Luffy sails from the East Blue to the Grand Line in search of the legendary treasure One Piece to succeed Gol D. Roger as the King of the Pirates. &quot;,</span><br><span class="line">    &quot;Luffy is the captain of the Straw Hat Pirates and along his journey, he recruits new crew members with unique abilities and personalities. &quot;,</span><br><span class="line">    &quot;Luffy often thinks with his stomach and gorges himself to comical levels. &quot;,</span><br><span class="line">    &quot;However, Luffy is not as naive as many people believe him to be, showing more understanding in situations than people often expect. &quot;,</span><br><span class="line">    &quot;Knowing the dangers ahead, Luffy is willing to risk his life to reach his goal to become the King of the Pirates, and protect his crew.&quot;,</span><br><span class="line">    &quot;Adopted and raised by Navy seaman turned tangerine farmer Bellemere, Nami and her older sister Nojiko, have to witness their mother being murdered by the infamous Arlong.&quot;,</span><br><span class="line">    &quot;Nami, still a child but already an accomplished cartographer who dreams of drawing a complete map of the world, joins the pirates, hoping to eventually buy freedom for her village. &quot;,</span><br><span class="line">    &quot;Growing up as a pirate-hating pirate, drawing maps for Arlong and stealing treasure from other pirates, Nami becomes an excellent burglar, pickpocket and navigator with an exceptional ability to forecast weather.&quot;,</span><br><span class="line">    &quot;After Arlong betrays her, and he and his gang are defeated by the Straw Hat Pirates, Nami joins the latter in pursuit of her dream.&quot;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">print(f&apos;len(documents): &#123;len(documents)&#125;&apos;)</span><br><span class="line"># 停用词</span><br><span class="line">stopwords = [&apos;a&apos;, &apos;an&apos;, &apos;after&apos;, &apos;also&apos;, &apos;and&apos;, &apos;as&apos;, &apos;be&apos;, &apos;being&apos;, &apos;but&apos;, &apos;by&apos;, &apos;d&apos;, &apos;for&apos;, &apos;from&apos;, &apos;he&apos;, &apos;her&apos;,</span><br><span class="line">             &apos;his&apos;, &apos;in&apos;, &apos;is&apos;, &apos;more&apos;, &apos;of&apos;, &apos;often&apos;, &apos;the&apos;, &apos;to&apos;, &apos;who&apos;, &apos;with&apos;, &apos;people&apos;]</span><br><span class="line"># 要去除的标点符号的正则表达式</span><br><span class="line">punctuation_regex = &apos;[,.;&quot;]+&apos;</span><br><span class="line"># 构建一个字典, key是单词, value是单词出现的文档编号</span><br><span class="line">dictionary = &#123;&#125;</span><br><span class="line"></span><br><span class="line"># 当前处理的文档编号</span><br><span class="line">currentDocId = 0</span><br><span class="line"></span><br><span class="line"># 语料库的文档总数</span><br><span class="line">documents_total = len(documents)</span><br><span class="line"># 文档的总词数, 用来记录每篇文档的总词数</span><br><span class="line">documents_len = dict()</span><br><span class="line"></span><br><span class="line"># 依次处理每篇文档</span><br><span class="line">for d in documents:</span><br><span class="line">    words = d.split()</span><br><span class="line">    # 初始化每篇文档总词数</span><br><span class="line">    words_count = 0</span><br><span class="line"></span><br><span class="line">    for w in words:</span><br><span class="line">        # 去标点</span><br><span class="line">        w = re.sub(punctuation_regex, &apos;&apos;, w.lower())</span><br><span class="line">        if w in stopwords:</span><br><span class="line">            continue</span><br><span class="line">        elif w in dictionary:</span><br><span class="line">            dictionary[w].append(currentDocId)</span><br><span class="line">        else:</span><br><span class="line">            dictionary[w] = [currentDocId]</span><br><span class="line"></span><br><span class="line">        words_count += 1</span><br><span class="line">    documents_len[currentDocId] = words_count</span><br><span class="line">    currentDocId += 1</span><br><span class="line"></span><br><span class="line">print(f&quot;dictionary: &#123;dictionary&#125;&quot;)</span><br><span class="line">print(f&quot;语料库的文档总数documents_total: &#123;documents_total&#125;&quot;)</span><br><span class="line">print(f&quot;每篇文档的总词数documents_len: &#123;documents_len&#125;&quot;)</span><br><span class="line"></span><br><span class="line"># tf = 某个词在文章中出现的次数 / 文章的总词数</span><br><span class="line"># idf = log (语料库的文档总数 / (包含该词的文档数 + 1))</span><br><span class="line">idf_dict = dict()</span><br><span class="line">print(f&quot;documents: &#123;documents&#125;&quot;)</span><br><span class="line">import math</span><br><span class="line">for k, v in dictionary.items():</span><br><span class="line">    idf_dict[k] = math.log2(float(documents_total) / float((len(v) + 1)))</span><br><span class="line"></span><br><span class="line"># 至少出现在两个文档中的单词选为关键词</span><br><span class="line">keywords = [k for k in dictionary.keys() if len(dictionary[k]) &gt; 1]</span><br><span class="line">print(f&apos;keywords: &#123;len(keywords)&#125;, &#123;keywords&#125;&apos;)</span><br><span class="line">keywords.sort()</span><br><span class="line">print(f&apos;keywords: &#123;len(keywords)&#125;, &#123;keywords&#125;&apos;)</span><br><span class="line"></span><br><span class="line"># 生成word-document矩阵[19, 13]</span><br><span class="line">X = np.zeros([len(keywords), currentDocId])</span><br><span class="line">print(f&apos;X: &#123;X&#125;&apos;)</span><br><span class="line">for i, k in enumerate(keywords):</span><br><span class="line">    countWordDocument = &#123;&#125;</span><br><span class="line">    for d in dictionary[k]:</span><br><span class="line">        if d in countWordDocument:</span><br><span class="line">            countWordDocument[d] += 1</span><br><span class="line">        else:</span><br><span class="line">            countWordDocument[d] = 1</span><br><span class="line">    for d, v in countWordDocument.items():</span><br><span class="line">        tf = float(v) / (documents_len[d])</span><br><span class="line">        idf = idf_dict[k]</span><br><span class="line">        tf_idf = tf / idf</span><br><span class="line">        X[i, d] += tf_idf</span><br><span class="line">        # X[i, d] += 1</span><br><span class="line"></span><br><span class="line">print(f&apos;X: &#123;X&#125;&apos;)</span><br><span class="line"></span><br><span class="line"># 奇异值分解</span><br><span class="line">U, sigma, V = linalg.svd(X, full_matrices=True)</span><br><span class="line"></span><br><span class="line">print(&quot;U:\n&quot;, U.shape, &quot;\n&quot;, U, &quot;\n&quot;)</span><br><span class="line">print(&quot;SIGMA:\n&quot;, sigma.shape, sigma, &quot;\n&quot;)</span><br><span class="line">print(&quot;V:\n&quot;, V.shape, V, &quot;\n&quot;)</span><br><span class="line"></span><br><span class="line"># 得到降维(降到targetDimension维)后单词与文档的坐标表示</span><br><span class="line">targetDimension = 2</span><br><span class="line">U2 = U[0:, 0:targetDimension]</span><br><span class="line">V2 = V[0:targetDimension, 0:]</span><br><span class="line">sigma2 = np.diag(sigma[0:targetDimension])</span><br><span class="line"></span><br><span class="line">print(f&quot;U.shape: &#123;U.shape&#125;, sigma.shape: &#123;sigma.shape&#125;, V.shape: &#123;V.shape&#125;&quot;)</span><br><span class="line">print(f&quot;U2.shape: &#123;U2.shape&#125;, sigma2.shape: &#123;sigma2.shape&#125;, V2.shape: &#123;V2.shape&#125;&quot;)</span><br><span class="line"></span><br><span class="line"># 对比原始矩阵与降维结果</span><br><span class="line">X2 = np.dot(np.dot(U2, sigma2), V2)</span><br><span class="line">print(&quot;X:\n&quot;, X)</span><br><span class="line">print(&quot;X2:\n&quot;, X2)</span><br><span class="line"></span><br><span class="line"># 开始画图</span><br><span class="line">pyplot.title(&quot;LSA&quot;)</span><br><span class="line">pyplot.xlabel(u&apos;x&apos;)</span><br><span class="line">pyplot.ylabel(u&apos;y&apos;)</span><br><span class="line"></span><br><span class="line"># 绘制单词表示的点</span><br><span class="line"># U2的每一行包含了每个单词的坐标表示(维度是targetDimension)，此处使用前两个维度的坐标画图</span><br><span class="line">for i in range(len(U2)):</span><br><span class="line">    pylab.text(U2[i][0], U2[i][1], keywords[i], fontsize=10)</span><br><span class="line">    print(&quot;(&quot;, U2[i][0], &quot;,&quot;, U2[i][1], &quot;)&quot;, keywords[i])</span><br><span class="line">x = U2.T[0]</span><br><span class="line">y = U2.T[1]</span><br><span class="line">pylab.plot(x, y, &apos;.&apos;)</span><br><span class="line"></span><br><span class="line"># 绘制文档表示的点</span><br><span class="line"># V2的每一列包含了每个文档的坐标表示(维度是targetDimension)，此处使用前两个维度的坐标画图</span><br><span class="line">Dkey = []</span><br><span class="line">for i in range(len(V2[0])):</span><br><span class="line">    pylab.text(V2[0][i], V2[1][i], (&apos;D%d&apos; % (i + 1)), fontsize=10)</span><br><span class="line">    print(&quot;(&quot;, V2[0][i], &quot;,&quot;, V2[1][i], &quot;)&quot;, (&apos;D%d&apos; % (i + 1)))</span><br><span class="line">    Dkey.append(&apos;D%d&apos; % (i + 1))</span><br><span class="line">x = V[0]</span><br><span class="line">y = V[1]</span><br><span class="line">pylab.plot(x, y, &apos;x&apos;)</span><br><span class="line"></span><br><span class="line">pylab.savefig(&quot;tf-idf-svd.png&quot;, dpi=100)</span><br><span class="line"></span><br><span class="line">exit()</span><br></pre></td></tr></table></figure></p>
+<p><img src="/20191116/tf-idf-svd.png" width="300px"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/aura/" rel="tag"># aura</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/梯度下降求解二元函数/" rel="next" title="梯度下降求解二元函数">
+                <i class="fa fa-chevron-left"></i> 梯度下降求解二元函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/20191130/" rel="prev" title="20191130">
+                20191130 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#思考-硬币"><span class="nav-number">1.</span> <span class="nav-text">思考: 硬币</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">1.1.</span> <span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思考-为什么SVD之后cos距离最近"><span class="nav-number">2.</span> <span class="nav-text">思考: 为什么SVD之后cos距离最近</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程-病情预测"><span class="nav-number">3.</span> <span class="nav-text">编程: 病情预测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分析-1"><span class="nav-number">3.1.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#统计"><span class="nav-number">3.2.</span> <span class="nav-text">统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算结果"><span class="nav-number">3.3.</span> <span class="nav-text">计算结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编程实现"><span class="nav-number">3.4.</span> <span class="nav-text">编程实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程-在SVD基础上进行TF-IDF"><span class="nav-number">4.</span> <span class="nav-text">编程: 在SVD基础上进行TF-IDF</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="信息熵,决策树," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="熵信息熵H(X)就叫做随机变量X的信息熵 H(X) = - \displaystyle \sum_{i=1}^{m}{p_ilog_{2}{(p_i)}} 信息量: 指的是一个样本/事件所蕴含的信息, 如果一个事件的概率越大, 就认为该事件所蕴含的信息越少. 极端情况下, “太阳从东方升起”, 因为是确定事件, 所以不携带任何信息量 信息熵, 一个系统越有序, 信息熵就越低, 一个系统越混乱, 信">
+<meta name="keywords" content="信息熵,决策树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息熵和决策树">
+<meta property="og:url" content="http://yoursite.com/信息熵和决策树/index.html">
+<meta property="og:site_name" content="Wenhua">
+<meta property="og:description" content="熵信息熵H(X)就叫做随机变量X的信息熵 H(X) = - \displaystyle \sum_{i=1}^{m}{p_ilog_{2}{(p_i)}} 信息量: 指的是一个样本/事件所蕴含的信息, 如果一个事件的概率越大, 就认为该事件所蕴含的信息越少. 极端情况下, “太阳从东方升起”, 因为是确定事件, 所以不携带任何信息量 信息熵, 一个系统越有序, 信息熵就越低, 一个系统越混乱, 信">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/信息熵和决策树/WechatIMG32.png">
+<meta property="og:updated_time" content="2019-11-01T23:34:53.998Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="信息熵和决策树">
+<meta name="twitter:description" content="熵信息熵H(X)就叫做随机变量X的信息熵 H(X) = - \displaystyle \sum_{i=1}^{m}{p_ilog_{2}{(p_i)}} 信息量: 指的是一个样本/事件所蕴含的信息, 如果一个事件的概率越大, 就认为该事件所蕴含的信息越少. 极端情况下, “太阳从东方升起”, 因为是确定事件, 所以不携带任何信息量 信息熵, 一个系统越有序, 信息熵就越低, 一个系统越混乱, 信">
+<meta name="twitter:image" content="http://yoursite.com/信息熵和决策树/WechatIMG32.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/信息熵和决策树/"/>
+
+
+
+
+
+  <title>信息熵和决策树 | Wenhua</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wenhua</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/信息熵和决策树/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wenhua">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">信息熵和决策树</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T16:39:25+08:00">
+                2018-12-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ai/" itemprop="url" rel="index">
+                    <span itemprop="name">ai</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="熵"><a href="#熵" class="headerlink" title="熵"></a>熵</h2><h3 id="信息熵"><a href="#信息熵" class="headerlink" title="信息熵"></a>信息熵</h3><p>H(X)就叫做随机变量X的信息熵</p>
+<script type="math/tex; mode=display">H(X) = - \displaystyle \sum_{i=1}^{m}{p_ilog_{2}{(p_i)}}</script><ul>
+<li>信息量: 指的是一个样本/事件所蕴含的信息, 如果一个事件的概率越大, 就认为该事件所蕴含的信息越少. 极端情况下, “太阳从东方升起”, 因为是确定事件, 所以不携带任何信息量</li>
+<li>信息熵, 一个系统越有序, 信息熵就越低, 一个系统越混乱, 信息熵就越高, 所以信息熵被认为是一个系统有序程度的度量</li>
+<li><strong>信息熵就是用来描述系统信息量的不确定度</strong></li>
+<li>High Entropy(高信息熵): 表示随机变量X是均匀分布的, 各种去追情况是等概率出现</li>
+<li>Low Entropy(低信息熵): 表示随机变量X各种取值不是等概率出现, 可能出现有的事件概率很大, 有的事件概率很小</li>
+</ul>
+<p><img src="/信息熵和决策树/WechatIMG32.png" alt="信息熵"></p>
+<h3 id="条件熵"><a href="#条件熵" class="headerlink" title="条件熵"></a>条件熵</h3><ul>
+<li>给定条件X的情况下, 随机变量Y的信息熵叫做条件熵</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>专业(X)</th>
+<th>性别(Y)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数学</td>
+<td>M</td>
+</tr>
+<tr>
+<td>IT</td>
+<td>M</td>
+</tr>
+<tr>
+<td>英语</td>
+<td>F</td>
+</tr>
+<tr>
+<td>数学</td>
+<td>F</td>
+</tr>
+<tr>
+<td>数学</td>
+<td>M</td>
+</tr>
+<tr>
+<td>IT</td>
+<td>M</td>
+</tr>
+<tr>
+<td>英语</td>
+<td>F</td>
+</tr>
+<tr>
+<td>数学</td>
+<td>F</td>
+</tr>
+</tbody>
+</table>
+</div>
+<script type="math/tex; mode=display">P(X=数学) = 4/8 = 0.5</script><script type="math/tex; mode=display">P(X=IT) = 2/8 = 0.25</script><script type="math/tex; mode=display">P(X=英语) = 2/8 =0.25</script><script type="math/tex; mode=display">P(Y=M) = 4/8 = 0.5</script><script type="math/tex; mode=display">P(X=数学, Y=F) = 2/8 = 0.25</script><script type="math/tex; mode=display">P(X=数学, Y=M) = 2/8 = 0.25</script><script type="math/tex; mode=display">P(X=IT, Y=M) = 2/8 = 0.25</script><script type="math/tex; mode=display">P(X=英语, Y=F) = 2/8 = 0.25</script><script type="math/tex; mode=display">P(Y=M|X=英语) = 0/8 = 0</script><script type="math/tex; mode=display">\begin{align}H(X) &= -[P(X=数学)log_2P(X=数学) + P(X=IT)log_2P(X=IT) + P(X=英语)log_2P(X=英语)]\\
+&=-[0.5log_{2}0.5 + 0.25 log_{2}0.25 + 0.25 log_{2}0.25]\\
+&=-[0.5 \cdot (-1) + 0.25 \cdot (-2) + 0.25 \cdot (-2)] = 1.5\\
+\end{align}</script><script type="math/tex; mode=display">\begin{align}H(Y) &= -[P(Y=F)log_2P(Y=F) + P(Y=M)log_2P(Y=M)]\\
+&=-[0.5log_{2}0.5 + 0.5log_{2}0.5] = 1\\
+\end{align}</script><ul>
+<li>当专业(X)为数学的时候, Y的信息熵的值为H(Y|X=数学)</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>专业(X)</th>
+<th>性别(Y)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数学</td>
+<td>M</td>
+</tr>
+<tr>
+<td>数学</td>
+<td>F</td>
+</tr>
+<tr>
+<td>数学</td>
+<td>M</td>
+</tr>
+<tr>
+<td>数学</td>
+<td>F</td>
+</tr>
+</tbody>
+</table>
+</div>
+<script type="math/tex; mode=display">H(Y|X=数学) = H(Y=M|X=数学) + H(Y=F|X=数学) = -[0.5 log_{2}0.5 + 0.5 log_{2}0.5] = 1</script><p>同理</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>专业(X)</th>
+<th>性别(Y)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IT</td>
+<td>M</td>
+</tr>
+<tr>
+<td>IT</td>
+<td>M</td>
+</tr>
+</tbody>
+</table>
+</div>
+<script type="math/tex; mode=display">H(Y|X=IT) = H(Y=M|X=IT) = -[1 log_{2}1] = 0</script><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>专业(X)</th>
+<th>性别(Y)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>英语</td>
+<td>F</td>
+</tr>
+<tr>
+<td>英语</td>
+<td>F</td>
+</tr>
+</tbody>
+</table>
+</div>
+<script type="math/tex; mode=display">H(Y|X=英语) = H(Y=F|X=英语) = -[1 log_{2}1 ] = 0</script><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>$v_j$</th>
+<th>$P(X=v_j)$</th>
+<th>$H(Y \mid X=v_j)$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数学</td>
+<td>0.5</td>
+<td>1</td>
+</tr>
+<tr>
+<td>IT</td>
+<td>0.25</td>
+<td>0</td>
+</tr>
+<tr>
+<td>英语</td>
+<td>0.25</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<script type="math/tex; mode=display">H(Y|X) = \displaystyle \sum_{j=1}{P(X=v_j)H(Y|X=v_j)} = 0.5*1 + 0.25*0 + 0.25*0 = 0.5</script><script type="math/tex; mode=display">\begin{align}H(X,Y) &= -[P(X=数学,Y=F)log(P(X=数学,Y=F)) + P(X=数学,Y=M) log( P(X=数学,Y=M)) + P(X=IT,Y=M) log( P(X=IT,Y=M) ) + P(X=英语,Y=F) log( P(X=英语,Y=F) )]\\
+&= -[ 0.25log_{2}0.25 + 0.25log_{2}0.25 + 0.25log_{2}0.25 + 0.25log_{2}0.25 ] \\
+&= -[-0.5 - 0.5 - 0.5 - 0.5] = 2\\
+\end{align}</script><script type="math/tex; mode=display">\begin{align}H(X) &= -[P(X=数学)log( P(X=数学) ) + P(X=IT)log( P(X=IT) ) + P(X=英语) log( P(X=英语) )]\\
+&=-[0.5log_{2}0.5 + 0.25log_{2}0.25 + 0.25log_{2}0.25] = -[-0.5 - 0.5 - 0.5] = 1.5\\
+\end{align}</script><script type="math/tex; mode=display">H(Y|X) = H(X,Y)−H(X) = 2 - 1.5 = 0.5</script><ul>
+<li>事件(X, Y)发生所包含的熵, 减去事件X单独发生的熵, 即为在事件X发生的前提下, Y发生”新”带来的熵<script type="math/tex; mode=display">\begin{align} H(Y|X) &= \sum_{j=1}{P(X=v_j)H(Y|X=v_j) = \sum_xP(X)H(Y|X)}\\
+&= \sum_xp(x)(- \sum_yp(y|x)log(p(y|x)) = -\sum_x \sum_y p(x)p(y|x)log(p(y|x))\\
+&= - \sum_x \sum_y p(x, y)log(\frac {p(x, y)} {p(x)})\\
+&= - \sum_x \sum_y p(x, y)log(p(x,y)) - [- \sum_x (\sum_y p(x,y))log(p(x))]\\
+&= H(X,Y) - [- \sum_x p(x)log(p(x))] = H(X, Y) -H(X)
+\end{align}</script></li>
+</ul>
+<h2 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h2><ul>
+<li>决策树(Decision Tree)是在已知各种情况发生概率的基础上, 通过构建决策树来进行分析的一种方式, 是一种直观应用概率分析的一种图解法; 决策树是一种预测模型, 代表的是对象属性与对象值之间的映射关系; 决策树是一种树形结构, 其中每个内部节点表示一个属性的测试, 每个分支表示一个测试输出, 每个叶节点代表一种类别; 决策树是一种非常常用的有监督的分类算法</li>
+<li>决策树的决策过程就是从根节点开始, 测试待分类项中对应的特征属性, 并按照其值选择输出分支, 直到叶子节点, 将叶子节点的存放类别作为决策结果</li>
+<li>决策树分为两大类: 分类树和回归树, 前者用于分类标签值, 后者用于预测连续值, 常用的算法有ID3, C4.5, CART等</li>
+</ul>
+<h3 id="决策树构建过程"><a href="#决策树构建过程" class="headerlink" title="决策树构建过程"></a>决策树构建过程</h3><ul>
+<li>决策树算法的重点就是决策树的构造; 决策树的构造就是进行属性选择度量, 确定各个特征属性之间的拓扑结构(树结构); 构建决策树的关键步骤就是分裂属性, 分裂属性是指某个节点按照某一类特征属性的不同划分构建不同的分支, 其目标就是让各个分裂子集尽可能的<strong>纯</strong>(让一个分裂子类中待分类的项尽可能的属于同一个类别)</li>
+<li>构建步骤如下:<ul>
+<li>将所有的特征看成一个一个的节点;</li>
+<li>遍历每个特征的每一种分割方式, 找到最好的分割点; 将数据划分为不同的子节点, $N_1, N_2, \cdots N_m$, 计算划分后所有子节点的”纯度”信息;</li>
+<li>对第二步产生的分割, 选择出最优的特征以及最优的划分方式; 得出最终的子节点$N_1, N_2, \cdots N_m$</li>
+<li>对子节点$N_1, N_2, \cdots N_m$分别继续执行2-3步, 直到每个最终的子节点都足够”纯”</li>
+</ul>
+</li>
+</ul>
+<h3 id="决策树特征属性类型"><a href="#决策树特征属性类型" class="headerlink" title="决策树特征属性类型"></a>决策树特征属性类型</h3><p>根据特征属性的类型不同, 在构建决策树的时候, 采用不同的方式, 具体如下:</p>
+<ul>
+<li>属性是离散值, 而且不要求生成的是二叉决策树, 此时一个属性就是一个分支</li>
+<li>属性是离散值, 而且要求生成的是二叉决策树, 此时使用属性划分的子集进行测试, 按照”属于此子集”和”不属于此子集”分成两个分支</li>
+<li>属性是连续值, 可以确定一个值作为分裂点split_point, 按照<code>&gt; split_point</code>和$\le$<code>split_point</code>生成两个分支</li>
+</ul>
+<h3 id="决策树分割属性选择"><a href="#决策树分割属性选择" class="headerlink" title="决策树分割属性选择"></a>决策树分割属性选择</h3><ul>
+<li>决策树算法是一种”贪心”算法策略, 只考虑在当前数据特征下的最好分割方式, 不能进行回溯操作</li>
+<li>对于整体的数据集而言, 按照所有的特征属性进行划分操作, 对所有划分操作的结果集的”纯度”进行比较, 选择”纯度”越高的特征属性作为当前需要分割的数据集进行分割操作, 持续迭代, 直到得到最终结果. 决策树是通过”纯度”来进行分割特征属性点的</li>
+</ul>
+<h3 id="决策树量化纯度"><a href="#决策树量化纯度" class="headerlink" title="决策树量化纯度"></a>决策树量化纯度</h3><ul>
+<li>决策树的构建是通过样本概率和纯度进行构建操作的, 那么进行判断数据集是否”纯”可以通过三个公式进行判断, 分别是Gini系数, 熵(Entropy), 错误率, 这三个公式值越大, 表示数据越”不纯”; 越小表示越”纯”, 这三个公式效果差不多, 一般使用熵公式<script type="math/tex; mode=display">P(1)=7/10=0.7; 可以偿还概率</script><script type="math/tex; mode=display">P(2)=3/10=0.3; 无法偿还概率</script></li>
+</ul>
+<script type="math/tex; mode=display">Gini = 1 - \sum_{i=1}^{n}{P(i)^2}, H(Entropy) = -\sum_{i=1}^{n}{P(i)log_2(P(i))}, Error = 1 - \max_{i=1}^{n}{P(i)}</script><ul>
+<li>当计算出各个特征属性的量化纯度值后使用<strong>信息增益度</strong>来选择出当前数据集的分割特征属性; 如果信息增益度的值越大, 表示在该特征属性上会损失的纯度越大, 那么该属性就越应该在决策树的上层, 计算公式为:<script type="math/tex; mode=display">Gain = \Delta = H(D) - H(D|A)</script><ul>
+<li>Gain为特征A对训练集D的信息增益, 它为集合D的经验熵H(D)与特征A给定条件下D的经验条件熵H(D|A)之差</li>
+</ul>
+</li>
+</ul>
+<h3 id="决策树算法的停止条件"><a href="#决策树算法的停止条件" class="headerlink" title="决策树算法的停止条件"></a>决策树算法的停止条件</h3><p>一般情况下有两个停止条件:</p>
+<ul>
+<li>当每个子节点只有一种类型的时候停止构建</li>
+<li>当前节点中记录数小于某个阈值, 同时迭代次数达到给定值时, 停止构建过程, 此时使用$max(p(i))$作为节点的对应类型<br>方式一可能会使树的节点过多, 导致过拟合等问题; 比较常用的方式是使用方式二作为停止条件</li>
+</ul>
+<h3 id="决策树算法效果评估"><a href="#决策树算法效果评估" class="headerlink" title="决策树算法效果评估"></a>决策树算法效果评估</h3><ul>
+<li>决策树的效果评估和一般的分类算法一样, 采用混淆举证来进行计算准确率, 召回率和精确率等指标</li>
+<li>也可以采用叶子节点的纯度值总和来评估算法的效果, 值越小, 效果越好</li>
+</ul>
+<h2 id="决策树生成算法"><a href="#决策树生成算法" class="headerlink" title="决策树生成算法"></a>决策树生成算法</h2><p>建立决策树主要有三种算法</p>
+<ul>
+<li>ID3</li>
+<li>C4.5</li>
+<li>CART(Classification And Regression Tree)</li>
+</ul>
+<h3 id="ID3算法"><a href="#ID3算法" class="headerlink" title="ID3算法"></a>ID3算法</h3><p>ID3算法是决策树比较经典的一个构造算法, 内部使用信息熵以及信息增益来进行构造; 每次迭代选择信息增益最大的特征属性作为分割属性</p>
+<script type="math/tex; mode=display">H(D) = - \displaystyle \sum_{i=1}^{n}{P(i)log_2(P(i))}</script><script type="math/tex; mode=display">Gain = \Delta = H(D) - H(D|A)</script><p>优点: 决策树构建速度快, 实现简单<br>缺点:</p>
+<ul>
+<li>计算依赖于特征数目比较多的特征, 而属性值最多的属性不一定最优</li>
+<li>ID3算法不是递增算法</li>
+<li>ID3算法是单变量决策树, 对于特征属性之间的关系不会考虑</li>
+<li>抗噪性差</li>
+<li>只适合小规模数据集, 需要将数据放到内存中</li>
+</ul>
+<h3 id="C4-5算法"><a href="#C4-5算法" class="headerlink" title="C4.5算法"></a>C4.5算法</h3><p>使用信息增益率来取代ID3算法中的信息增益, 在树的构造过程中会进行剪枝操作进行优化; 能够自动完成对连续属性的离散化处理; C4.5算法在选中分割属性的时候选择信息增益率最大的属性, 涉及到的公式为:</p>
+<script type="math/tex; mode=display">H(D) = - \displaystyle \sum_{i=1}^{n}{P(i)log_2(P(i))}</script><script type="math/tex; mode=display">Gain = \Delta = H(D) - H(D|A)</script><script type="math/tex; mode=display">Gain_ratio(A) = \frac{Gain(A)}{H(A)}</script><p>优点:</p>
+<ul>
+<li>产生的规则容易理解</li>
+<li>准确率较高</li>
+<li>实现简单</li>
+</ul>
+<p>缺点:</p>
+<ul>
+<li>对数据集需要进行多次顺序扫描和排序, 效率较低</li>
+<li>只适合小规模数据集, 需要将数据放到内存中</li>
+</ul>
+<h3 id="CART算法"><a href="#CART算法" class="headerlink" title="CART算法"></a>CART算法</h3><p>使用基尼系数作为数据纯度的量化指标来构建决策树, 使用GINI增益作为分割属性选择的标准, 选择GINI增益最大的作为当前数据集的分割属性; 可用于分类和回归两类问题. CART构建是二叉树</p>
+<script type="math/tex; mode=display">Gini = 1 - \sum_{i=1}^{n}{P(i)^2}</script><script type="math/tex; mode=display">Gain = \Delta = Gini(D) - Gini(D|A)</script><h3 id="ID3-C4-5-CART分类算法总结"><a href="#ID3-C4-5-CART分类算法总结" class="headerlink" title="ID3, C4.5, CART分类算法总结"></a>ID3, C4.5, CART分类算法总结</h3><ul>
+<li>ID3和C4.5算法均只适合在小规模数据集上使用</li>
+<li>ID3和C4.5算法都是单变量决策树</li>
+<li>当属性值取值比较多的时候，最好考虑C4.5算法，ID3得出的效果会比较差</li>
+<li>决策树分类一般情况只适合小数据量的情况(数据可以放内存)</li>
+<li>CART算法是三种算法中最常用的一种决策树构建算法</li>
+<li>三种算法的区别仅仅只是对于当前树的评价标准不同而已，ID3使用信息增益, C4.5使用信息增益率、CART使用基尼系数</li>
+<li>CART算法构建的一定是二叉树，ID3和C4.5构建的不一定是二叉树</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>支持模型</th>
+<th>树结构</th>
+<th>特征选择</th>
+<th>连续值处理</th>
+<th>缺失值处理</th>
+<th>剪枝</th>
+<th>特征属性多次使用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ID3</td>
+<td>分类</td>
+<td>多叉树</td>
+<td>信息增益</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>C4.5</td>
+<td>分类</td>
+<td>多叉树</td>
+<td>信息增益率</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>CART</td>
+<td>分类, 回归</td>
+<td>二叉树</td>
+<td>基尼系数, 均方差</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="决策树优化策略"><a href="#决策树优化策略" class="headerlink" title="决策树优化策略"></a>决策树优化策略</h3><ul>
+<li>剪枝优化, 决策树过拟合一般情况是由于节点太多导致的, 剪枝优化对决策树的正确率影响是比较大的, 也是最常用的一种优化方式</li>
+<li>Random Forest, 利用训练数据随机产生多个决策树, 形成一个森林, 然后使用这个森林对数据进行预测, 选取最多结果作为预测结果</li>
+</ul>
+<h4 id="决策树剪枝"><a href="#决策树剪枝" class="headerlink" title="决策树剪枝"></a>决策树剪枝</h4><ul>
+<li>前置剪枝: 在构建决策树过程中, 提前停止, 得到的决策树一般比较小, 实践证明这种策略无法得到比较好的结果</li>
+<li>后置剪枝: 在决策树构建好之后, 然后再开始裁剪, 一般使用两种方法, 后置剪枝的主要问题是计算效率问题, 存在一定的浪费情况<ul>
+<li>用单一叶子节点代替整个子树, 叶子节点的分类采用子树中最主要的分类</li>
+<li>将一个子树完全代替另外一颗子树</li>
+</ul>
+</li>
+<li>后剪枝总体思路(交叉验证):<ul>
+<li>由完全树$T_0$开始, 剪枝部分节点得到$T_1$, 再次剪枝得到$T_2$……直到仅剩树根的树$T_k$</li>
+<li>在验证数据集上对这$k+1$个树进行评价, 选择最优树$T_a$(即损失函数最小的树)</li>
+</ul>
+</li>
+<li>对于给定的决策树$T_0$<ul>
+<li>计算所有内部非叶子节点的剪枝系数</li>
+<li>查找最小剪枝系数的节点, 将其子节点进行删除操作, 进行剪枝得到决策树$T_k$; 如果存在多个最小剪枝系数节点, 选择包含数据项最多的节点进行了剪枝操作</li>
+<li>重复上述操作, 直到产生的剪枝决策树$T_k$只有1个节点</li>
+<li>得到决策树$T_0T_1 \cdots T_k$</li>
+<li>使用验证样本集选择最优子树$T_a$</li>
+</ul>
+</li>
+<li>使用验证集选择最优子树的标准, 可以使用原始损失函数来考虑:<script type="math/tex; mode=display">loss = \displaystyle \sum_{t=1}^{leaf}{ \frac{\vert D_t \vert}{\vert D \vert}H(t)}</script></li>
+<li>叶节点越多, 决策树越复杂, 损失越大; 修正添加剪枝系数, 修改后的损失函数为:<script type="math/tex; mode=display">loss_{\alpha} = loss + \alpha * leaf</script></li>
+<li>考虑根节点为r的子树, 剪枝前后的损失函数分别为loss(R)和loss(r), 当这两者相等的时候, 可以求的剪枝系数<script type="math/tex; mode=display">loss_{\alpha}(r) = loss(r) + \alpha</script><script type="math/tex; mode=display">loss_{\alpha}(R) = loss(R) + \alpha * R_{leaf}</script><script type="math/tex; mode=display">\alpha = \displaystyle \frac{loss(r) - loss(R)}{R_{leaf} - 1}</script></li>
+</ul>
+<p>GridSearchCV: 网格交叉验证, 主要用于模型开发阶段找出模型的最优参数的一种方式, 内部会利用交叉验证</p>
+<p>现在对于A和B的每个参数组合都进行一次k折交叉验证, 将k折交叉验证得到的k个模型的score(model.score(x,y))均值作为当前这组参数在训练集上的模型整体效果, GridSearchCV最终认为模型整体效果最优的对应参数是最优参数</p>
+<h3 id="分类树和回归树的区别"><a href="#分类树和回归树的区别" class="headerlink" title="分类树和回归树的区别"></a>分类树和回归树的区别</h3><ul>
+<li>分类树采用信息增益、信息增益率、基尼系数来评价树的效果，都是基于概率值进行判断的;而分类树的叶子节点的预测值一般为叶子节点中概率最大的类别作为当前叶子的预测值。</li>
+<li>在回归树种，叶子节点的预测值一般为叶子节点中所有值的均值来作为当前叶子 节点的预测值。所以在回归树中一般采用MSE作为树的评价指标，即均方差。<script type="math/tex; mode=display">MSE = \frac{1}{n} \sum_{i=1}^{n}{(y_i - \hat{y_i})^2}</script></li>
+<li>一般情况下只使用CART算法构建回归树</li>
+</ul>
+<p>使用特征树实现特征选择<br>因为决策树构建过程中, 每次选择的划分特征的目的/方向是让数据具有更加明显的区分能力; 也就是我们每次选择的特征其实是具有明显的区分能力的, 可以认为这些被选择的特征其实对于y的取值具有更大的影响, 所有我们可以使用决策树来实现特征选择的操作, 即选择clf.feature_importances_返回列表中, 权重比较大的特征 </p>
+<p>决策树</p>
+<ul>
+<li><p>区别</p>
+<ul>
+<li>分类树中使用信息熵, gini系数, 错误率作为”纯度”的度量指标, 回归树中使用MSE/MAE作为树的”纯度”的度量指标</li>
+<li>分类树使用叶子节点中包含最多的那个类别作为当前叶子的预测值, 回归树中使用叶子节点中包含的所有样本的目标属性的均值作为叶子的预测值</li>
+</ul>
+</li>
+<li><p>决策树的构建</p>
+<ul>
+<li>让每次分裂数据集的时候, 让分裂之后的数据集更加的”纯”</li>
+</ul>
+</li>
+<li><p>决策树分裂属性选择方式</p>
+<ul>
+<li>基于最优划分的规则进行选择, 迭代计算特征属性上所有划分方式的”纯度”, 选择划分后更加”纯”的一种方式(信息增益, 信息增益率), 该方法只能说明在当前数据集上是最优的, 可能会存在一定的过拟合情况</li>
+<li>基于随机的划分规则: 每次划分的时候, 都是先选择一定数目的特征, 然后在这部分特征中选择出一个最优的划分特征. 因为每次选择的划分特征都是局部最优的, 相对来讲可以增加模型的鲁棒性</li>
+</ul>
+</li>
+<li><p>决策树的欠拟合和过拟合</p>
+<ul>
+<li>通过增加树的深度来缓解决策树的欠拟合问题</li>
+<li>通过限制树的复杂程度来缓解这个过拟合的问题</li>
+</ul>
+</li>
+<li><p>网格交叉验证(GridSearchCV)</p>
+</li>
+<li>决策树的效果评估</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/信息熵/" rel="tag"># 信息熵</a>
+          
+            <a href="/tags/决策树/" rel="tag"># 决策树</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/matplotlib/" rel="next" title="matplotlib">
+                <i class="fa fa-chevron-left"></i> matplotlib
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/L7/" rel="prev" title="L7">
+                L7 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#熵"><span class="nav-number">1.</span> <span class="nav-text">熵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#信息熵"><span class="nav-number">1.1.</span> <span class="nav-text">信息熵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件熵"><span class="nav-number">1.2.</span> <span class="nav-text">条件熵</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#决策树"><span class="nav-number">2.</span> <span class="nav-text">决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#决策树构建过程"><span class="nav-number">2.1.</span> <span class="nav-text">决策树构建过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#决策树特征属性类型"><span class="nav-number">2.2.</span> <span class="nav-text">决策树特征属性类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#决策树分割属性选择"><span class="nav-number">2.3.</span> <span class="nav-text">决策树分割属性选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#决策树量化纯度"><span class="nav-number">2.4.</span> <span class="nav-text">决策树量化纯度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#决策树算法的停止条件"><span class="nav-number">2.5.</span> <span class="nav-text">决策树算法的停止条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#决策树算法效果评估"><span class="nav-number">2.6.</span> <span class="nav-text">决策树算法效果评估</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#决策树生成算法"><span class="nav-number">3.</span> <span class="nav-text">决策树生成算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ID3算法"><span class="nav-number">3.1.</span> <span class="nav-text">ID3算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C4-5算法"><span class="nav-number">3.2.</span> <span class="nav-text">C4.5算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CART算法"><span class="nav-number">3.3.</span> <span class="nav-text">CART算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ID3-C4-5-CART分类算法总结"><span class="nav-number">3.4.</span> <span class="nav-text">ID3, C4.5, CART分类算法总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#决策树优化策略"><span class="nav-number">3.5.</span> <span class="nav-text">决策树优化策略</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#决策树剪枝"><span class="nav-number">3.5.1.</span> <span class="nav-text">决策树剪枝</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类树和回归树的区别"><span class="nav-number">3.6.</span> <span class="nav-text">分类树和回归树的区别</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

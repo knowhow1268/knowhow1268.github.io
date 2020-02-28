@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="梯度下降," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="梯度下降梯度下降是常用的卷积神经网络模型参数的求解方法, 根据每次参数更新使用样本数量的多少, 可以分为以下三类:  批量梯度下降(batch gradient descent, BGD) 小批量梯度下降(mini-batch gradient descent, MBGD) 随机梯度下降(stochastic gradient descent, SGD)  求参数过程即最小化损失函数过程, 比如有">
+<meta name="keywords" content="梯度下降">
+<meta property="og:type" content="article">
+<meta property="og:title" content="梯度下降">
+<meta property="og:url" content="http://yoursite.com/梯度下降/index.html">
+<meta property="og:site_name" content="Wenhua">
+<meta property="og:description" content="梯度下降梯度下降是常用的卷积神经网络模型参数的求解方法, 根据每次参数更新使用样本数量的多少, 可以分为以下三类:  批量梯度下降(batch gradient descent, BGD) 小批量梯度下降(mini-batch gradient descent, MBGD) 随机梯度下降(stochastic gradient descent, SGD)  求参数过程即最小化损失函数过程, 比如有">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/梯度下降/WechatIMG71.png">
+<meta property="og:image" content="http://yoursite.com/梯度下降/WechatIMG72.png">
+<meta property="og:image" content="http://yoursite.com/梯度下降/WechatIMG73.png">
+<meta property="og:image" content="http://yoursite.com/梯度下降/WechatIMG145.png">
+<meta property="og:image" content="http://yoursite.com/梯度下降/WechatIMG146.png">
+<meta property="og:updated_time" content="2019-11-01T23:34:54.056Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="梯度下降">
+<meta name="twitter:description" content="梯度下降梯度下降是常用的卷积神经网络模型参数的求解方法, 根据每次参数更新使用样本数量的多少, 可以分为以下三类:  批量梯度下降(batch gradient descent, BGD) 小批量梯度下降(mini-batch gradient descent, MBGD) 随机梯度下降(stochastic gradient descent, SGD)  求参数过程即最小化损失函数过程, 比如有">
+<meta name="twitter:image" content="http://yoursite.com/梯度下降/WechatIMG71.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/梯度下降/"/>
+
+
+
+
+
+  <title>梯度下降 | Wenhua</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wenhua</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/梯度下降/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wenhua">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">梯度下降</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-17T10:46:11+08:00">
+                2019-03-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ai/" itemprop="url" rel="index">
+                    <span itemprop="name">ai</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h2><p>梯度下降是常用的卷积神经网络模型参数的求解方法, 根据每次参数更新使用样本数量的多少, 可以分为以下三类:</p>
+<ul>
+<li>批量梯度下降(batch gradient descent, BGD)</li>
+<li>小批量梯度下降(mini-batch gradient descent, MBGD)</li>
+<li>随机梯度下降(stochastic gradient descent, SGD)</li>
+</ul>
+<p>求参数过程即最小化损失函数过程, 比如有一个含有D个训练数据的数据集, 损失函数为:</p>
+<script type="math/tex; mode=display">L(W) = \displaystyle \frac{1}{\vert D \vert} \sum_{i}^{\vert D \vert} f_W(x^{(i)}) + \lambda \gamma(W)</script><p>$f_W(X^{(i)})$是单个样本$X^{(i)}$的损失, $\gamma(W)$是正则项, $\lambda$是权重</p>
+<h3 id="批量梯度下降"><a href="#批量梯度下降" class="headerlink" title="批量梯度下降"></a>批量梯度下降</h3><p>量梯度下降(batch gradient descent, BGD), 是梯度下降法最原始的形式, 具体思路是在更新每一组参数的时候都使用所有的样本进行更新, 如果是几百万个样本集的话, 训练时间和内存将都不可取</p>
+<p><img src="/梯度下降/WechatIMG71.png" width="300px"></p>
+<h3 id="随机梯度下降"><a href="#随机梯度下降" class="headerlink" title="随机梯度下降"></a>随机梯度下降</h3><p>随机梯度下降(stochastic gradient descent, SGD), 是为了解决批量梯度下降法在训练过程中随着样本数量的增加而变得异常缓慢的问题提出的</p>
+<p><img src="/梯度下降/WechatIMG72.png" width="300px"></p>
+<h3 id="小批量梯度下降"><a href="#小批量梯度下降" class="headerlink" title="小批量梯度下降"></a>小批量梯度下降</h3><p>批量梯度下降和随机梯度下降都有各自的优缺点, 不能取得性能和准确率之间的平衡, 而小批量梯度下降(mini-batch gradient descent, MBGD), 是在每次更新参数时时使用b个样本(b一般为较小的数, 如100)</p>
+<p><img src="/梯度下降/WechatIMG73.png" width="300px"></p>
+<h2 id="梯度下降法-L8"><a href="#梯度下降法-L8" class="headerlink" title="梯度下降法_L8"></a>梯度下降法_L8</h2><p>梯度下降法(Gradient Descent, GD)常用于求解无约束情况下凸函数(Convex Function)的极小值, 是一种迭代类型的算法, 因为凸函数只有一个极值点, 故求解出来的极小值就是函数的最小值点</p>
+<script type="math/tex; mode=display">J(\theta) = \frac{1}{2m} \displaystyle \sum_{i=1}^m ( h_\theta(x^{(i)}) - y^{(i)} )^2</script><script type="math/tex; mode=display">\theta^\ast = arg \min \limits_{\theta} J(\theta)</script><p>导数: 一个函数在某一点的导数描述类这个函数在这一点附近的变化率, 也可以认为是函数在某一点的导数就是该函数所代表的曲线在这一点的切线斜率. 导数值越大, 表示函数在该点处的变化越大.</p>
+<p>梯度: 梯度是一个向量, 表示某一函数在该点处的方向导数沿着该方向取的最大值, 即函数在该点处沿着该方向变化最快, 变化率最大(即该梯度向量的模); 当函数为一维函数的时候, 梯度就是导数</p>
+<p><img src="/梯度下降/WechatIMG145.png" width="500px"></p>
+<script type="math/tex; mode=display">y' = \frac{\partial f(x)}{\partial x}</script><script type="math/tex; mode=display">\nabla f(x_1, x_2) = ( \frac{ \partial f(x_1, x_2) }{\partial x_1}, \frac{\partial f(x_1, x_2)}{\partial x_2})</script><p><img src="/梯度下降/WechatIMG146.png" width="300px"></p>
+<p>梯度下降法的优化思想是用当前位置负梯度方向作为搜索方向, 因为该方向为当前位置的最快下降方向, 所以梯度下降法也称为”最速下降法”. 梯度下降法中越接近目标值, 变量变化越小, 如下:</p>
+<script type="math/tex; mode=display">\theta^{k+1} = \theta^k - \alpha \nabla f(\theta^k)</script><p>$\alpha$称为步长或者学习率(learning rate), 表示自变量$x$每次迭代变化的大小</p>
+<p>收敛条件: 当目标函数的函数值变化非常小的时候或者达到最大迭代次数的时候, 就结束循环</p>
+<p>由于梯度下降法中负梯度方向作为变量的变化方向, 所有有肯能导致最终解的值是局部最优解, 所以在使用梯度下降的时候, 一般需要进行一些调优策略</p>
+<ul>
+<li>学习率的选择: 学习率过大, 表示每次迭代更新的时候变化比较大, 有可能会跳过最优解; 学习率过小, 表示每次迭代更新的时候变化比较小, 就会导致迭代速度过慢, 很长时间都不能结束 </li>
+<li>算法初始参数值的选择: 初始值不同, 最终获得的最小值也有可能不同, 因为梯度下降法求解的是局部最优解, 所以一般情况下, 选择多次不同初始值运行算法, 并最终返回损失函数最小情况下的结果值</li>
+<li>标准化: 由于样本不同特征的取值范围不同, 可能导致在各个不同参数上迭代速度不同, 为了减少特征取值的影响, 可以将特征进行标准化操作</li>
+</ul>
+<h3 id="批量梯度下降法-Batch-Gradient-Descent-BGD"><a href="#批量梯度下降法-Batch-Gradient-Descent-BGD" class="headerlink" title="批量梯度下降法(Batch Gradient Descent, BGD)"></a>批量梯度下降法(Batch Gradient Descent, BGD)</h3><p>使用所有样本在当前点的梯度值对变量参数进行更新操作</p>
+<script type="math/tex; mode=display">\theta^{k+1} = \theta^k - \alpha \displaystyle \sum_{i=1}^m \nabla f_{\theta^k} (x_i)</script><h3 id="随机梯度下降法-Stochastic-Gradient-Descent-SGD"><a href="#随机梯度下降法-Stochastic-Gradient-Descent-SGD" class="headerlink" title="随机梯度下降法(Stochastic Gradient Descent, SGD)"></a>随机梯度下降法(Stochastic Gradient Descent, SGD)</h3><p>在更新变量参数的时候, 选取一个样本的梯度值来更新参数</p>
+<script type="math/tex; mode=display">\theta^{k+1} = \theta^k - \alpha \nabla f_{\theta^k} (x_i)</script><h3 id="小批量梯度下降法-Mini-batch-Gradient-Descent-MBGD"><a href="#小批量梯度下降法-Mini-batch-Gradient-Descent-MBGD" class="headerlink" title="小批量梯度下降法(Mini-batch Gradient Descent, MBGD)"></a>小批量梯度下降法(Mini-batch Gradient Descent, MBGD)</h3><p>集合BGD和SGD的特性, 从原始数据中, 每次选择n个样本来更新参数值, 一般n选择10</p>
+<script type="math/tex; mode=display">\theta^{k+1} = \theta^k - \alpha \displaystyle \sum_{i=t}^{t+n-1} \nabla f_{\theta^k} (x_i)</script><h3 id="BGD-SGD-MBGD的区别"><a href="#BGD-SGD-MBGD的区别" class="headerlink" title="BGD/SGD/MBGD的区别"></a>BGD/SGD/MBGD的区别</h3><ul>
+<li>当样本量为m的时候, 每次迭代BGD算法中对于参数值更新一次, SGD算法中对于参数值更新m次, MBGD算法中对于参数值更新$m/n$次, 相对来讲SGD算法的更新速度最快</li>
+<li>SGD算法中对于每个样本都需要更新参数值, 当样本值不太正常的时候, 就有可能会导致本次的参数更新会产生相反的影响, 也就是说SGD算法的结果并不是完全收敛的, 而是在收敛结果处波动的</li>
+<li>SGD算法是每个样本都更新一次参数值, 所以SGD算法特别适合样本数据量大的情况以及在线机器学习(Online ML)</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/梯度下降/" rel="tag"># 梯度下降</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/L9/" rel="next" title="L9">
+                <i class="fa fa-chevron-left"></i> L9
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/precision和accuracy的区别/" rel="prev" title="precision和accuracy的区别">
+                precision和accuracy的区别 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#梯度下降"><span class="nav-number">1.</span> <span class="nav-text">梯度下降</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#批量梯度下降"><span class="nav-number">1.1.</span> <span class="nav-text">批量梯度下降</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机梯度下降"><span class="nav-number">1.2.</span> <span class="nav-text">随机梯度下降</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小批量梯度下降"><span class="nav-number">1.3.</span> <span class="nav-text">小批量梯度下降</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#梯度下降法-L8"><span class="nav-number">2.</span> <span class="nav-text">梯度下降法_L8</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#批量梯度下降法-Batch-Gradient-Descent-BGD"><span class="nav-number">2.1.</span> <span class="nav-text">批量梯度下降法(Batch Gradient Descent, BGD)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机梯度下降法-Stochastic-Gradient-Descent-SGD"><span class="nav-number">2.2.</span> <span class="nav-text">随机梯度下降法(Stochastic Gradient Descent, SGD)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小批量梯度下降法-Mini-batch-Gradient-Descent-MBGD"><span class="nav-number">2.3.</span> <span class="nav-text">小批量梯度下降法(Mini-batch Gradient Descent, MBGD)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BGD-SGD-MBGD的区别"><span class="nav-number">2.4.</span> <span class="nav-text">BGD/SGD/MBGD的区别</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

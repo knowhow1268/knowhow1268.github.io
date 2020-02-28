@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SMO,非线性可分SVM,EM,GMM,多项式回归,核函数,高斯核函数,贝叶斯算法,高斯朴素贝叶斯,伯努利朴素贝叶斯,多项式朴素贝叶斯,鸢尾花数据分类,文本数据分类,贝叶斯网络," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="多项式回归在线性回归中, 可以通过多项式扩展将低维度扩展成为高维度数据, 从而可以使用线性回归模型来解决问题. 即对于二维空间中不是线性可分的数据, 将其映射到高维空间中后, 变成了线性可分的数据 两维线性模型:  h_\theta(x_1, x_2) = \theta_0 + \theta_1 x_1 + \theta_2 x_2(x_1, x_2) \quad \underrightarrow">
+<meta name="keywords" content="SMO,非线性可分SVM,EM,GMM,多项式回归,核函数,高斯核函数,贝叶斯算法,高斯朴素贝叶斯,伯努利朴素贝叶斯,多项式朴素贝叶斯,鸢尾花数据分类,文本数据分类,贝叶斯网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="L8">
+<meta property="og:url" content="http://yoursite.com/L8/index.html">
+<meta property="og:site_name" content="Wenhua">
+<meta property="og:description" content="多项式回归在线性回归中, 可以通过多项式扩展将低维度扩展成为高维度数据, 从而可以使用线性回归模型来解决问题. 即对于二维空间中不是线性可分的数据, 将其映射到高维空间中后, 变成了线性可分的数据 两维线性模型:  h_\theta(x_1, x_2) = \theta_0 + \theta_1 x_1 + \theta_2 x_2(x_1, x_2) \quad \underrightarrow">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/L8/WechatIMG39.png">
+<meta property="og:image" content="http://yoursite.com/L8/WechatIMG40.png">
+<meta property="og:image" content="http://yoursite.com/L8/WechatIMG42.png">
+<meta property="og:image" content="http://yoursite.com/L8/WechatIMG44.png">
+<meta property="og:image" content="http://yoursite.com/L8/WechatIMG45.png">
+<meta property="og:image" content="http://yoursite.com/L8/WechatIMG46.png">
+<meta property="og:image" content="http://yoursite.com/L8/WechatIMG47.png">
+<meta property="og:image" content="http://yoursite.com/L8/WechatIMG48.png">
+<meta property="og:updated_time" content="2019-11-01T23:34:53.860Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="L8">
+<meta name="twitter:description" content="多项式回归在线性回归中, 可以通过多项式扩展将低维度扩展成为高维度数据, 从而可以使用线性回归模型来解决问题. 即对于二维空间中不是线性可分的数据, 将其映射到高维空间中后, 变成了线性可分的数据 两维线性模型:  h_\theta(x_1, x_2) = \theta_0 + \theta_1 x_1 + \theta_2 x_2(x_1, x_2) \quad \underrightarrow">
+<meta name="twitter:image" content="http://yoursite.com/L8/WechatIMG39.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/L8/"/>
+
+
+
+
+
+  <title>L8 | Wenhua</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wenhua</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/L8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wenhua">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">L8</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-05T20:56:25+08:00">
+                2019-02-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ai/" itemprop="url" rel="index">
+                    <span itemprop="name">ai</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="多项式回归"><a href="#多项式回归" class="headerlink" title="多项式回归"></a>多项式回归</h2><p>在线性回归中, 可以通过多项式扩展将低维度扩展成为高维度数据, 从而可以使用线性回归模型来解决问题. 即对于二维空间中不是线性可分的数据, 将其映射到高维空间中后, 变成了线性可分的数据<br><img src="/L8/WechatIMG39.png" width="250px"></p>
+<p>两维线性模型: </p>
+<script type="math/tex; mode=display">h_\theta(x_1, x_2) = \theta_0 + \theta_1 x_1 + \theta_2 x_2</script><script type="math/tex; mode=display">(x_1, x_2) \quad \underrightarrow{多项式扩展} \quad (x_1, x_2, x_1^2, x_2^2, x_1x_2)</script><p>五维线性模型:</p>
+<script type="math/tex; mode=display">h_\theta(x_1, x_2) = \theta_0 + \theta_1 x_1 + \theta_2 x_2  + \theta_3 x_3 + \theta_4 x_4 + \theta_5 x_5</script><script type="math/tex; mode=display">\underrightarrow{等价于} \quad h_\theta(x_1, x_2) = \theta_0 + \theta_1 z_1 + \theta_2 z_2  + \theta_3 z_3 + \theta_4 z_4 + \theta_5 z_5</script><h2 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h2><p>假设函数$\phi$是一个从低维特征空间到高维特征空间到一个映射, 那么如果存在函数$K(x,z)$, 对于任意的低维度特征向量x和z, 都有$K(x, z) = \phi(x) \cdot \phi(z)$, 该函数称为<strong>核函数</strong></p>
+<p>核函数在解决线性不可分问题的时候, 采用的方式是: 使用低维特征空间的计算来避免在高维特征空间中向量内积的恐怖计算量, 也就是说此时SVM模型可以应用在高维特征空间中数据可线性分割的优点, 同时也避免来引入这个高维特征空间恐怖的内积计算量</p>
+<p>设两个向量$x_1 = (\mu_1, \mu_2)^T$和$x_2 = (\eta_1, \eta_2)^T$, 映射过后的内积为:</p>
+<script type="math/tex; mode=display">\phi(x_1) \cdot \phi(x_2) = \mu_1 \eta_1 + \mu_2 \eta_2 + \mu_1^2 \eta_1^2 + \mu_2^2 \eta_2^2 + \mu_1 \mu_2 \eta_1 \eta_2</script><p>同时发现另外一个公式:</p>
+<script type="math/tex; mode=display">(x_1 \cdot x_2 + 1)^2 = 2\mu_1 \eta_1 + 2\mu_2 \eta_2 + \mu_1^2 \eta_1^2 + \mu_2^2 \eta_2^2 + 2\mu_1 \mu_2 \eta_1 \eta_2 + 1</script><p>上述两个公式非常相似, 只要乘上一个相关系数, 就可以让两个式子的值相等, 这样就可以将五维空间的一个内积转换为两维的内积运算</p>
+<ul>
+<li>线性核函数(Linear Kernel)<script type="math/tex; mode=display">K(x, z) = x \cdot z</script></li>
+<li>多项式核函数(polynomial Kernal), 其中$\gamma, r, d$属于超参, 需要调参定义<script type="math/tex; mode=display">K(x, z) = (\gamma x \cdot r)^d</script></li>
+<li>高斯核函数(Gaussian Kernal), 其中$\gamma$属于超参, 要求大于0, 需要调参定义<script type="math/tex; mode=display">K(x,z) = e^{-\gamma \Vert x-z \Vert_{2}^{2}}</script></li>
+<li>Sigmoid核函数(Sigmoid Kernal), 其中$\gamma, r$属于超参, 需要调参定义<script type="math/tex; mode=display">K(x,z) = tanh(\gamma x \cdot z + r)</script></li>
+</ul>
+<p><img src="/L8/WechatIMG40.png" width="300px"></p>
+<h3 id="核函数总结"><a href="#核函数总结" class="headerlink" title="核函数总结"></a>核函数总结</h3><ul>
+<li>核函数可以自定义, 核函数必须是正定核函数, 即Gram矩阵是半正定矩阵</li>
+<li>核函数的价值在于它虽然也是将特征进行从低维度到高维度的转换, 但核函数事先在低维上进行计算, 而将实质的分类效果表现在了高维上, 也就避免了直接在高维空间上的复杂计算</li>
+<li>通过核函数, 可以将非线性可分的数据转换为线性可分数据</li>
+</ul>
+<p>\begin{bmatrix}<br>{K(x_1, x_1)}&amp;{K(x_1, x_2)}&amp;{\cdots}&amp;{K(x_1, x_m)}\\<br>{K(x_2, x_1)}&amp;{K(x_2, x_2)}&amp;{\cdots}&amp;{K(x_2, x_m)}\\<br>{\vdots}&amp;{\vdots}&amp;{\ddots}&amp;{\vdots}\\<br>{K(x_m, x_1)}&amp;{K(x_m, x_2)}&amp;{\cdots}&amp;{K(x_m, x_m)}\\<br>\end{bmatrix}</p>
+<h3 id="高斯核函数"><a href="#高斯核函数" class="headerlink" title="高斯核函数"></a>高斯核函数</h3><p>令$z=x$, 进行多维变换后, 应该是同一个向量, 从而得到以下公式:</p>
+<script type="math/tex; mode=display">\begin{align} K(x, z) &= e^{-\gamma \Vert x-z \Vert_2^2} \\
+&= e^{-\gamma \Vert x \Vert_2^2} \cdot e^{-\gamma \Vert z \Vert_2^2} \cdot e^{2\gamma x \cdot z} \\
+& \overset{\text{泰勒展开}}{=} e^{-\gamma \Vert x \Vert_2^2} \cdot e^{-\gamma \Vert z \Vert_2^2} (\displaystyle \sum_{i=0}^{+\infty} \frac{(2\gamma x \cdot z)^i}{i!}) \\
+&= \displaystyle \sum_{i=0}^{+\infty} e^{-\gamma \Vert x \Vert_2^2} \cdot e^{-\gamma \Vert z \Vert_2^2} \frac{(2\gamma x \cdot z)^i}{i!}
+& \Rightarrow \phi(x) = e^{-\gamma \Vert x \Vert_2^2} \cdot (1, \sqrt{\frac{(2 \gamma)^1}{1!}} \Vert x\Vert_2^1, \sqrt{\frac{(2 \gamma)^2}{2!}} \Vert x\Vert_2^2, \cdots) \\
+& = \displaystyle \sum_{i=0}^{+\infty} e^{-\gamma \Vert x \Vert_2^2} \cdot e^{-\gamma \Vert z \Vert_2^2} \sqrt{\frac{(2\gamma)^i}{i!}} \sqrt{\frac{(2\gamma)^i}{i!}} \Vert x \Vert_2^i \Vert z \Vert_2^i \\
+&= \phi(x) \cdot \phi(z)\\
+\end{align}</script><h2 id="非线性可分SVM"><a href="#非线性可分SVM" class="headerlink" title="非线性可分SVM"></a>非线性可分SVM</h2><p>不管是线性可分SVM还是加入惩罚系数的软间隔线性可分SVM其实都是要求数据本身都是线性可分的, 对于完全不可以线性可分的数据, 这两种算法模型就没法解决这个问题了 </p>
+<h3 id="SMO"><a href="#SMO" class="headerlink" title="SMO"></a>SMO</h3><p>未完待续</p>
+<h2 id="贝叶斯算法"><a href="#贝叶斯算法" class="headerlink" title="贝叶斯算法"></a>贝叶斯算法</h2><h3 id="贝叶斯定理相关公式"><a href="#贝叶斯定理相关公式" class="headerlink" title="贝叶斯定理相关公式"></a>贝叶斯定理相关公式</h3><h3 id="朴素贝叶斯算法"><a href="#朴素贝叶斯算法" class="headerlink" title="朴素贝叶斯算法"></a>朴素贝叶斯算法</h3><h4 id="朴素贝叶斯算法推导"><a href="#朴素贝叶斯算法推导" class="headerlink" title="朴素贝叶斯算法推导"></a>朴素贝叶斯算法推导</h4><h4 id="朴素贝叶斯算法流程"><a href="#朴素贝叶斯算法流程" class="headerlink" title="朴素贝叶斯算法流程"></a>朴素贝叶斯算法流程</h4><h3 id="高斯朴素贝叶斯"><a href="#高斯朴素贝叶斯" class="headerlink" title="高斯朴素贝叶斯"></a>高斯朴素贝叶斯</h3><h3 id="伯努利朴素贝叶斯"><a href="#伯努利朴素贝叶斯" class="headerlink" title="伯努利朴素贝叶斯"></a>伯努利朴素贝叶斯</h3><h3 id="多项式朴素贝叶斯"><a href="#多项式朴素贝叶斯" class="headerlink" title="多项式朴素贝叶斯"></a>多项式朴素贝叶斯</h3><h3 id="案例一-鸢尾花数据分类"><a href="#案例一-鸢尾花数据分类" class="headerlink" title="案例一: 鸢尾花数据分类"></a>案例一: 鸢尾花数据分类</h3><h3 id="案例二-文本数据分类"><a href="#案例二-文本数据分类" class="headerlink" title="案例二: 文本数据分类"></a>案例二: 文本数据分类</h3><h2 id="贝叶斯网络"><a href="#贝叶斯网络" class="headerlink" title="贝叶斯网络"></a>贝叶斯网络</h2><h3 id="最简单的贝叶斯网络"><a href="#最简单的贝叶斯网络" class="headerlink" title="最简单的贝叶斯网络"></a>最简单的贝叶斯网络</h3><h3 id="全连接贝叶斯网络"><a href="#全连接贝叶斯网络" class="headerlink" title="全连接贝叶斯网络"></a>全连接贝叶斯网络</h3><h3 id="正常贝叶斯网络"><a href="#正常贝叶斯网络" class="headerlink" title="正常贝叶斯网络"></a>正常贝叶斯网络</h3><h4 id="实际贝叶斯网络-判断是否下雨"><a href="#实际贝叶斯网络-判断是否下雨" class="headerlink" title="实际贝叶斯网络: 判断是否下雨"></a>实际贝叶斯网络: 判断是否下雨</h4><h4 id="贝叶斯网络判定条件独立"><a href="#贝叶斯网络判定条件独立" class="headerlink" title="贝叶斯网络判定条件独立"></a>贝叶斯网络判定条件独立</h4><p>如果x是连续的, 一般选择高斯朴素贝叶斯; 如果x是离散的, 一般选择多项式朴素贝叶斯; 如果x既有连续值又有离散值, 选择高斯朴素贝叶斯</p>
+<h3 id="EM"><a href="#EM" class="headerlink" title="EM"></a>EM</h3><h4 id="最大似然估计回顾"><a href="#最大似然估计回顾" class="headerlink" title="最大似然估计回顾"></a>最大似然估计回顾</h4><p>MLE就是利用已知的样本结果, 反推最有可能(最大概率)导致这样结果的参数值的计算过程. 就是给定了一定的数据, 假定知道数据是从某种分布中随机抽取出来的, 但是不知道这个分布具体的参数值, 即”模型已定, 参数未知”, MLE就是用来估计模型的参数的. MLE的目标是找出一组参数(模型中的参数), 使得模型产出观察数据的概率最大.</p>
+<script type="math/tex; mode=display">\displaystyle arg\max \limits_{\theta}p(X;\theta)</script><h4 id="贝叶斯算法估计"><a href="#贝叶斯算法估计" class="headerlink" title="贝叶斯算法估计"></a>贝叶斯算法估计</h4><ul>
+<li>贝叶斯算法估计是一种从先验概率和样本分布情况来计算后验概率的一种方式</li>
+<li>贝叶斯算法中的常见概念<ul>
+<li>p(A)是事件A的先验概率或者边缘概率</li>
+<li>p(A|B)是已知B发生后A发生的条件概率, 也称为A的后验概率</li>
+<li>p(B|A)是已知A发生后B发生的条件概率, 也称为B的后验概率</li>
+<li>p(B)是事件B的先验概率或者边缘概率<script type="math/tex; mode=display">p(AB) = p(A)p(B|A) = p(B)p(A|B) \Rightarrow p(A|B) = \frac{p(A)p(B|A)}{p(B)}</script><script type="math/tex; mode=display">p(A_i|B) = \frac{p(A_i)p(B|A_i)}{p(B)} = \frac{p(A_i)p(B|A_i)}{\displaystyle \sum_j p(B|A_j)p(A_j)}</script><script type="math/tex; mode=display">f(\theta|x) = \frac{f(x|\theta)g(\theta)}{\displaystyle \int_{\theta^{'} \in \Theta}f(x|{\theta}^{'})g(\theta^{'})}</script></li>
+</ul>
+</li>
+</ul>
+<p>假设有5个盒子, 假定每个盒子中都有黑白两种球, 并且黑白球的比例如下; 已知从这5个盒子中的任意一个盒子中有放回的抽取两个球, 且均为白球, 问这两个球是从哪个盒子中抽取出来的?</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>盒子编号</th>
+<th>白球(p)</th>
+<th>黑球(q)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0.3</td>
+<td>0.7</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0.5</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.7</td>
+<td>0.3</td>
+</tr>
+<tr>
+<td>5</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>p(A)</td>
+<td>0.2</td>
+<td>0.2</td>
+<td>0.2</td>
+<td>0.2</td>
+<td>0.2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>使用MLE(最大似然估计), 结论是从第5个盒子抽取的球:</p>
+<script type="math/tex; mode=display">L(X;p) = p^2 \quad \underrightarrow{arg\max L(X;p)} \quad p=1</script><p>使用贝叶斯算法估计, 结论是从第5个盒子抽取的球: 假设抽出白球为事件B, 从第i个盒子中抽取为事件$A_i$</p>
+<p>$p(B|A_i)$, 抽到第i个盒子的概率 <strong>乘以</strong> 在第i个盒子中第一次抽出的球为白球的概率 <strong>乘以</strong> 在第i个盒子中第二次抽出的球为白球的概率</p>
+<script type="math/tex; mode=display">p(B|A_1) = 0.2 * 0 * 0 = 0</script><script type="math/tex; mode=display">p(B|A_2) = 0.2 * 0.3 * 0.3 = 0.018</script><script type="math/tex; mode=display">p(B|A_3) = 0.2 * 0.5 * 0.5 = 0.05</script><script type="math/tex; mode=display">p(B|A_4) = 0.2 * 0.7 * 0.7 = 0.098</script><script type="math/tex; mode=display">p(B|A_5) = 0.2 * 1 * 1 = 0.2</script><p>$p(B)$, 从任意一个盒子中有放回的抽取两个球, 且均为白球的概率</p>
+<script type="math/tex; mode=display">p(B) = \sum_{i=1}^{5} p(B|A_i) = 0 + 0.018 + 0.05 + 0.098 + 0.2 = 0.366</script><p>$p(A_1|B)$, 两抽为白的是第一个盒子的后验概率<br>$p(A_1)$, 抽到第一个盒子的先验概率<br>$p(B|A_1)$, 抽到第一个盒子并且两抽为白的条件概率<br>$p(B)$, 任意的盒子, 两抽为白的边缘概率</p>
+<script type="math/tex; mode=display">p(A_1|B) = \frac{p(A_1)p(B|A_1)}{p(B)} = \frac{0.2 * 0}{0.366} = 0</script><script type="math/tex; mode=display">p(A_2|B) = \frac{p(A_2)p(B|A_2)}{p(B)} = \frac{0.2 * 0.018}{0.366} = 0.2 * 0.049</script><script type="math/tex; mode=display">p(A_3|B) = \frac{p(A_3)p(B|A_3)}{p(B)} = \frac{0.2 * 0.05}{0.366} = 0.2 * 0.137</script><script type="math/tex; mode=display">p(A_4|B) = \frac{p(A_4)p(B|A_3)}{p(B)} = \frac{0.2 * 0.098}{0.366} = 0.2 * 0.268</script><script type="math/tex; mode=display">p(A_5|B) = \frac{p(A_5)p(B|A_3)}{p(B)} = \frac{0.2 * 0.2}{0.366} = 0.2 * 0.546</script><p>现在不是从5个盒子中任选一个盒子进行抽取, 而是按照一定的概率选择对应的盒子, 概率如下. 结论是从第4个盒子抽取的</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>p(A)</td>
+<td>0.1</td>
+<td>0.2</td>
+<td>0.2</td>
+<td>0.4</td>
+<td>0.1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<script type="math/tex; mode=display">p(A_1|B) = \frac{p(A_1)p(B|A_1)}{p(B)} = \frac{0.1 * 0}{0.366} = 0</script><script type="math/tex; mode=display">p(A_2|B) = \frac{p(A_2)p(B|A_2)}{p(B)} = \frac{0.2 * 0.018}{0.366} = 0.2 * 0.049</script><script type="math/tex; mode=display">p(A_3|B) = \frac{p(A_3)p(B|A_3)}{p(B)} = \frac{0.2 * 0.05}{0.366} = 0.2 * 0.137</script><script type="math/tex; mode=display">p(A_4|B) = \frac{p(A_4)p(B|A_3)}{p(B)} = \frac{0.4 * 0.098}{0.366} = 0.2 * 0.536</script><script type="math/tex; mode=display">p(A_5|B) = \frac{p(A_5)p(B|A_3)}{p(B)} = \frac{0.1 * 0.2}{0.366} = 0.2 * 0.366</script><h4 id="最大后验概率估计"><a href="#最大后验概率估计" class="headerlink" title="最大后验概率估计"></a>最大后验概率估计</h4><p>MAp(Maximum a posteriori estimation), 和MLE一样, 都是通过样本估计参数$\theta$的值; 在MLE中, 是使得似然函数$p(X|\theta)$最大的时候参数$\theta$的值, MLE中假设先验概率是一个等值的; 而在MAp中, 则是求$\theta$使$p(X|\theta)p(\theta)$的值最大, 这就要求$\theta$值不仅仅是让似然函数最大, 同时要求$\theta$本身出现的先验概率也得比较大</p>
+<p>可以认为MAp是贝叶斯算法的一种应用</p>
+<script type="math/tex; mode=display">p(\theta^{'}|X) = \frac{p(\theta^{'})p(X|\theta^{'})}{p(X)} \quad \rightarrow \quad arg\max \limits_{\theta^{'}} p(\theta^{'}|X) \quad \rightarrow \quad arg\max \limits_{\theta^{'}} p(\theta^{'})p(X|\theta^{'})</script><h4 id="K-means算法回顾"><a href="#K-means算法回顾" class="headerlink" title="K-means算法回顾"></a>K-means算法回顾</h4><p>K-means算法, 也叫做k-均值聚类算法, 是一种非常广泛使用的聚类算法之一<br>假定输入样本为$S=x_1, x_2, \cdots, x_m$, 则算法步骤为:</p>
+<ul>
+<li>选择初始的k个簇中心点$\mu_1, \mu_2, \cdots, \mu_k$</li>
+<li>将样本$x_i$标记为距离簇中心最近的簇: $label_i = arg \min \limits_{1 \le j \le k} \Vert x_i - \mu_j \Vert$</li>
+<li>迭代处理所有样本数据, 计算出各个样本点所属的对应簇</li>
+<li>更新簇中心点坐标$\mu_i = \displaystyle \frac{1}{\vert C_i \vert} \sum_{j \in C_i} x_j$</li>
+<li>重复上述三个操作,  直到算法收敛<br>算法收敛条件: 迭代次数/簇中心变化率/MSE/MAE<script type="math/tex; mode=display">J(k, \mu) = \frac{1}{m}\sum_{i=1}^{m}\Vert x^{(i)} - \mu_{k^{(i)}} \Vert^2</script><script type="math/tex; mode=display">k, \mu = arg \min \limits_{k, \mu} J(k, \mu)</script></li>
+</ul>
+<h4 id="EM算法引入"><a href="#EM算法引入" class="headerlink" title="EM算法引入"></a>EM算法引入</h4><p>公司有男同事=[A，B，C]，同时有很多漂亮的女职员=[小甲，小章，小乙]。（请勿对号入座）你迫切的怀疑这些男同事跟这些女职员有“问题”。为了科学的验证你的猜想，你进行了细致的观察。于是：<br>观察数据:</p>
+<ul>
+<li>A，小甲、小乙一起出门了；</li>
+<li>B，小甲、小章一起出门了；</li>
+<li>B，小章、小乙一起出门了；</li>
+<li>C，小乙一起出门了；</li>
+</ul>
+<h5 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h5><p>你觉得三个同事一样帅，一样有钱，三个美女一样漂亮，每个人都可能跟每个人有关系。所以，每个男同事跟每个女职员“有问题”的概率都是1/3;</p>
+<h5 id="EM算法中的E步骤"><a href="#EM算法中的E步骤" class="headerlink" title="EM算法中的E步骤"></a>EM算法中的E步骤</h5><ul>
+<li>A和小甲出去过的次数为$\displaystyle \frac{1}{2} \cdot \frac{1}{3} = \frac{1}{6}$, 和小乙出去的次数也是$\displaystyle \frac{1}{6}$</li>
+<li>B和小甲, 小章出去的次数分别为$\displaystyle \frac{1}{6}$</li>
+<li>B和小章, 小乙出去的次数分别为$\displaystyle \frac{1}{6}$</li>
+<li>C和小乙出去的次数为$\displaystyle \frac{1}{3}$</li>
+</ul>
+<p>归纳总结:</p>
+<ul>
+<li>A和小甲出去了$\displaystyle \frac{1}{6}$次, 和小乙出去了$\displaystyle \frac{1}{6}$次</li>
+<li>B和小甲出去了$\displaystyle \frac{1}{6}$次, 和小乙出去了$\displaystyle \frac{1}{6}$次, 和小章出去了$\displaystyle \frac{1}{3}$次</li>
+<li>C和小乙出去了$\displaystyle \frac{1}{3}$次</li>
+</ul>
+<h5 id="EM算法中的M步骤"><a href="#EM算法中的M步骤" class="headerlink" title="EM算法中的M步骤"></a>EM算法中的M步骤</h5><ul>
+<li>A和小甲, 小乙有问题的概率为$\displaystyle \frac{1/6}{1/6 + 1/6} = \frac{1}{2}$</li>
+<li>B和小甲, 小乙有问题的概率为$\displaystyle \frac{1/6}{1/6 + 1/6 + 1/6 + 1/6} = \frac{1}{4}$</li>
+<li>B和小章有问题的概率为$\displaystyle \frac{1/3}{1/6 + 1/6 + 1/3} = \frac{1}{2}$</li>
+<li>C和小乙有问题的概率为$\displaystyle \frac{1/3}{1/3} = 1$</li>
+</ul>
+<h5 id="第二次迭代EM算法中的E步骤"><a href="#第二次迭代EM算法中的E步骤" class="headerlink" title="第二次迭代EM算法中的E步骤"></a>第二次迭代EM算法中的E步骤</h5><p>根据已知条件</p>
+<ul>
+<li>A，小甲、小乙一起出门了；</li>
+<li>B，小甲、小章一起出门了；</li>
+<li>B，小章、小乙一起出门了；</li>
+<li>C，小乙一起出门了；</li>
+</ul>
+<p>结合上个M步骤更新的概率</p>
+<ul>
+<li>A和小甲出去了$\displaystyle \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{4}$次, 和小乙出去了$\displaystyle \frac{1}{4}$次</li>
+<li>B和小甲出去了$\displaystyle \frac{1}{2} \cdot \frac{1}{4} = \frac{1}{8}$次, 和小章出去了$\displaystyle \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{4}$次, </li>
+<li>B和小章出去了$\displaystyle \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{4}$次, 和小乙出去了$\displaystyle \frac{1}{2} \cdot \frac{1}{4} = \frac{1}{8}$次</li>
+<li>C和小乙出去了1次</li>
+</ul>
+<p>归纳总结:</p>
+<ul>
+<li>A和小甲出去了$\displaystyle \frac{1}{4}$次, 和小乙出去了$\displaystyle \frac{1}{4}$次</li>
+<li>B和小甲出去了$\displaystyle \frac{1}{8}$次, 和小乙出去了$\displaystyle \frac{1}{8}$次, 和小章出去了$\displaystyle \frac{1}{2}$次</li>
+<li>C和小乙出去了1次</li>
+</ul>
+<h5 id="第二次迭代EM算法中的M步骤"><a href="#第二次迭代EM算法中的M步骤" class="headerlink" title="第二次迭代EM算法中的M步骤"></a>第二次迭代EM算法中的M步骤</h5><ul>
+<li>A和小甲, 小乙有问题的概率为$\displaystyle \frac{1/4}{1/4 + 1/4} = \frac{1}{2}$</li>
+<li>B和小甲, 小乙有问题的概率为$\displaystyle \frac{1/8}{1/8 + 1/8 + 1/2} = \frac{1}{6}$</li>
+<li>B和小章有问题的概率为$\displaystyle \frac{1/2}{1/8 + 1/8 + 1/2} = \frac{2}{3}$</li>
+<li>C和小乙有问题的概率为1</li>
+</ul>
+<p>你继续计算，反思，总之，最后，你得到了真相。</p>
+<p>通过上面的计算我们可以得知，EM算法实际上是一个不停迭代计算的过程，根据我们事先估计的先验概率A，得出一个结果B，再根据结果B，再计算得到结果A，然后反复直到这个过程收敛。<br>可以想象饭店的后方大厨，炒了两盘一样的菜，现在，菜炒好后从锅中倒入盘，不可能一下子就分配均匀，所以先往两盘中倒入，然后发现B盘菜少了，就从A中匀出一些，A少了，从B匀…..</p>
+<h4 id="EM算法"><a href="#EM算法" class="headerlink" title="EM算法"></a>EM算法</h4><h5 id="EM算法原理"><a href="#EM算法原理" class="headerlink" title="EM算法原理"></a>EM算法原理</h5><p>给定m个训练样本${x(1), x(2), \cdots, x(m)}$, 样本间独立, 找出样本的模型参数$\theta$, 极大化模型参数的对数似然函数, 如下:</p>
+<script type="math/tex; mode=display">\theta = arg \max \limits_\theta \displaystyle \sum_{i=1}^{m} log(p(x^{(i)}; \theta))</script><p>假定样本中存在隐含数据$z={z(1), z(2), \cdots, z(k)}$, 此时极大化模型分布的对数似然函数如下:</p>
+<script type="math/tex; mode=display">\begin{align}\theta &= arg \max \limits_\theta \displaystyle \sum_{i=1}^{m} log(p(x^{(i)}; \theta))\\
+&= arg \max \limits_\theta \displaystyle \sum_{i=1}^{m} log( \sum_{z^{(i)}} p(z^{(i)}) p(x^{(i)}|z^{(i)}; \theta) )\\
+&= arg \max \limits_\theta \displaystyle \sum_{i=1}^{m} log( \sum_{z^{(i)}} p(x^{(i)}, z^{(i)}; \theta) )\\
+\end{align}</script><p>Q(z)是一个随机变量的分布, 每一个取值对应的概率密度之和等于1.<br>$E(Y) = E(g(x)) = \sum_i g(x_i)p_i$, $\displaystyle \sum_z Q(z; \theta) = 1$</p>
+<p>令z的分布为$Q(z; \theta)$, 并且$Q(z; \theta) \ge 0$, 那么如上的极大似然估计的最大化的函数$l(\theta)$</p>
+<script type="math/tex; mode=display">\begin{align} l(\theta) &= \displaystyle \sum_{i=1}^{m} log( \sum_{z^{(i)}} p(x^{(i)}, z^{(i)}; \theta) )\\
+&= \displaystyle \sum_{i=1}^{m} log( \sum_{z^{(i)}} Q(z^{(i)}; \theta) \cdot \displaystyle \frac{p(x^{(i)}, z^{(i)}; \theta)}{Q(z^{(i)}; \theta)} ) \\
+&= \displaystyle \sum_{i=1}^{m} log( \quad \displaystyle E_Q( \frac{p(x^{(i)}, z^{(i)}; \theta)}{Q(z^{(i)}; \theta)} ) \quad) \\
+&\ge \displaystyle \sum_{i=1}^{m} E_Q ( \quad log( \displaystyle  \frac{p(x^{(i)}, z^{(i)}; \theta)}{Q(z^{(i)}; \theta)} ) \quad) \\
+&\ge \displaystyle \sum_{i=1}^{m} \sum_{z^{(i)}} Q(z^{(i)}; \theta) (log( \frac{p(x^{(i)}, z^{(i)}; \theta)}{Q(z^{(i)}; \theta)} ) ) \\
+\end{align}</script><p><img src="/L8/WechatIMG42.png" width="300px"></p>
+<p>一般情况下, z是隐含变量, 不知道应该取多少合适, 但是可以通过最后得到的公式对z进行求解. 如果最后两步相等的话, 就用公式的最后一步去替代$l(\theta)$, 进而得到新公式的最大值. 那么最后两步在什么情况下才能相等?</p>
+<p>根据不等式的性质, 当下面式子中的对数中的随机变量为常数的时候, $l(\theta)$和右边的式子取等号</p>
+<script type="math/tex; mode=display">\displaystyle \frac{p(x, z; \theta)}{Q(z; \theta)} = c, \quad \sum_zQ(z; \theta) = 1</script><script type="math/tex; mode=display">\begin{align}
+Q(z; \theta) &= \frac{p(x, z; \theta)}{c} = \frac{p(x, z; \theta)}{c \cdot \displaystyle \sum_{z^{(i)}} Q(z^{(i)}; \theta)}\\
+&=\frac{p(x, z; \theta)}{\displaystyle \sum_{z^{(i)}} c \cdot Q(z^{(i)}; \theta)} \\
+&=\frac{p(x, z; \theta)}{\displaystyle \sum_{z^{(i)}} p(x, z^{(i)}; \theta)} \\
+&=\frac{p(x, z; \theta)}{ p(x; \theta)} = p(z|x; \theta) \\
+\end{align}</script><p>所以最后, 当$Q(z; \theta) = p(z|x; \theta)$的时候$l(\theta)$函数取得等号</p>
+<script type="math/tex; mode=display">\begin{align} \theta &= arg \max \limits_{\theta} l(\theta) = arg \max \limits_{\theta} \sum_{i=1}^{m} \sum_{z} Q(z; \theta^{old}) log( \frac{p(x, z; \theta)}{Q(z; \theta^{old})} )\\
+&= arg \max \limits_{\theta} \sum_{i=1}^{m} \sum_{z} p(z|x; \theta^{old}) log( \frac{p(x, z; \theta)}{ p(z|x; \theta^{old}) } ) \\
+&= arg \max \limits_{\theta} \sum_{i=1}^{m} \sum_{z} p(z|x; \theta^{old}) log( p(x, z; \theta) ) \\
+\end{align}</script><h5 id="EM算法流程"><a href="#EM算法流程" class="headerlink" title="EM算法流程"></a>EM算法流程</h5><p>样本数据$X={x_1, x_2, \cdots, x_m}$, 联合分布$p(x, z; \theta)$, 条件分布$p(z|x; \theta)$, 最大迭代次数J</p>
+<ul>
+<li>随机初始化模型参数$\theta$的初始值$\theta_0$</li>
+<li>开始EM算法的迭代处理:<ul>
+<li>E步: 计算联合分布的条件概率期望, $Q^j = p(z|x; \theta^j) \quad l(\theta) = \displaystyle \sum_{i=1}^{m} \sum_z Q^j log(p(x, z; \theta^j))$</li>
+<li>M步: 极大化L函数, 得到$\theta^{j+1}$, $\theta^{j+1} = arg \max \limits_{\theta} l(\theta)$</li>
+<li>如果$\theta^{j+1}$已经收敛, 则算法结束, 输出最终的模型参数$\theta$, 否则继续迭代处理</li>
+</ul>
+</li>
+</ul>
+<h5 id="EM算法直观案例"><a href="#EM算法直观案例" class="headerlink" title="EM算法直观案例"></a>EM算法直观案例</h5><p>假设现有两个装有不定数量黑球和白球的盒子, 随机从盒子中抽取出一个白球的概率分布为$p_1$和$p_2$; 为了估计这两个概率, 每次选择一个盒子, 有放回的连续随机抽取5个球, 记录如下:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>盒子编号</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>统计</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>白</td>
+<td>白</td>
+<td>黑</td>
+<td>白</td>
+<td>黑</td>
+<td>3白2黑</td>
+</tr>
+<tr>
+<td>2</td>
+<td>黑</td>
+<td>黑</td>
+<td>白</td>
+<td>白</td>
+<td>黑</td>
+<td>2白3黑</td>
+</tr>
+<tr>
+<td>1</td>
+<td>白</td>
+<td>黑</td>
+<td>黑</td>
+<td>黑</td>
+<td>黑</td>
+<td>1白4黑</td>
+</tr>
+<tr>
+<td>2</td>
+<td>白</td>
+<td>黑</td>
+<td>白</td>
+<td>黑</td>
+<td>白</td>
+<td>3白2黑</td>
+</tr>
+<tr>
+<td>1</td>
+<td>黑</td>
+<td>白</td>
+<td>黑</td>
+<td>白</td>
+<td>黑</td>
+<td>2白3黑</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>使用MLE最大似然估计:</p>
+<script type="math/tex; mode=display">l(p_1) = log(p_1^6(1-p_1)^9) = 6logp_1 + 9log(1-p_1)</script><script type="math/tex; mode=display">\displaystyle \frac{\partial l(p_1)}{\partial p_1} = \frac{6}{p_1} - \frac{9}{1-p_1} \quad \underrightarrow{ 令\frac{\partial l(p_1)}{\partial p_1} = 0 } \quad p_1 = 0.4</script><p>同理</p>
+<script type="math/tex; mode=display">l(p_2) = log(p_2^5(1-p_2)^5) = 5logp_2 + 5log(1-p_2)</script><script type="math/tex; mode=display">\displaystyle \frac{\partial l(p_2)}{\partial p_2} = \frac{5}{p_2} - \frac{5}{1-p_2} \quad \underrightarrow{ 令\frac{\partial l(p_2)}{\partial p_2} = 0 } \quad p_2 = 0.5</script><p>如果现在不知道具体的盒子编号, 但是同样还是为了求解$p_1$和$p_2$的值, 这个时候就相当于多了一个隐藏变量z, z表示每次抽取的时候选择的盒子编号, 比如$z_1$表示第一次抽取的时候选择的是盒子1还是盒子2</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>盒子编号</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>统计</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>z1</td>
+<td>白</td>
+<td>白</td>
+<td>黑</td>
+<td>白</td>
+<td>黑</td>
+<td>3白2黑</td>
+</tr>
+<tr>
+<td>z2</td>
+<td>黑</td>
+<td>黑</td>
+<td>白</td>
+<td>白</td>
+<td>黑</td>
+<td>2白3黑</td>
+</tr>
+<tr>
+<td>z3</td>
+<td>白</td>
+<td>黑</td>
+<td>黑</td>
+<td>黑</td>
+<td>黑</td>
+<td>1白4黑</td>
+</tr>
+<tr>
+<td>z4</td>
+<td>白</td>
+<td>黑</td>
+<td>白</td>
+<td>黑</td>
+<td>白</td>
+<td>3白2黑</td>
+</tr>
+<tr>
+<td>z5</td>
+<td>黑</td>
+<td>白</td>
+<td>黑</td>
+<td>白</td>
+<td>黑</td>
+<td>2白3黑</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>随机初始化一个概率值: $p_1=0.1$和$p_2=0.9$; 然后使用最大似然估计计算每轮操作中从两个盒子中抽取的最大概率. 然后使用计算出来的z值, 重新使用极大似然估计法估计概率值</p>
+<script type="math/tex; mode=display">L(z_1=1|x; p_1) = 0.1^3 * 0.9^2 = 0.00081</script><script type="math/tex; mode=display">L(z_1=2|x; p_2) = 0.9^3 * 0.1^2 = 0.00729</script><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>轮数</th>
+<th>盒子1</th>
+<th>盒子2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0.00081</td>
+<td>0.00729</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0.00729</td>
+<td>0.00081</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0.06561</td>
+<td>0.00009</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.00081</td>
+<td>0.00729</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0.00729</td>
+<td>0.00081</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>在这里, 切记$p_1$表示从盒子1中抽取到白球的概率, $p_2$表示从盒子2中抽取到白球的概率, 那么上述表格就表示第1轮从盒子2中抽取的概率较大, 第2轮从盒子1中抽取的概率较大, 总结一下就是第1, 4轮从盒子1中抽取的概率较大, 第2, 3, 5轮从盒子2中抽取的概率较大</p>
+<p>那么更新一下原始表格如下:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>盒子编号</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>统计</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>白</td>
+<td>白</td>
+<td>黑</td>
+<td>白</td>
+<td>黑</td>
+<td>3白2黑</td>
+</tr>
+<tr>
+<td>1</td>
+<td>黑</td>
+<td>黑</td>
+<td>白</td>
+<td>白</td>
+<td>黑</td>
+<td>2白3黑</td>
+</tr>
+<tr>
+<td>1</td>
+<td>白</td>
+<td>黑</td>
+<td>黑</td>
+<td>黑</td>
+<td>黑</td>
+<td>1白4黑</td>
+</tr>
+<tr>
+<td>2</td>
+<td>白</td>
+<td>黑</td>
+<td>白</td>
+<td>黑</td>
+<td>白</td>
+<td>3白2黑</td>
+</tr>
+<tr>
+<td>1</td>
+<td>黑</td>
+<td>白</td>
+<td>黑</td>
+<td>白</td>
+<td>黑</td>
+<td>2白3黑</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>根据此表格, 得出$p_2=\frac{6}{10}=0.6, \quad p_1=\frac{5}{15}=\frac{1}{3}$</p>
+<script type="math/tex; mode=display">L(z_1=1|x; p_1) = (\frac{1}{3})^3 * 0.6^2 = 0.01565</script><script type="math/tex; mode=display">L(z_1=2|x; p_2) = 0.6^3 * (\frac{1}{3})^2 = 0.03456</script><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>轮数</th>
+<th>盒子1</th>
+<th>盒子2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0.01565</td>
+<td>0.03456</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0.0313</td>
+<td>0.02304</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0.0626</td>
+<td>0.01536</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.01565</td>
+<td>0.03456</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0.0313</td>
+<td>0.02304</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>使用最大似然概率法则估计z和p的值, 但是在这个过程中, 只使用一个最有可能的值.  如果考虑所有的z值, 然后对每一组z值都估计一个概率p, 那么这个时候估计出来的概 率可能会更好, 可以用期望的方式来简化这个操作</p>
+<p>归一化操作</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>轮数</th>
+<th>盒子1</th>
+<th>盒子2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0.00081/(0.00081+0.00729) = 0.1</td>
+<td>0.00729/(0.00081+0.00729) = 0.9</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0.00729</td>
+<td>0.00081</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0.06561</td>
+<td>0.00009</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.00081</td>
+<td>0.00729</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0.00729</td>
+<td>0.00081</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h5 id="EM算法收敛证明"><a href="#EM算法收敛证明" class="headerlink" title="EM算法收敛证明"></a>EM算法收敛证明</h5><p>EM算法的收敛性只要能够证明对数似然函数的值在迭代过程中是增加的就可以</p>
+<script type="math/tex; mode=display">\displaystyle \sum_{i=1}^{m}log(p(x^i; \theta^{j+1})) \ge \sum_{i=1}^{m}log(p(x^i; \theta^{j}))</script><p>构造函数如下:</p>
+<script type="math/tex; mode=display">L(\theta, \theta^j) = \sum_{i=1}^{m} \sum_z p(z|x^i; \theta^j) log(p(x^i, z; \theta))</script><script type="math/tex; mode=display">H(\theta, \theta^j) = \sum_{i=1}^{m} \sum_z p(z|x^i; \theta^j) log(p(z|x^i; \theta))</script><script type="math/tex; mode=display">\because \sum_z p(z|x^i; \theta^j) = 1</script><script type="math/tex; mode=display">\begin{align} \therefore L(\theta, \theta^j) - H(\theta, \theta^j) &= \sum_{i=1}^{m} \sum_z p(z|x^i; \theta^j) log(\frac{p(x^i, z; \theta)}{p(z|x^i; \theta}) \\
+&= \sum_{i=1}^{m} log(\frac{p(x^i, z; \theta)}{p(z|x^i; \theta})\\
+&= \sum_{i=1}^{m} log(p(x^i; \theta))\\
+\end{align}</script><script type="math/tex; mode=display">\begin{align} \therefore [L(\theta^{j+1}, \theta^j) - H(\theta^{j+1}, \theta^j)] - [L(\theta^{j}, \theta^j) - H(\theta^{j}, \theta^j)] &= [L(\theta^{j+1}, \theta^j) - L(\theta^{j}, \theta^j)] - [H(\theta^{j+1}, \theta^j) - H(\theta^{j}, \theta^j)] \\
+&= \sum_{i=1}^{m} log(p(x^i; \theta^{j+1})) - \sum_{i=1}^{m} log(p(x^i; \theta^j))\\
+\end{align}</script><p>而</p>
+<script type="math/tex; mode=display">\begin{align} L(\theta^{j+1}, \theta^j) - L(\theta^{j}, \theta^j) &= \sum_{i=1}^{m} \sum_z p(z|x^i; \theta^j) log(p(x^i, z; \theta^{j+1})) - \sum_{i=1}^{m} \sum_z p(z|x^i; \theta^j) log(p(x^i, z; \theta^j)) \\
+&= \sum_{i=1}^{m} \sum_z p(z|x^i; \theta^j) log( \frac{p(x^i, z; \theta^{j+1})}{p(x^i, z; \theta^j)} )\\
+& \ge 0 \\
+\end{align}</script><script type="math/tex; mode=display">\begin{align} H(\theta^{j+1}, \theta^j) - H(\theta^{j}, \theta^j) &= \sum_{i=1}^{m} \sum_z p(z|x^i; \theta^j) log(p(z|x^i; \theta^{j+1})) - \sum_{i=1}^{m} \sum_z p(z|x^i; \theta^j) log(p(z|x^i; \theta^j)) \\
+&= \sum_{i=1}^{m} \sum_z p(z|x^i; \theta^j) log( \frac{p(z|x^i; \theta^{j+1})}{p(z|x^i; \theta^j)}) \\
+&\because log函数是开口向下的凸函数 \\
+&\therefore \le \sum_{i=1}^{m} log( \sum_z p(z|x^i; \theta^j) \frac{p(z|x^i; \theta^{j+1})}{p(z|x^i; \theta^j)}) = 0 \\ 
+\end{align}</script><script type="math/tex; mode=display">\sum_{i=1}^{m} log(p(x^i; \theta^{j+1})) - \sum_{i=1}^{m} log(p(x^i; \theta^j)) \ge 0</script><p>然而如下问题<br>随机选择1000名用户, 测量用户的身高; 若样本中存在男性和女性, 身高分别服从高斯分布$N(\mu_1, \sigma_1)$和$N(\mu_2, \sigma_2)$的分布, 试估计参数: $\mu_1, \sigma_1, \mu_2, \sigma_2$; </p>
+<p>解析:</p>
+<ul>
+<li>如果明确的知道样本的情况(即男性和女性数据是分开的), 那么我们使用极大似然估计来估计这个参数值</li>
+<li>如果样本是混合而成的, 不能明确的区分开, 那么就没法直接使用极大似然估计来进行参数的估计.  可以使用EM算法来估计男女这两个参数值, 即男女这两个性别就变成了隐含变量.  实际上, EM算法在某些层面上是在帮助我们做聚类的操作. 即帮助我们找到隐含变量的取值. </li>
+</ul>
+<h3 id="GMM"><a href="#GMM" class="headerlink" title="GMM"></a>GMM</h3><p>GMM(Gaussian Mixture Model), 高斯混合模型, 是指该算法由多个高斯模型线性叠加混合而成, 每个高斯模型称为component. GMM算法描述的是数据本身存在的一种分布<br>GMM常用于聚类应用中, component的个数就可以认为是类别的数量<br>假定GMM由k个Gaussian分布线性叠加而成, 那么概率密度函数如下:</p>
+<p><img src="/L8/WechatIMG44.png" width="300px"></p>
+<script type="math/tex; mode=display">p(x) = \sum_{k=1}^{K}p(k)p(x|k) = \sum_{k=1}^{K} \pi_k p(x; \mu_k, \sum_k)</script><h4 id="对数似然函数"><a href="#对数似然函数" class="headerlink" title="对数似然函数"></a>对数似然函数</h4><script type="math/tex; mode=display">l(\pi, \mu, \sigma) = \displaystyle \sum_{i=1}^{N} log( \sum_{k=1}^{K}\pi_k p(x^i; \mu_k, \sum_k) )</script><h4 id="E-step"><a href="#E-step" class="headerlink" title="E step"></a>E step</h4><script type="math/tex; mode=display">w_{j}^{(i)} = Q_i(z^{(i)} = j) = p(z^{(i)} = j|x^{(i)}; \pi, \mu, \sum)</script><h4 id="M-step"><a href="#M-step" class="headerlink" title="M step"></a>M step</h4><script type="math/tex; mode=display">\begin{align} l(\pi, \mu, \sum) &= \sum_{i=1}^{m} \sum_{z^{(i)}} Q_i(z^{(i)}) log( \frac{p(x^{(i)}, z^{(i)}; \pi, \mu, \sum)}{Q_i(z^{(i)})} ) \\
+&= \sum_{i=1}^{m} \sum_{j=1}^{k} Q_i(z^{(i)=j}) log( \frac{p(x^{(i)}|z^{(i)}=j; \mu, \sum) \cdot p(z^{(i)}=j; \pi)}{Q_i(z^{(i)}=j)} ) \\
+
+&= \sum_{i=1}^{m} \sum_{j=1}^{k} w_j^{(i)} log( \frac{ \frac{1}{ (2\pi)^{\frac{n}{2}} \vert \sum_j \vert^{ \frac{1}{2} } } e^{-\frac{1}{2} (x^{(i)}-\mu_j)^T \sum_j^{-1}(x^{(i)}-\mu_j) \cdot \pi_j}  }{w_j^{(i)}} ) \\
+\end{align}</script><h4 id="对均值求偏导"><a href="#对均值求偏导" class="headerlink" title="对均值求偏导"></a>对均值求偏导</h4><script type="math/tex; mode=display">l(\pi, \mu, \sum) = \sum_{i=1}^{m} \sum_{j=1}^{k} w_j^{(i)}(-\frac{1}{2}(x^{(i)}-\mu_j)^T \sum_j^{-1}(x^{(i)}-\mu_j)) + c</script><p><img src="/L8/WechatIMG45.png" width="300px"><br><img src="/L8/WechatIMG46.png" width="300px"></p>
+<h4 id="对方差求偏导"><a href="#对方差求偏导" class="headerlink" title="对方差求偏导"></a>对方差求偏导</h4><p><img src="/L8/WechatIMG47.png" width="300px"></p>
+<h4 id="对概率使用拉格朗日乘子法求解"><a href="#对概率使用拉格朗日乘子法求解" class="headerlink" title="对概率使用拉格朗日乘子法求解"></a>对概率使用拉格朗日乘子法求解</h4><p><img src="/L8/WechatIMG48.png" width="300px"></p>
+<h2 id="多分类及多标签分类"><a href="#多分类及多标签分类" class="headerlink" title="多分类及多标签分类"></a>多分类及多标签分类</h2><h3 id="单标签二分类"><a href="#单标签二分类" class="headerlink" title="单标签二分类"></a>单标签二分类</h3><h3 id="单标签多分类"><a href="#单标签多分类" class="headerlink" title="单标签多分类"></a>单标签多分类</h3><h3 id="多标签分类算法"><a href="#多标签分类算法" class="headerlink" title="多标签分类算法"></a>多标签分类算法</h3>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SMO/" rel="tag"># SMO</a>
+          
+            <a href="/tags/非线性可分SVM/" rel="tag"># 非线性可分SVM</a>
+          
+            <a href="/tags/EM/" rel="tag"># EM</a>
+          
+            <a href="/tags/GMM/" rel="tag"># GMM</a>
+          
+            <a href="/tags/多项式回归/" rel="tag"># 多项式回归</a>
+          
+            <a href="/tags/核函数/" rel="tag"># 核函数</a>
+          
+            <a href="/tags/高斯核函数/" rel="tag"># 高斯核函数</a>
+          
+            <a href="/tags/贝叶斯算法/" rel="tag"># 贝叶斯算法</a>
+          
+            <a href="/tags/高斯朴素贝叶斯/" rel="tag"># 高斯朴素贝叶斯</a>
+          
+            <a href="/tags/伯努利朴素贝叶斯/" rel="tag"># 伯努利朴素贝叶斯</a>
+          
+            <a href="/tags/多项式朴素贝叶斯/" rel="tag"># 多项式朴素贝叶斯</a>
+          
+            <a href="/tags/鸢尾花数据分类/" rel="tag"># 鸢尾花数据分类</a>
+          
+            <a href="/tags/文本数据分类/" rel="tag"># 文本数据分类</a>
+          
+            <a href="/tags/贝叶斯网络/" rel="tag"># 贝叶斯网络</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/L7/" rel="next" title="L7">
+                <i class="fa fa-chevron-left"></i> L7
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/L9/" rel="prev" title="L9">
+                L9 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#多项式回归"><span class="nav-number">1.</span> <span class="nav-text">多项式回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核函数"><span class="nav-number">2.</span> <span class="nav-text">核函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#核函数总结"><span class="nav-number">2.1.</span> <span class="nav-text">核函数总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高斯核函数"><span class="nav-number">2.2.</span> <span class="nav-text">高斯核函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非线性可分SVM"><span class="nav-number">3.</span> <span class="nav-text">非线性可分SVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SMO"><span class="nav-number">3.1.</span> <span class="nav-text">SMO</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#贝叶斯算法"><span class="nav-number">4.</span> <span class="nav-text">贝叶斯算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#贝叶斯定理相关公式"><span class="nav-number">4.1.</span> <span class="nav-text">贝叶斯定理相关公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#朴素贝叶斯算法"><span class="nav-number">4.2.</span> <span class="nav-text">朴素贝叶斯算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#朴素贝叶斯算法推导"><span class="nav-number">4.2.1.</span> <span class="nav-text">朴素贝叶斯算法推导</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#朴素贝叶斯算法流程"><span class="nav-number">4.2.2.</span> <span class="nav-text">朴素贝叶斯算法流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高斯朴素贝叶斯"><span class="nav-number">4.3.</span> <span class="nav-text">高斯朴素贝叶斯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伯努利朴素贝叶斯"><span class="nav-number">4.4.</span> <span class="nav-text">伯努利朴素贝叶斯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式朴素贝叶斯"><span class="nav-number">4.5.</span> <span class="nav-text">多项式朴素贝叶斯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例一-鸢尾花数据分类"><span class="nav-number">4.6.</span> <span class="nav-text">案例一: 鸢尾花数据分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例二-文本数据分类"><span class="nav-number">4.7.</span> <span class="nav-text">案例二: 文本数据分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#贝叶斯网络"><span class="nav-number">5.</span> <span class="nav-text">贝叶斯网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最简单的贝叶斯网络"><span class="nav-number">5.1.</span> <span class="nav-text">最简单的贝叶斯网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全连接贝叶斯网络"><span class="nav-number">5.2.</span> <span class="nav-text">全连接贝叶斯网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正常贝叶斯网络"><span class="nav-number">5.3.</span> <span class="nav-text">正常贝叶斯网络</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实际贝叶斯网络-判断是否下雨"><span class="nav-number">5.3.1.</span> <span class="nav-text">实际贝叶斯网络: 判断是否下雨</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#贝叶斯网络判定条件独立"><span class="nav-number">5.3.2.</span> <span class="nav-text">贝叶斯网络判定条件独立</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EM"><span class="nav-number">5.4.</span> <span class="nav-text">EM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#最大似然估计回顾"><span class="nav-number">5.4.1.</span> <span class="nav-text">最大似然估计回顾</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#贝叶斯算法估计"><span class="nav-number">5.4.2.</span> <span class="nav-text">贝叶斯算法估计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最大后验概率估计"><span class="nav-number">5.4.3.</span> <span class="nav-text">最大后验概率估计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#K-means算法回顾"><span class="nav-number">5.4.4.</span> <span class="nav-text">K-means算法回顾</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#EM算法引入"><span class="nav-number">5.4.5.</span> <span class="nav-text">EM算法引入</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#初始化"><span class="nav-number">5.4.5.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#EM算法中的E步骤"><span class="nav-number">5.4.5.2.</span> <span class="nav-text">EM算法中的E步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#EM算法中的M步骤"><span class="nav-number">5.4.5.3.</span> <span class="nav-text">EM算法中的M步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二次迭代EM算法中的E步骤"><span class="nav-number">5.4.5.4.</span> <span class="nav-text">第二次迭代EM算法中的E步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二次迭代EM算法中的M步骤"><span class="nav-number">5.4.5.5.</span> <span class="nav-text">第二次迭代EM算法中的M步骤</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#EM算法"><span class="nav-number">5.4.6.</span> <span class="nav-text">EM算法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#EM算法原理"><span class="nav-number">5.4.6.1.</span> <span class="nav-text">EM算法原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#EM算法流程"><span class="nav-number">5.4.6.2.</span> <span class="nav-text">EM算法流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#EM算法直观案例"><span class="nav-number">5.4.6.3.</span> <span class="nav-text">EM算法直观案例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#EM算法收敛证明"><span class="nav-number">5.4.6.4.</span> <span class="nav-text">EM算法收敛证明</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GMM"><span class="nav-number">5.5.</span> <span class="nav-text">GMM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对数似然函数"><span class="nav-number">5.5.1.</span> <span class="nav-text">对数似然函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#E-step"><span class="nav-number">5.5.2.</span> <span class="nav-text">E step</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#M-step"><span class="nav-number">5.5.3.</span> <span class="nav-text">M step</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对均值求偏导"><span class="nav-number">5.5.4.</span> <span class="nav-text">对均值求偏导</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对方差求偏导"><span class="nav-number">5.5.5.</span> <span class="nav-text">对方差求偏导</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对概率使用拉格朗日乘子法求解"><span class="nav-number">5.5.6.</span> <span class="nav-text">对概率使用拉格朗日乘子法求解</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多分类及多标签分类"><span class="nav-number">6.</span> <span class="nav-text">多分类及多标签分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单标签二分类"><span class="nav-number">6.1.</span> <span class="nav-text">单标签二分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单标签多分类"><span class="nav-number">6.2.</span> <span class="nav-text">单标签多分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多标签分类算法"><span class="nav-number">6.3.</span> <span class="nav-text">多标签分类算法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
